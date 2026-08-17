@@ -1,0 +1,659 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>P3 Mobile — Redesign Concept</title>
+<style>
+@font-face{font-family:"Bricolage Grotesque";src:url("assets/fonts/BricolageGrotesque.ttf") format("truetype");
+           font-weight:200 800;font-display:swap;}
+@font-face{font-family:"Plus Jakarta Sans";src:url("assets/fonts/PlusJakartaSans.ttf") format("truetype");
+           font-weight:200 800;font-display:swap;}
+
+:root{
+  /* P3 web-app system */
+  --canvas:#ece6df; --card:rgba(255,255,255,.90); --hair:#ece9e6;
+  --ink:#1a1a1a; --deep:#4a1020; --muted:#8a8580; --faint:#9a938d;
+  --crimson:#d93a3a; --crimson-dk:#b82e2e; --violet:#6a4fb0; --gold:#f5c56b;
+  --ok-t:#1b7f4b; --ok-b:#e7f4ec; --wait-t:#b26b00; --wait-b:#fcf1dd;
+  --prog-t:#d93a3a; --prog-b:#fbeae9; --neut-t:#6b6560; --neut-b:#f2efec;
+  --seg:#f4f1ee; --quiet:#faf8f6;
+  --head:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
+  --body:"Plus Jakarta Sans",ui-sans-serif,system-ui,-apple-system,sans-serif;
+  --page:#f2eee9;
+}
+*,*::before,*::after{box-sizing:border-box;}
+body{margin:0;background:var(--page);color:var(--ink);font-family:var(--body);
+     -webkit-font-smoothing:antialiased;}
+.wrap{max-width:1180px;margin:0 auto;padding:0 26px;}
+
+/* ---------------- App Store style header ---------------- */
+header{padding:44px 0 0;}
+.we-row{display:flex;align-items:center;gap:20px;}
+.store-icon{width:88px;height:88px;border-radius:20px;flex:none;
+            box-shadow:0 8px 26px rgba(40,15,22,.18);}
+.wt h1{font-family:var(--head);font-size:clamp(1.5rem,3.2vw,2rem);font-weight:800;
+       letter-spacing:-.028em;color:var(--deep);margin:0 0 3px;line-height:1.12;}
+.wt .sub{font-size:1rem;color:#6b5f52;font-weight:600;}
+.wt .meta{font-size:.84rem;color:var(--faint);font-weight:600;margin-top:7px;}
+.wt .meta b{color:var(--crimson);font-weight:800;}
+
+.framing{margin:26px 0 0;padding:15px 18px;border-radius:14px;background:#fff;
+         border:1px solid var(--hair);font-size:.9rem;line-height:1.55;color:#6b5f52;
+         max-width:74ch;}
+.framing b{color:var(--deep);font-weight:800;}
+
+/* ---------------- controls ---------------- */
+.bar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:30px 0 6px;}
+.roleseg{display:inline-flex;background:#e7e1da;border-radius:50px;padding:4px;gap:3px;}
+.roleseg button{appearance:none;border:0;cursor:pointer;font-family:var(--body);
+  font-size:.86rem;font-weight:700;padding:8px 20px;border-radius:50px;background:none;
+  color:#6b5f52;transition:all .18s ease;}
+.roleseg button[aria-pressed="true"]{background:#fff;color:var(--deep);
+  box-shadow:0 2px 7px rgba(40,15,22,.12);}
+.hint{font-size:.8rem;color:var(--faint);font-weight:600;display:flex;align-items:center;gap:7px;}
+.hint svg{flex:none;}
+
+/* ---------------- strip ---------------- */
+.strip{display:flex;gap:34px;overflow-x:auto;padding:26px 4px 40px;
+       scroll-snap-type:x proximity;}
+.slot{flex:none;scroll-snap-align:center;width:300px;}
+.slot-label{margin-top:14px;text-align:center;font-size:12px;color:#9a948e;
+            letter-spacing:.2px;opacity:.85;}
+.slot-label b{color:#6b5f52;font-weight:700;display:block;font-size:12.5px;margin-bottom:2px;}
+
+/* ---------------- phone ---------------- */
+.phone{width:300px;height:650px;border-radius:42px;background:#131013;padding:8px;
+       box-shadow:0 24px 70px rgba(40,15,22,.20),0 3px 10px rgba(0,0,0,.10);position:relative;}
+.screen{width:100%;height:100%;border-radius:35px;overflow:hidden;position:relative;
+        display:flex;flex-direction:column;background:var(--canvas);isolation:isolate;}
+.screen::before{content:"";position:absolute;inset:0;z-index:0;
+  background:url("assets/campus-bg.jpg") center/cover no-repeat;opacity:.40;}
+.screen > *{position:relative;z-index:1;}
+.notch{position:absolute;top:8px;left:50%;transform:translateX(-50%);width:86px;height:23px;
+       background:#131013;border-radius:20px;z-index:30;}
+
+.sbar{height:42px;flex:none;display:flex;align-items:center;justify-content:space-between;
+      padding:0 20px;font-size:.68rem;font-weight:700;color:var(--ink);}
+.sbar .rr{display:flex;gap:3px;opacity:.75;}
+
+/* scrollable content area */
+.body{flex:1;overflow-y:auto;overflow-x:hidden;padding:0 15px 16px;
+      scrollbar-width:none;-ms-overflow-style:none;}
+.body::-webkit-scrollbar{display:none;}
+.body.flush{padding:0;}
+
+.ahead{display:flex;align-items:center;gap:9px;padding:0 0 10px;}
+.ahead .t{font-family:var(--head);font-size:1.24rem;font-weight:800;letter-spacing:-.024em;
+          color:var(--deep);line-height:1.14;}
+.ahead .s{font-size:.7rem;color:var(--faint);font-weight:600;margin-top:2px;}
+.ahead .sp{margin-left:auto;}
+.gbtn{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.78);
+      border:1px solid var(--hair);display:grid;place-items:center;flex:none;
+      backdrop-filter:blur(10px);}
+
+.glass{background:var(--card);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+       border:1px solid var(--hair);border-radius:16px;box-shadow:0 2px 8px rgba(20,20,43,.05);
+       overflow:hidden;}
+
+.sect{font-family:var(--head);font-size:.88rem;font-weight:800;letter-spacing:-.01em;
+      color:var(--deep);margin:15px 0 8px;display:flex;align-items:baseline;}
+.sect .more{margin-left:auto;font-family:var(--body);font-size:.68rem;font-weight:700;
+            color:var(--crimson);}
+
+.hero{border-radius:16px;padding:14px 15px 15px;color:#fff;position:relative;overflow:hidden;
+      background:linear-gradient(112deg,#2e0614 0%,#4a1020 46%,#7a1a2c 100%);
+      box-shadow:0 8px 20px rgba(40,15,22,.20);}
+.hero h3{font-family:var(--head);font-size:1.1rem;line-height:1.18;letter-spacing:-.02em;
+         font-weight:800;margin:0 0 5px;}
+.hero h3 em{font-style:normal;color:var(--crimson);}
+.hero p{margin:0;font-size:.72rem;line-height:1.48;color:rgba(255,255,255,.76);}
+
+/* tighter, senior-level controls */
+.seg{display:flex;background:var(--seg);border-radius:50px;padding:2.5px;gap:2px;}
+.seg span{flex:1;text-align:center;font-size:.68rem;font-weight:700;padding:5px 3px;
+          border-radius:50px;color:var(--muted);white-space:nowrap;}
+.seg span.on{background:#fff;color:var(--deep);box-shadow:0 1px 3px rgba(0,0,0,.09);}
+.chips{display:flex;gap:5px;overflow:hidden;}
+.chip{font-size:.65rem;font-weight:700;padding:4.5px 10px;border-radius:50px;white-space:nowrap;
+      background:rgba(255,255,255,.78);border:1px solid var(--hair);color:var(--muted);}
+.chip.on{background:var(--deep);border-color:var(--deep);color:#fff;}
+.btnp{background:var(--crimson);color:#fff;font-size:.7rem;font-weight:800;padding:7px 14px;
+      border-radius:50px;box-shadow:0 3px 10px rgba(217,58,58,.26);white-space:nowrap;}
+.btno{border:1px solid rgba(217,58,58,.40);color:var(--crimson);font-size:.67rem;font-weight:800;
+      padding:5.5px 11px;border-radius:50px;display:inline-flex;align-items:center;gap:4px;
+      background:rgba(255,255,255,.62);white-space:nowrap;}
+.lnk{font-size:.67rem;font-weight:800;color:var(--crimson);display:inline-flex;align-items:center;gap:3px;}
+.field{background:var(--quiet);border:1px solid var(--hair);border-radius:11px;padding:9px 10px;
+       font-size:.71rem;color:var(--faint);line-height:1.4;}
+.pill{font-size:.61rem;font-weight:800;padding:3px 8px;border-radius:50px;display:inline-block;}
+.pill.prog{background:var(--prog-b);color:var(--prog-t);}
+.pill.wait{background:var(--wait-b);color:var(--wait-t);}
+.pill.ok{background:var(--ok-b);color:var(--ok-t);}
+.pill.neut{background:var(--neut-b);color:var(--neut-t);}
+.pill.vio{background:#f0eafb;color:var(--violet);}
+.rowdiv{height:1px;background:var(--hair);margin:9px 0;}
+.thumb{width:100%;display:block;object-fit:cover;background:var(--seg);}
+.av{border-radius:50%;object-fit:cover;flex:none;}
+
+/* ---------------- liquid glass tab bar ---------------- */
+.tabbar{flex:none;height:62px;display:flex;align-items:center;padding:0 4px 6px;
+  position:relative;
+  background:linear-gradient(to bottom,rgba(255,255,255,.58),rgba(255,255,255,.80));
+  backdrop-filter:blur(22px) saturate(180%);-webkit-backdrop-filter:blur(22px) saturate(180%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.85), 0 -1px 16px rgba(40,15,22,.06);
+  border-top:1px solid rgba(255,255,255,.55);}
+.tabbar::after{content:"";position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.9),transparent);}
+.tb{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;
+    font-size:.555rem;font-weight:700;color:#9a938d;letter-spacing:.1px;
+    padding:6px 0 0;transition:color .2s ease;background:none;border:0;font-family:var(--body);}
+.tb .ic{width:26px;height:26px;display:grid;place-items:center;border-radius:10px;
+        transition:all .22s cubic-bezier(.4,0,.2,1);}
+.tb:hover{color:#6b5f52;}
+.tb.on{color:var(--crimson);}
+.tb.on .ic{background:rgba(217,58,58,.11);box-shadow:0 2px 8px rgba(217,58,58,.16);}
+
+/* ---------------- welcome ---------------- */
+.welcome{flex:1;display:flex;flex-direction:column;padding:0 22px 28px;color:#fff;
+         position:relative;overflow:hidden;}
+.welcome .bg{position:absolute;inset:0;background:url("assets/campus-bg.jpg") center/cover no-repeat;}
+.welcome .veil{position:absolute;inset:0;
+  background:linear-gradient(178deg,rgba(26,5,16,.72) 0%,rgba(74,16,32,.90) 48%,rgba(20,5,16,.97) 100%);}
+.welcome .glow{position:absolute;width:300px;height:300px;border-radius:50%;top:-106px;right:-118px;
+  background:radial-gradient(circle,rgba(217,58,58,.42),transparent 68%);}
+.wtop{flex:1;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:2;}
+.wmark{width:120px;margin-bottom:22px;filter:brightness(0) invert(1);}
+.welcome h2{font-family:var(--head);font-size:1.72rem;line-height:1.13;letter-spacing:-.03em;
+            font-weight:800;margin:0 0 12px;}
+.welcome h2 em{font-style:normal;color:var(--crimson);}
+.welcome .sub{font-size:.83rem;line-height:1.58;color:rgba(255,255,255,.78);margin:0;}
+.wcta{position:relative;z-index:2;}
+.btn{display:block;text-align:center;font-size:.82rem;font-weight:800;padding:12px;
+     border-radius:12px;margin-bottom:8px;}
+.btn.p{background:var(--crimson);color:#fff;box-shadow:0 4px 16px rgba(217,58,58,.40);}
+.btn.g{background:rgba(255,255,255,.10);color:#fff;border:1px solid rgba(255,255,255,.26);
+       backdrop-filter:blur(8px);}
+.wtrust{text-align:center;font-size:.67rem;color:rgba(255,255,255,.55);margin-top:10px;font-weight:600;}
+
+/* ---------------- cards ---------------- */
+.rail2{display:flex;gap:9px;overflow:hidden;}
+.pathitem{flex:none;width:142px;}
+.pathitem .thumb{height:72px;}
+.pathitem .in{padding:8px 9px 10px;}
+.pathitem .t{font-family:var(--head);font-size:.79rem;font-weight:800;color:var(--deep);line-height:1.16;}
+.pathitem .sal{font-size:.68rem;font-weight:800;color:var(--ok-t);margin-top:3px;}
+.pathitem .meta{font-size:.6rem;color:var(--faint);margin-top:2px;font-weight:600;}
+
+.aicard{border-radius:15px;padding:11px 12px;border:1px solid rgba(106,79,176,.24);
+        background:linear-gradient(135deg,#faf7ff 0%,#ece4fb 100%);}
+.aicard .t{font-size:.74rem;font-weight:800;color:var(--violet);display:flex;align-items:center;gap:5px;}
+.aicard p{margin:4px 0 0;font-size:.67rem;line-height:1.42;color:#6b5f86;}
+
+.opp{margin-bottom:9px;}
+.opp .thumb{height:74px;}
+.opp .in{padding:9px 11px 11px;}
+.opp .t{font-family:var(--head);font-size:.82rem;font-weight:800;color:var(--deep);
+        line-height:1.22;margin-bottom:5px;}
+.opp .row{display:flex;align-items:center;gap:5px;flex-wrap:wrap;}
+
+.mrow{display:flex;gap:9px;align-items:center;}
+.mrow .nm{font-family:var(--head);font-size:.82rem;font-weight:800;color:var(--deep);line-height:1.2;}
+.mrow .rl{font-size:.67rem;color:var(--muted);margin-top:1px;line-height:1.3;}
+.why{display:flex;gap:4px;margin-top:6px;flex-wrap:wrap;}
+.why span{font-size:.58rem;font-weight:700;padding:2.5px 6px;border-radius:50px;
+          background:var(--prog-b);color:var(--crimson-dk);}
+
+/* shorter video rows so scanning works */
+.vrow{display:flex;gap:10px;padding:9px;margin-bottom:8px;align-items:center;}
+.vrow .vw{position:relative;flex:none;width:104px;border-radius:11px;overflow:hidden;}
+.vrow .vw .thumb{height:59px;}
+.vrow .dur{position:absolute;right:4px;bottom:4px;background:rgba(0,0,0,.74);color:#fff;
+           font-size:.55rem;font-weight:800;padding:1px 5px;border-radius:4px;}
+.vrow .t{font-size:.75rem;font-weight:800;color:var(--deep);line-height:1.26;}
+.vrow .by{display:flex;align-items:center;gap:5px;margin-top:5px;}
+.vrow .by .n{font-size:.63rem;font-weight:700;color:var(--muted);}
+
+.qcard{padding:11px 12px;margin-bottom:8px;}
+.qcard .q{font-size:.76rem;font-weight:700;color:var(--ink);line-height:1.34;}
+.qcard .m{display:flex;align-items:center;gap:6px;margin-top:8px;}
+.qcard .m .n{font-size:.64rem;font-weight:700;color:var(--muted);}
+
+.stat{display:flex;gap:8px;}
+.stat .s{flex:1;padding:10px 9px;text-align:center;}
+.stat .v{font-family:var(--head);font-size:1.16rem;font-weight:800;color:var(--deep);line-height:1;}
+.stat .k{font-size:.58rem;color:var(--faint);font-weight:700;margin-top:4px;letter-spacing:.2px;}
+
+/* ---------------- footer note ---------------- */
+footer{border-top:1px solid #e4ded7;margin-top:20px;padding:26px 0 56px;}
+footer p{font-size:.82rem;color:#8a8580;line-height:1.6;margin:0 0 8px;max-width:76ch;}
+footer b{color:#6b5f52;}
+
+@media (max-width:700px){ .wrap{padding:0 16px;} .store-icon{width:66px;height:66px;} }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="we-row">
+      <img class="store-icon" src="assets/app-icon.png" alt="P3 app icon">
+      <div class="wt">
+        <h1>P3 Mobile &mdash; Redesign</h1>
+        <div class="sub">Concept for review</div>
+        <div class="meta">August 2026 &middot; <b>A fresh coat of paint</b> &middot; iPhone</div>
+      </div>
+    </div>
+
+    <div class="framing">
+      <b>Same app, same flows, same screens.</b> This is a visual refresh that brings the mobile app
+      into the web platform's design language, plus a small number of genuinely new items that are
+      already built and proven on web (opportunity filters and imagery, richer career resources).
+      Nothing here changes the app's architecture or navigation, which keeps the risk of breaking
+      something low.
+    </div>
+
+    <div class="bar">
+      <div class="roleseg" role="group" aria-label="Role">
+        <button id="r-mentee" aria-pressed="true">Mentee</button>
+        <button id="r-mentor" aria-pressed="false">Mentor</button>
+      </div>
+      <span class="hint">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 11V6a2 2 0 0 1 4 0v5"/><path d="M13 9a2 2 0 0 1 4 0v3"/>
+          <path d="M17 11a2 2 0 0 1 4 0v4a6 6 0 0 1-6 6h-2a7 7 0 0 1-7-7v-3a2 2 0 0 1 4 0"/></svg>
+        Scroll inside a phone. Tap its tab bar to jump between screens.
+      </span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="strip" id="strip"></div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <p><b>What is actually new here:</b> opportunity imagery and filters (industry, deadline,
+       location), career resources with salary and skills depth, a Videos tab with the same
+       Featured / Latest / Following / Saved views the web app already has, and the frosted surface
+       treatment. Everything else is the existing app, repainted.</p>
+    <p><b>Build note:</b> React Native has no <code>backdrop-filter</code>. The frosted surfaces need
+       <code>@react-native-community/blur</code>, and heavy blur on long lists is costly on low-end
+       Android, so plan a solid <code>rgba(255,255,255,0.94)</code> fallback. The layout must read
+       without the blur.</p>
+    <p>Mentor photos and video thumbnails are real P3 people and real posts. The background is the
+       same <code>campus-bg.jpg</code> the web platform composites at 40% over <code>#ECE6DF</code>.</p>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   Icons — one rounded, premium set shared by both roles.
+   ============================================================ */
+const I = {
+  explore:(f)=>`<svg width="22" height="22" viewBox="0 0 24 24" fill="${f?'currentColor':'none'}"
+      stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"
+      ${f?'fill-opacity=".16"':''}><circle cx="12" cy="12" r="9"/>
+      <path d="m15.4 8.6-2 4.8-4.8 2 2-4.8z" fill="currentColor" stroke="none"/></svg>`,
+  videos:(f)=>`<svg width="22" height="22" viewBox="0 0 24 24" fill="${f?'currentColor':'none'}"
+      stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"
+      ${f?'fill-opacity=".16"':''}><rect x="2.5" y="5.5" width="13" height="13" rx="3.6"/>
+      <path d="M21.5 8.4v7.2a1 1 0 0 1-1.5.86l-4-2.4V9.94l4-2.4a1 1 0 0 1 1.5.86z"/>
+      <path d="m7.8 9.9 3.4 2.1-3.4 2.1z" fill="currentColor" stroke="none"/></svg>`,
+  mentors:(f)=>`<svg width="22" height="22" viewBox="0 0 24 24" fill="${f?'currentColor':'none'}"
+      stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"
+      ${f?'fill-opacity=".16"':''}><circle cx="9" cy="7.8" r="3.4"/>
+      <path d="M2.6 20a6.4 6.4 0 0 1 12.8 0"/><path d="M16.6 5.2a3.4 3.4 0 0 1 0 6.4"/>
+      <path d="M18.4 20a6.4 6.4 0 0 0-2.6-5.1"/></svg>`,
+  opps:(f)=>`<svg width="22" height="22" viewBox="0 0 24 24" fill="${f?'currentColor':'none'}"
+      stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"
+      ${f?'fill-opacity=".16"':''}>
+      <path d="M12 2.8l2.4 5.9 6.3.5-4.8 4.1 1.5 6.1L12 16.2l-5.4 3.2 1.5-6.1-4.8-4.1 6.3-.5z"/></svg>`,
+  mentees:(f)=>`<svg width="22" height="22" viewBox="0 0 24 24" fill="${f?'currentColor':'none'}"
+      stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"
+      ${f?'fill-opacity=".16"':''}><path d="M12 3.4 22 8l-10 4.6L2 8z"/>
+      <path d="M6 10.4V15c0 1.7 2.7 3 6 3s6-1.3 6-3v-4.6"/></svg>`,
+  profile:(f)=>`<svg width="22" height="22" viewBox="0 0 24 24" fill="${f?'currentColor':'none'}"
+      stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"
+      ${f?'fill-opacity=".16"':''}><circle cx="12" cy="8" r="3.8"/>
+      <path d="M4.5 20.2a7.5 7.5 0 0 1 15 0"/></svg>`,
+};
+const bell = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#4a1020"
+  stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M18 8.5a6 6 0 1 0-12 0c0 6-2 7-2 7h16s-2-1-2-7"/><path d="M10.5 20.5a2 2 0 0 0 3 0"/></svg>`;
+const search = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4a1020"
+  stroke-width="2.1" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>`;
+const sliders = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#4a1020"
+  stroke-width="2" stroke-linecap="round"><path d="M4 6h16M7 12h13M11 18h9"/>
+  <circle cx="4" cy="6" r="0.1"/></svg>`;
+const chat = `<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+  stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M21 11.5a8.4 8.4 0 0 1-9 8.4L3 21l1.1-4.6A8.4 8.4 0 1 1 21 11.5z"/></svg>`;
+const sbar = `<div class="sbar"><span>9:41</span><span class="rr">&#9679;&#9679;&#9679; &#9679;</span></div>`;
+
+/* ============================================================
+   Screens
+   ============================================================ */
+const MENTEE_TABS = [["explore","Explore"],["videos","Videos"],["mentors","Mentors"],["opps","Opportunities"]];
+const MENTOR_TABS = [["profile","Profile"],["videos","Videos"],["mentees","Mentees"],["opps","Opportunities"]];
+
+const MENTEE = [
+  { key:"welcome", label:"Welcome", note:"Photographic ground, not a flat gradient", tabs:null, html:`
+    <div class="welcome">
+      <div class="bg"></div><div class="veil"></div><div class="glow"></div>
+      <div class="wtop">
+        <img class="wmark" src="assets/p3-logo-horizontal.png" alt="P3">
+        <h2>Talent is universal.<br><em>Access is not.</em></h2>
+        <p class="sub">Find a mentor who has already done the thing you are trying to do, and get a
+           straight answer when you need one.</p>
+      </div>
+      <div class="wcta">
+        <span class="btn p">Create your account</span>
+        <span class="btn g">I already have an account</span>
+        <div class="wtrust">Free, always &middot; 1,200+ students and mentors</div>
+      </div>
+    </div>`},
+
+  { key:"explore", label:"Explore", note:"Greeting, ask, mentors, then explore", tabs:"explore", html:`
+    <div class="ahead"><div><div class="t">Explore</div>
+      <div class="s">Wednesday &middot; 2 new opportunities</div></div>
+      <div class="sp"></div><div class="gbtn">${bell}</div></div>
+    <div class="hero">
+      <h3>Good afternoon, <em>Maya</em></h3>
+      <p>Mentorship, scholarships and a network that opens doors. Pick up where you left off.</p>
+    </div>
+    <div class="glass" style="padding:12px;margin-top:10px">
+      <div style="font-family:var(--head);font-size:.85rem;font-weight:800;color:var(--deep);margin-bottom:8px">Ask a question</div>
+      <div style="display:flex;gap:6px;margin-bottom:8px">
+        <div class="seg" style="flex:1"><span class="on">My Mentor</span><span>Public</span></div>
+      </div>
+      <div class="field">Ask about careers, college, or your next step&hellip;</div>
+      <div style="display:flex;align-items:center;margin-top:9px">
+        <span class="lnk">Need ideas?</span><span style="margin-left:auto" class="btnp">Submit</span>
+      </div>
+    </div>
+    <div class="glass" style="padding:12px;margin-top:10px">
+      <div style="display:flex;align-items:baseline;margin-bottom:9px">
+        <div style="font-family:var(--head);font-size:.85rem;font-weight:800;color:var(--deep)">Your mentors</div>
+        <span class="lnk" style="margin-left:auto">Browse &rarr;</span></div>
+      <div class="mrow"><img class="av" src="assets/mentors/m13.jpg" width="36" height="36" alt="">
+        <div><div class="nm">Gerald Whitfield</div><div class="rl">Attorney &middot; replies in ~1 day</div></div>
+        <span class="btno" style="margin-left:auto">${chat} Ask</span></div>
+      <div class="rowdiv"></div>
+      <div class="mrow"><img class="av" src="assets/mentors/m12.jpg" width="36" height="36" alt="">
+        <div><div class="nm">Alicia Bell</div><div class="rl">Software Engineer &middot; Google</div></div>
+        <span class="btno" style="margin-left:auto">Say hello</span></div>
+    </div>
+    <div class="sect">Career paths <span class="more">See all 11</span></div>
+    <div class="rail2">
+      <div class="glass pathitem">
+        <img class="thumb" src="https://images.pexels.com/photos/6129680/pexels-photo-6129680.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=360&w=640" alt="">
+        <div class="in"><div class="t">Healthcare</div><div class="sal">$48k &rarr; $210k</div>
+          <div class="meta">4 roles &middot; 7 skills</div></div></div>
+      <div class="glass pathitem">
+        <img class="thumb" src="https://images.pexels.com/photos/36706459/pexels-photo-36706459.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=360&w=640" alt="">
+        <div class="in"><div class="t">Technology</div><div class="sal">$62k &rarr; $240k</div>
+          <div class="meta">4 roles &middot; 7 skills</div></div></div>
+      <div class="pathitem" style="width:40px"></div>
+    </div>
+    <div class="sect">Featured videos <span class="more">See all</span></div>
+    <div class="glass vrow" style="margin-top:0">
+      <div class="vw"><img class="thumb" src="assets/video/vid-madhere.jpg" alt=""><span class="dur">1:24</span></div>
+      <div><div class="t">How I found opportunities as a first-gen student</div>
+        <div class="by"><img class="av" src="assets/mentors/m3.jpg" width="17" height="17" alt="">
+          <span class="n">Dr. Max Madhere</span></div></div>
+    </div>`},
+
+  { key:"opps", label:"Opportunities", note:"New: imagery + industry / deadline / location filters", tabs:"opps", html:`
+    <div class="ahead"><div><div class="t">Opportunities</div>
+      <div class="s">124 open &middot; 8 closing this week</div></div>
+      <div class="sp"></div><div class="gbtn">${sliders}</div></div>
+    <div class="aicard" style="margin-bottom:9px">
+      <div class="t">${I.opps(true).replace('width="22" height="22"','width="12" height="12"')} Matched to you</div>
+      <p>3 healthcare scholarships that fit your pathway and close within 60 days.</p></div>
+    <div class="seg" style="margin-bottom:8px"><span>All</span><span class="on">Scholarships</span>
+      <span>Intern</span><span>Jobs</span></div>
+    <div class="chips" style="margin-bottom:10px"><span class="chip on">Healthcare</span>
+      <span class="chip">Closing soon</span><span class="chip">Illinois</span></div>
+    <div class="glass opp"><img class="thumb" src="https://images.pexels.com/photos/30562665/pexels-photo-30562665.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=360&w=640" alt="">
+      <div class="in"><div class="t">Golden Door Scholars Scholarship</div>
+        <div class="row"><span class="pill prog">Closes in 9 days</span><span class="pill neut">Full ride</span></div></div></div>
+    <div class="glass opp"><img class="thumb" src="https://images.pexels.com/photos/6129680/pexels-photo-6129680.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=360&w=640" alt="">
+      <div class="in"><div class="t">National Restaurant Association Foundation</div>
+        <div class="row"><span class="pill ok">Closes Mar 2027</span><span class="pill neut">Health</span></div></div></div>
+    <div class="glass opp"><img class="thumb" src="https://images.pexels.com/photos/7693201/pexels-photo-7693201.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=360&w=640" alt="">
+      <div class="in"><div class="t">Goldman Sachs HBCU Possibilities Summit</div>
+        <div class="row"><span class="pill wait">Closes in 6 weeks</span><span class="pill neut">Finance</span></div></div></div>`},
+
+  { key:"mentors", label:"Mentors", note:"Match reasons shown, not just a percentage", tabs:"mentors", html:`
+    <div class="ahead"><div><div class="t">Mentors</div>
+      <div class="s">Matched on your goals and background</div></div>
+      <div class="sp"></div><div class="gbtn">${search}</div></div>
+    <div class="glass" style="padding:11px;border-color:rgba(217,58,58,.22)">
+      <div class="mrow"><img class="av" src="assets/mentors/m13.jpg" width="40" height="40" alt="">
+        <div><div class="nm">Gerald Whitfield</div><div class="rl">Your mentor &middot; Attorney</div></div>
+        <span class="btno" style="margin-left:auto">${chat} Ask</span></div></div>
+    <div class="sect">Recommended for you</div>
+    <div class="glass" style="padding:11px;margin-bottom:8px"><div class="mrow" style="align-items:flex-start">
+      <img class="av" src="assets/mentors/m12.jpg" width="40" height="40" alt="">
+      <div style="flex:1"><div style="display:flex"><div><div class="nm">Alicia Bell</div>
+        <div class="rl">Software Engineer &middot; Chicago</div></div>
+        <span class="pill ok" style="margin-left:auto">94%</span></div>
+        <div class="why"><span>First-gen</span><span>Technology</span><span>Chicago</span></div></div></div></div>
+    <div class="glass" style="padding:11px;margin-bottom:8px"><div class="mrow" style="align-items:flex-start">
+      <img class="av" src="assets/mentors/m4.jpg" width="40" height="40" alt="">
+      <div style="flex:1"><div style="display:flex"><div><div class="nm">Denise Carter</div>
+        <div class="rl">Nurse Practitioner &middot; Baton Rouge</div></div>
+        <span class="pill ok" style="margin-left:auto">91%</span></div>
+        <div class="why"><span>Healthcare</span><span>HBCU grad</span></div></div></div></div>
+    <div class="glass" style="padding:11px;margin-bottom:8px"><div class="mrow" style="align-items:flex-start">
+      <img class="av" src="assets/mentors/m9.jpg" width="40" height="40" alt="">
+      <div style="flex:1"><div style="display:flex"><div><div class="nm">Marcus Tran</div>
+        <div class="rl">Commercial Pilot &middot; Atlanta</div></div>
+        <span class="pill ok" style="margin-left:auto">88%</span></div>
+        <div class="why"><span>Aviation</span><span>Non-degree route</span></div></div></div></div>
+    <div class="glass" style="padding:11px"><div class="mrow" style="align-items:flex-start">
+      <img class="av" src="assets/mentors/m11.jpg" width="40" height="40" alt="">
+      <div style="flex:1"><div style="display:flex"><div><div class="nm">Andre Foster</div>
+        <div class="rl">Financial Advisor &middot; Houston</div></div>
+        <span class="pill ok" style="margin-left:auto">86%</span></div>
+        <div class="why"><span>Finance</span><span>College apps</span></div></div></div></div>`},
+
+  { key:"videos", label:"Videos", note:"Real posts, shorter rows, web's four views", tabs:"videos", html:`
+    <div class="ahead"><div><div class="t">Videos</div>
+      <div class="s">Real answers from real mentors</div></div>
+      <div class="sp"></div><div class="gbtn">${search}</div></div>
+    <div class="chips" style="margin-bottom:10px"><span class="chip on">Featured</span>
+      <span class="chip">Latest</span><span class="chip">Following</span><span class="chip">Saved</span></div>
+    <div class="glass vrow">
+      <div class="vw"><img class="thumb" src="assets/video/vid-madhere.jpg" alt=""><span class="dur">1:24</span></div>
+      <div><div class="t">How I found opportunities as a first-generation student</div>
+        <div class="by"><img class="av" src="assets/mentors/m3.jpg" width="17" height="17" alt="">
+          <span class="n">Dr. Max Madhere</span></div></div></div>
+    <div class="glass vrow">
+      <div class="vw"><img class="thumb" src="assets/video/vid-semien.jpg" alt=""><span class="dur">2:06</span></div>
+      <div><div class="t">Should I stay in state for college, or leave?</div>
+        <div class="by"><img class="av" src="assets/mentors/m2.jpg" width="17" height="17" alt="">
+          <span class="n">Dr. Joseph Semien</span></div></div></div>
+    <div class="glass vrow">
+      <div class="vw"><img class="thumb" src="assets/video/vid-paulm.jpg" alt=""><span class="dur">1:29</span></div>
+      <div><div class="t">Keeping options open. Having different experiences.</div>
+        <div class="by"><img class="av" src="assets/mentors/m13.jpg" width="17" height="17" alt="">
+          <span class="n">Paul M</span></div></div></div>
+    <div class="glass vrow">
+      <div class="vw"><img class="thumb" src="assets/video/vid-madhere.jpg" alt=""><span class="dur">0:58</span></div>
+      <div><div class="t">What I wish I knew before applying to med school</div>
+        <div class="by"><img class="av" src="assets/mentors/m3.jpg" width="17" height="17" alt="">
+          <span class="n">Dr. Max Madhere</span></div></div></div>
+    <div class="glass vrow">
+      <div class="vw"><img class="thumb" src="assets/video/vid-semien.jpg" alt=""><span class="dur">1:47</span></div>
+      <div><div class="t">Paying for college without going broke</div>
+        <div class="by"><img class="av" src="assets/mentors/m2.jpg" width="17" height="17" alt="">
+          <span class="n">Dr. Joseph Semien</span></div></div></div>`},
+];
+
+const MENTOR = [
+  { key:"profile", label:"Profile", note:"Mentor landing: impact first", tabs:"profile", html:`
+    <div class="ahead"><div><div class="t">Profile</div>
+      <div class="s">Thanks for showing up this week</div></div>
+      <div class="sp"></div><div class="gbtn">${bell}</div></div>
+    <div class="hero"><h3>Good afternoon, <em>Gerald</em></h3>
+      <p>3 students are waiting on an answer. Ninety seconds each is all it takes.</p></div>
+    <div class="stat" style="margin-top:10px">
+      <div class="glass s"><div class="v">12</div><div class="k">MENTEES</div></div>
+      <div class="glass s"><div class="v">38</div><div class="k">ANSWERS</div></div>
+      <div class="glass s"><div class="v">2.4k</div><div class="k">VIEWS</div></div></div>
+    <div class="sect">Waiting on you <span class="more">See all 3</span></div>
+    <div class="glass qcard"><div class="q">How do I choose between a paid internship and a better-named
+      unpaid one?</div><div class="m"><img class="av" src="assets/mentors/m10.jpg" width="18" height="18" alt="">
+      <span class="n">Maya R. &middot; 2 days ago</span><span class="pill wait" style="margin-left:auto">Awaiting</span></div></div>
+    <div class="glass qcard"><div class="q">Is law school worth it if I already have an offer?</div>
+      <div class="m"><img class="av" src="assets/mentors/m4.jpg" width="18" height="18" alt="">
+      <span class="n">Jasmine T. &middot; 4 days ago</span><span class="pill wait" style="margin-left:auto">Awaiting</span></div></div>
+    <div class="sect">Your latest</div>
+    <div class="glass vrow"><div class="vw"><img class="thumb" src="assets/video/vid-paulm.jpg" alt="">
+      <span class="dur">1:29</span></div>
+      <div><div class="t">Keeping options open. Having different experiences.</div>
+        <div class="by"><span class="n">312 views &middot; 7 followers</span></div></div></div>`},
+
+  { key:"mentees", label:"Mentees", note:"Full roster, first name + last initial", tabs:"mentees", html:`
+    <div class="ahead"><div><div class="t">Your mentees</div>
+      <div class="s">12 active &middot; 2 pending requests</div></div>
+      <div class="sp"></div><div class="gbtn">${search}</div></div>
+    <div class="chips" style="margin-bottom:10px"><span class="chip on">Active</span>
+      <span class="chip">Pending</span><span class="chip">Past</span></div>
+    <div class="glass" style="padding:11px;margin-bottom:8px"><div class="mrow">
+      <img class="av" src="assets/mentors/m10.jpg" width="40" height="40" alt="">
+      <div><div class="nm">Maya R.</div><div class="rl">College pathway &middot; 3 of 10 milestones</div></div>
+      <span class="pill wait" style="margin-left:auto">Awaiting</span></div></div>
+    <div class="glass" style="padding:11px;margin-bottom:8px"><div class="mrow">
+      <img class="av" src="assets/mentors/m4.jpg" width="40" height="40" alt="">
+      <div><div class="nm">Jasmine T.</div><div class="rl">Career pathway &middot; 6 of 10 milestones</div></div>
+      <span class="pill wait" style="margin-left:auto">Awaiting</span></div></div>
+    <div class="glass" style="padding:11px;margin-bottom:8px"><div class="mrow">
+      <img class="av" src="assets/mentors/m12.jpg" width="40" height="40" alt="">
+      <div><div class="nm">Andre W.</div><div class="rl">College pathway &middot; 8 of 10 milestones</div></div>
+      <span class="pill ok" style="margin-left:auto">On track</span></div></div>
+    <div class="glass" style="padding:11px;margin-bottom:8px"><div class="mrow">
+      <img class="av" src="assets/mentors/m11.jpg" width="40" height="40" alt="">
+      <div><div class="nm">Devon K.</div><div class="rl">Career pathway &middot; 2 of 10 milestones</div></div>
+      <span class="pill neut" style="margin-left:auto">Quiet</span></div></div>
+    <div class="glass" style="padding:11px"><div class="mrow">
+      <img class="av" src="assets/mentors/m9.jpg" width="40" height="40" alt="">
+      <div><div class="nm">Tasha B.</div><div class="rl">College pathway &middot; 5 of 10 milestones</div></div>
+      <span class="pill ok" style="margin-left:auto">On track</span></div></div>`},
+
+  { key:"respond", label:"Answer a question", note:"The mentor's core action, 90 seconds", tabs:null, html:`
+    <div style="flex:none;padding:0 15px 12px;display:flex;align-items:center;gap:10px">
+      <div class="gbtn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4a1020"
+        stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></div>
+      <div style="font-family:var(--head);font-size:1.06rem;font-weight:800;color:var(--deep);
+        letter-spacing:-.02em">Answer a question</div></div>
+    <div class="body">
+      <div class="glass" style="padding:12px">
+        <div class="m" style="display:flex;align-items:center;gap:6px;margin-bottom:8px">
+          <img class="av" src="assets/mentors/m10.jpg" width="20" height="20" alt="">
+          <span style="font-size:.66rem;font-weight:700;color:var(--muted)">Maya R. asked &middot; 2 days ago</span></div>
+        <div style="font-size:.82rem;font-weight:700;color:var(--ink);line-height:1.36">
+          How do I choose between a paid internship and a better-named unpaid one?</div></div>
+      <div class="glass" style="margin-top:10px;padding:0;overflow:hidden">
+        <div style="height:168px;background:linear-gradient(150deg,#2e0614,#4a1020 55%,#7a1a2c);
+          display:grid;place-items:center;position:relative">
+          <div style="width:60px;height:60px;border-radius:50%;background:rgba(255,255,255,.14);
+            border:1.5px solid rgba(255,255,255,.34);display:grid;place-items:center;
+            backdrop-filter:blur(8px)">
+            <div style="width:24px;height:24px;border-radius:50%;background:var(--crimson);
+              box-shadow:0 0 18px rgba(217,58,58,.75)"></div></div>
+          <div style="position:absolute;bottom:10px;right:12px;font-size:.6rem;font-weight:800;
+            color:rgba(255,255,255,.72)">90 SEC MAX</div></div>
+        <div style="padding:12px">
+          <div class="field" style="margin-bottom:8px">Add a title so students can find this&hellip;</div>
+          <div class="chips"><span class="chip on">Internships</span><span class="chip">Money</span>
+            <span class="chip">+ Tag</span></div></div></div>
+      <div style="display:flex;gap:8px;margin-top:12px">
+        <span class="btn g" style="flex:1;margin:0;background:#f2efec;color:#6b5f52;
+          border:1px solid var(--hair);padding:11px;font-size:.78rem">Cancel</span>
+        <span class="btn p" style="flex:2;margin:0;padding:11px;font-size:.78rem">Record answer</span></div>
+    </div>`, raw:true},
+
+  { key:"opps", label:"Opportunities", note:"Share an opening with your mentees", tabs:"opps", html:`
+    <div class="ahead"><div><div class="t">Opportunities</div>
+      <div class="s">Share an opening with your mentees</div></div>
+      <div class="sp"></div><div class="gbtn">${sliders}</div></div>
+    <div class="seg" style="margin-bottom:8px"><span class="on">All</span><span>Mine</span>
+      <span>Shared</span></div>
+    <div class="chips" style="margin-bottom:10px"><span class="chip on">Law</span>
+      <span class="chip">Closing soon</span><span class="chip">Remote</span></div>
+    <div class="glass opp"><img class="thumb" src="https://images.pexels.com/photos/6077091/pexels-photo-6077091.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=360&w=640" alt="">
+      <div class="in"><div class="t">DOJ Summer Law Intern Program</div>
+        <div class="row"><span class="pill prog">Closes in 12 days</span>
+          <span class="pill vio">Shared with 4</span></div></div></div>
+    <div class="glass opp"><img class="thumb" src="https://images.pexels.com/photos/7693201/pexels-photo-7693201.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=360&w=640" alt="">
+      <div class="in"><div class="t">Goldman Sachs HBCU Possibilities Summit</div>
+        <div class="row"><span class="pill wait">Closes in 6 weeks</span><span class="pill neut">Finance</span></div></div></div>
+    <div class="glass opp"><img class="thumb" src="https://images.pexels.com/photos/14608504/pexels-photo-14608504.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=360&w=640" alt="">
+      <div class="in"><div class="t">White House Internship Program</div>
+        <div class="row"><span class="pill ok">Closes Jan 2027</span><span class="pill neut">Government</span></div></div></div>`},
+];
+
+/* ============================================================
+   Render
+   ============================================================ */
+const strip = document.getElementById("strip");
+let role = "mentee";
+
+function tabbar(tabs, activeKey){
+  const set = tabs === "mentor" ? MENTOR_TABS : MENTEE_TABS;
+  return `<div class="tabbar">` + set.map(([k,lab])=>{
+    const on = k === activeKey;
+    return `<button class="tb ${on?'on':''}" data-goto="${k}">
+      <span class="ic">${I[k](on)}</span>${lab}</button>`;
+  }).join("") + `</div>`;
+}
+
+function render(){
+  const screens = role === "mentee" ? MENTEE : MENTOR;
+  const set = role === "mentee" ? "mentee" : "mentor";
+  strip.innerHTML = screens.map((s,i)=>`
+    <div class="slot" data-key="${s.key}">
+      <div class="phone"><div class="notch"></div><div class="screen">
+        ${sbar}
+        ${s.raw ? s.html : `<div class="body">${s.html}</div>`}
+        ${s.tabs ? tabbar(set, s.tabs) : ""}
+      </div></div>
+      <div class="slot-label"><b>${String(i+1).padStart(2,"0")} &middot; ${s.label}</b>${s.note}</div>
+    </div>`).join("");
+
+  // Tapping a tab in any phone scrolls the strip to that screen.
+  strip.querySelectorAll("[data-goto]").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      const target = strip.querySelector(`.slot[data-key="${btn.dataset.goto}"]`);
+      if(!target) return;
+      target.scrollIntoView({behavior:"smooth",inline:"center",block:"nearest"});
+      target.querySelector(".phone").animate(
+        [{transform:"scale(1)"},{transform:"scale(1.022)"},{transform:"scale(1)"}],
+        {duration:420,easing:"cubic-bezier(.4,0,.2,1)"});
+    });
+  });
+}
+
+document.getElementById("r-mentee").addEventListener("click",()=>{
+  role="mentee";
+  document.getElementById("r-mentee").setAttribute("aria-pressed","true");
+  document.getElementById("r-mentor").setAttribute("aria-pressed","false");
+  render(); strip.scrollTo({left:0,behavior:"smooth"});
+});
+document.getElementById("r-mentor").addEventListener("click",()=>{
+  role="mentor";
+  document.getElementById("r-mentor").setAttribute("aria-pressed","true");
+  document.getElementById("r-mentee").setAttribute("aria-pressed","false");
+  render(); strip.scrollTo({left:0,behavior:"smooth"});
+});
+
+render();
+</script>
+</body>
+</html>
