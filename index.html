@@ -63,7 +63,7 @@ body{margin:0;background:#f4f1ee;color:var(--ink);font-family:var(--body);
 .screen{width:100%;height:100%;border-radius:33px;overflow:hidden;position:relative;
         display:flex;flex-direction:column;background:var(--canvas);isolation:isolate;}
 .screen::before{content:"";position:absolute;inset:0;z-index:0;
-  background:url("assets/campus-bg.jpg") center/cover no-repeat;opacity:.40;}
+  background:url("assets/campus-bg.jpg") center/cover no-repeat;opacity:.20;}
 .screen>*{position:relative;z-index:1;}
 .screen.plain::before{display:none;}
 .notch{position:absolute;top:8px;left:50%;transform:translateX(-50%);width:82px;height:22px;
@@ -102,8 +102,8 @@ body{margin:0;background:#f4f1ee;color:var(--ink);font-family:var(--body);
 .hero h3 em{font-style:normal;color:var(--crimson);}
 .hero p{margin:0;font-size:.69rem;line-height:1.46;color:rgba(255,255,255,.76);}
 
-.seg{display:flex;background:var(--seg);border-radius:50px;padding:2.5px;gap:2px;}
-.seg span{flex:1;text-align:center;font-size:.66rem;font-weight:700;padding:5px 3px;
+.seg{display:flex;background:var(--seg);border-radius:50px;padding:3px;gap:2px;}
+.seg span{flex:1;text-align:center;font-size:.665rem;font-weight:700;padding:6.5px 6px;
           border-radius:50px;color:var(--muted);white-space:nowrap;}
 .seg span.on{background:#fff;color:var(--deep);box-shadow:0 1px 3px rgba(0,0,0,.09);}
 .chips{display:flex;gap:5px;overflow:hidden;}
@@ -171,7 +171,7 @@ body{margin:0;background:#f4f1ee;color:var(--ink);font-family:var(--body);
      border-radius:12px;margin-bottom:8px;}
 .btn.p{background:var(--crimson);color:#fff;box-shadow:0 4px 16px rgba(217,58,58,.40);}
 .btn.g{background:rgba(255,255,255,.09);color:#fff;border:1px solid rgba(255,255,255,.26);}
-.wfree{text-align:center;font-size:.66rem;color:rgba(255,255,255,.5);margin-top:9px;font-weight:600;}
+
 
 /* ---- cards ---- */
 .rail2{display:flex;gap:8px;overflow:hidden;}
@@ -376,30 +376,41 @@ function menteeRow(name, grad, glyph, pathway, done, total, last){
 }
 
 const MENTEE_TABS=[["explore","Home"],["mentors","Mentors"],["videos","Answers"],["opps","Opportunities"]];
-const MENTOR_TABS=[["profile","Home"],["mentees","Mentees"],["videos","Answers"],["opps","Opportunities"]];
+const MENTOR_TABS=[["profile","Home"],["mentees","Mentees"],["videos","Questions"],["opps","Opportunities"]];
 
 /* =========================== MENTEE =========================== */
 const MENTEE=[
-{key:"welcome",label:"Welcome",note:"Clean grid, no photograph",tabs:null,plain:true,light:true,html:`
+{key:"welcome",label:"Welcome",note:"One entry point for both personas",tabs:null,plain:true,light:true,html:`
   <div class="welcome"><div class="grid"></div><div class="glow"></div>
     <div class="wtop">
       <img class="wmark" src="assets/p3-logo-horizontal.png" alt="P3">
       <h2>Talent is universal.<br><em>Access is not.</em></h2>
-      <p class="sub">Find a mentor who has already done the thing you are trying to do, and get a
-         straight answer when you need one.</p></div>
+      <p class="sub">For students building a future, and the people who can help them get there.</p></div>
     <div class="wcta"><span class="btn p">Create your account</span>
-      <span class="btn g">I already have an account</span>
-      <div class="wfree">Free, always</div></div></div>`},
+      <span class="btn g">I already have an account</span></div></div>`},
 
-{key:"explore",label:"Explore",note:"Mentor picker for multiple mentors",tabs:"explore",html:`
+{key:"explore",label:"Home",note:"Ask, then progress, then what to explore",tabs:"explore",html:`
   <div class="ahead"><div><div class="t">Home</div><div class="s">2 new opportunities</div></div>
     <div class="sp"></div><div class="gbtn">${gBell}</div>
     <div class="av" style="width:30px;height:30px;overflow:hidden;border:1.5px solid var(--hair)">
       ${menteeAvatar(27,GR.indigo,"person")}</div></div>
   <div class="hero"><h3>Good afternoon, <em>Maya</em></h3>
     <p>Mentorship, scholarships and a network that opens doors.</p></div>
+  <div class="glass" style="padding:12px;margin-top:8px">
+    <div style="font-family:var(--head);font-size:.85rem;font-weight:800;color:var(--deep);margin-bottom:8px">Ask a question</div>
+    <div class="seg" style="margin-bottom:7px"><span class="on">My Mentor</span><span>Public</span></div>
+    <div style="display:flex;align-items:center;gap:6px;margin-bottom:7px">
+      <span style="font-size:.63rem;color:var(--faint);font-weight:700">To</span>
+      <div style="flex:1;display:flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--hair);
+        border-radius:10px;padding:5px 8px">
+        <img class="av" src="assets/mentors/m13.jpg" width="18" height="18" alt="">
+        <span style="font-size:.68rem;font-weight:700;color:var(--deep)">Gerald Whitfield</span>
+        <span style="margin-left:auto;color:var(--faint)">${gChev}</span></div></div>
+    <div class="field">Ask about careers, college, or your next step&hellip;</div>
+    <div style="display:flex;align-items:center;margin-top:8px"><span class="lnk">Need ideas?</span>
+      <span style="margin-left:auto" class="btnp">Submit</span></div></div>
   <div class="sect">Milestone pathways <span class="more">View</span></div>
-  <div class="glass" style="padding:11px;margin-top:0">
+  <div class="glass" style="padding:11px">
     <div class="mrow">
       <div class="ring">
         <svg width="46" height="46" viewBox="0 0 46 46">
@@ -415,102 +426,68 @@ const MENTEE=[
         <div class="nm">College &amp; Career</div>
         <div class="rl">Up next: visit or research 3 colleges</div></div>
       <span style="color:var(--faint);transform:rotate(-90deg);flex:none">${gChev}</span></div></div>
-  <div class="glass" style="padding:12px;margin-top:8px">
-    <div style="font-family:var(--head);font-size:.83rem;font-weight:800;color:var(--deep);margin-bottom:8px">Ask a question</div>
-    <div class="seg" style="margin-bottom:7px"><span class="on">My Mentor</span><span>Public</span></div>
-    <div style="display:flex;align-items:center;gap:6px;margin-bottom:7px">
-      <span style="font-size:.63rem;color:var(--faint);font-weight:700">To</span>
-      <div style="flex:1;display:flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--hair);
-        border-radius:10px;padding:5px 8px">
-        <img class="av" src="assets/mentors/m13.jpg" width="18" height="18" alt="">
-        <span style="font-size:.68rem;font-weight:700;color:var(--deep)">Gerald Whitfield</span>
-        <span style="margin-left:auto;color:var(--faint)">${gChev}</span></div></div>
-    <div class="field">Ask about careers, college, or your next step&hellip;</div>
-    <div style="display:flex;align-items:center;margin-top:8px"><span class="lnk">Need ideas?</span>
-      <span style="margin-left:auto" class="btnp">Submit</span></div></div>
-  <div class="glass" style="padding:12px;margin-top:8px">
-    <div style="display:flex;align-items:baseline;margin-bottom:8px">
-      <div style="font-family:var(--head);font-size:.83rem;font-weight:800;color:var(--deep)">Your mentors</div>
-      <span class="lnk" style="margin-left:auto">Browse</span></div>
-    <div class="mrow"><img class="av" src="assets/mentors/m13.jpg" width="34" height="34" alt="">
-      <div><div class="nm">Gerald Whitfield</div><div class="rl">Attorney</div></div>
-      <span class="btno" style="margin-left:auto">Ask</span></div>
-    <div class="rowdiv"></div>
-    <div class="mrow"><img class="av" src="assets/mentors/m12.jpg" width="34" height="34" alt="">
-      <div><div class="nm">Alicia Bell</div><div class="rl">Software Engineer</div></div>
-      <span class="btno" style="margin-left:auto">Ask</span></div></div>
   <div class="sect">Resources <span class="more">See all 11</span></div>
   <div class="rail2">
     <div class="glass pathitem"><img class="thumb" src="https://images.pexels.com/photos/6129680/pexels-photo-6129680.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=360&w=640" alt="">
-      <div class="in"><div class="t">Healthcare</div><div class="sal">$60k &rarr; $400k+</div><div class="meta">4 roles &middot; 7 skills</div></div></div>
+      <div class="in"><div class="t">Healthcare</div><div class="sal">$60k &rarr; $400k+</div>
+        <div class="meta">4 roles &middot; 7 skills</div></div></div>
     <div class="glass pathitem"><img class="thumb" src="https://images.pexels.com/photos/36706459/pexels-photo-36706459.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=360&w=640" alt="">
-      <div class="in"><div class="t">Technology</div><div class="sal">$80k &rarr; $400k+</div><div class="meta">4 roles &middot; 7 skills</div></div></div>
-    <div class="glass pathitem"><img class="thumb" src="https://images.pexels.com/photos/6077091/pexels-photo-6077091.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=360&w=640" alt="">
-      <div class="in"><div class="t">Legal</div><div class="sal">$70k &rarr; $500k+</div>
+      <div class="in"><div class="t">Technology</div><div class="sal">$80k &rarr; $400k+</div>
         <div class="meta">4 roles &middot; 7 skills</div></div></div>
     <div class="pathitem" style="width:34px"></div></div>
-  <div class="sect">Featured videos <span class="more">See all</span></div>
-  <div class="glass vcard"><div class="vw"><img class="thumb" src="assets/video/vid-madhere.jpg" alt="">
-    <span class="dur">1:24</span></div>
-    <div class="in"><div class="t">How I found opportunities as a first-gen student</div>
-      <div class="by">Dr. Max Madhere</div></div></div>`},
+  <div class="sect">Featured answers <span class="more">See all</span></div>
+  <div class="rail2">
+    <div class="glass pathitem" style="width:158px">
+      <div style="position:relative"><img class="thumb" src="assets/video/vid-madhere.jpg" style="height:86px" alt="">
+        <span class="dur" style="position:absolute;right:5px;bottom:5px">1:24</span></div>
+      <div class="in"><div class="t" style="font-size:.72rem">How I found opportunities as a first-gen student</div>
+        <div class="meta">Dr. Max Madhere</div></div></div>
+    <div class="glass pathitem" style="width:158px">
+      <div style="position:relative"><img class="thumb" src="assets/video/vid-semien.jpg" style="height:86px" alt="">
+        <span class="dur" style="position:absolute;right:5px;bottom:5px">2:06</span></div>
+      <div class="in"><div class="t" style="font-size:.72rem">Stay in state for college, or leave?</div>
+        <div class="meta">Dr. Joseph Semien</div></div></div>
+    <div class="pathitem" style="width:34px"></div></div>`},
 
-{key:"opps",label:"Opportunities",note:"New: imagery + industry / deadline / location",tabs:"opps",html:`
-  <div class="ahead"><div><div class="t">Opportunities</div><div class="s">124 open &middot; 8 closing soon</div></div>
-    <div class="sp"></div><div class="gbtn">${gSliders}</div></div>
-  <div class="seg" style="margin-bottom:7px"><span>All</span><span class="on">Scholarships</span>
-    <span>Intern</span><span>Jobs</span></div>
-  <div class="chips" style="margin-bottom:9px"><span class="chip on">Healthcare</span>
-    <span class="chip">Closing soon</span><span class="chip">Illinois</span></div>
-  <div class="glass opp"><img class="thumb" src="https://images.pexels.com/photos/30562665/pexels-photo-30562665.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=360&w=640" alt="">
-    <div class="in"><div class="t">Golden Door Scholars Scholarship</div>
-      <div class="row"><span class="pill prog">Closes in 9 days</span><span class="pill neut">Full ride</span></div></div></div>
-  <div class="glass opp"><img class="thumb" src="https://images.pexels.com/photos/6129680/pexels-photo-6129680.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=360&w=640" alt="">
-    <div class="in"><div class="t">National Restaurant Association Foundation</div>
-      <div class="row"><span class="pill ok">Closes Mar 2027</span><span class="pill neut">Health</span></div></div></div>
-  <div class="glass opp"><img class="thumb" src="https://images.pexels.com/photos/7693201/pexels-photo-7693201.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=360&w=640" alt="">
-    <div class="in"><div class="t">Goldman Sachs HBCU Possibilities</div>
-      <div class="row"><span class="pill wait">Closes in 6 weeks</span><span class="pill neut">Finance</span></div></div></div>`},
-
-{key:"mentors",label:"Mentors",note:"Match Me kept, no invented percentages",tabs:"mentors",html:`
+{key:"mentors",label:"Mentors",note:"Match Me, then people. No invented descriptors",tabs:"mentors",html:`
   <div class="ahead"><div><div class="t">Mentors</div><div class="s">Find someone who has done it</div></div>
     <div class="sp"></div><div class="gbtn">${gSearch}</div></div>
   <div class="btnwide" style="margin-bottom:9px">${gSpark} Match me with a mentor</div>
-  <div class="glass" style="padding:10px;border-color:rgba(217,58,58,.22);margin-bottom:9px">
+  <div class="glass" style="padding:11px;border-color:rgba(217,58,58,.22);margin-bottom:9px">
     <div class="mrow"><img class="av" src="assets/mentors/m13.jpg" width="46" height="46" alt="">
       <div><div class="nm">Gerald Whitfield</div><div class="rl">Your mentor &middot; Attorney</div></div>
       <span class="btno" style="margin-left:auto">Ask</span></div></div>
   <div class="sect" style="margin-top:4px">Recommended</div>
-  <div class="glass" style="padding:11px;margin-bottom:7px"><div class="mrow" style="align-items:flex-start">
-    <img class="av" src="assets/mentors/m12.jpg" width="56" height="56" alt="">
-    <div style="flex:1"><div class="nm">Alicia Bell</div>
-      <div class="rl">Software Engineer &middot; Technology</div>
-      <div class="why"><span class="hl">Expert</span><span>12 videos</span><span>48 mentees</span></div></div></div></div>
-  <div class="glass" style="padding:11px;margin-bottom:7px"><div class="mrow" style="align-items:flex-start">
-    <img class="av" src="assets/mentors/m9.jpg" width="56" height="56" alt="">
-    <div style="flex:1"><div class="nm">Marcus Tran</div>
-      <div class="rl">Commercial Pilot &middot; Aviation</div>
-      <div class="why"><span class="hl">Guide</span><span>7 videos</span><span>21 mentees</span></div></div></div></div>
-  <div class="glass" style="padding:11px;margin-bottom:7px"><div class="mrow" style="align-items:flex-start">
-    <div class="av" style="width:56px;height:56px;background:linear-gradient(135deg,#efe9e3,#ded5cb);
+  <div class="glass" style="padding:11px;margin-bottom:7px"><div class="mrow">
+    <img class="av" src="assets/mentors/m12.jpg" width="52" height="52" alt="">
+    <div style="flex:1;min-width:0"><div class="nm">Alicia Bell</div>
+      <div class="rl">Software Engineer &middot; Technology</div></div>
+    <span class="btno" style="margin-left:auto">View</span></div></div>
+  <div class="glass" style="padding:11px;margin-bottom:7px"><div class="mrow">
+    <img class="av" src="assets/mentors/m9.jpg" width="52" height="52" alt="">
+    <div style="flex:1;min-width:0"><div class="nm">Marcus Tran</div>
+      <div class="rl">Commercial Pilot &middot; Aviation</div></div>
+    <span class="btno" style="margin-left:auto">View</span></div></div>
+  <div class="glass" style="padding:11px;margin-bottom:7px"><div class="mrow">
+    <div class="av" style="width:52px;height:52px;background:linear-gradient(135deg,#efe9e3,#ded5cb);
       display:grid;place-items:center">
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#a89c8f" stroke-width="1.7"
-        stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8.4" r="3.6"/>
-        <path d="M5 19.6a7.2 7.2 0 0 1 14 0"/></svg></div>
-    <div style="flex:1"><div class="nm">Denise Carter</div>
-      <div class="rl">Nurse Practitioner &middot; Health &amp; Medicine</div>
-      <div class="why"><span>3 videos</span><span>9 mentees</span></div></div></div></div>
-  <div class="glass" style="padding:10px"><div class="mrow" style="align-items:flex-start">
-    <img class="av" src="assets/mentors/m11.jpg" width="56" height="56" alt="">
-    <div style="flex:1"><div class="nm">Andre Foster</div>
-      <div class="rl">Financial Advisor &middot; Business</div>
-      <div class="why"><span class="hl">Expert</span><span>15 videos</span></div></div></div></div>`},
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a89c8f" stroke-width="1.8"
+        stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/>
+        <path d="M20 21a8 8 0 0 0-16 0"/></svg></div>
+    <div style="flex:1;min-width:0"><div class="nm">Denise Carter</div>
+      <div class="rl">Nurse Practitioner &middot; Health</div></div>
+    <span class="btno" style="margin-left:auto">View</span></div></div>
+  <div class="glass" style="padding:11px"><div class="mrow">
+    <img class="av" src="assets/mentors/m11.jpg" width="52" height="52" alt="">
+    <div style="flex:1;min-width:0"><div class="nm">Andre Foster</div>
+      <div class="rl">Financial Advisor &middot; Business</div></div>
+    <span class="btno" style="margin-left:auto">View</span></div></div>`},
 
-{key:"videos",label:"Videos",note:"Thumbnail first, web's four views",tabs:"videos",html:`
-  <div class="ahead"><div><div class="t">Videos</div><div class="s">Real answers from mentors</div></div>
+{key:"videos",label:"Answers",note:"Same segmented bar as Opportunities",tabs:"videos",html:`
+  <div class="ahead"><div><div class="t">Answers</div><div class="s">Real answers from mentors</div></div>
     <div class="sp"></div><div class="gbtn">${gSearch}</div></div>
-  <div class="chips" style="margin-bottom:9px"><span class="chip on">Featured</span><span class="chip">Latest</span>
-    <span class="chip">Following</span><span class="chip">Saved</span></div>
+  <div class="seg" style="margin-bottom:9px"><span class="on">Featured</span><span>Latest</span>
+    <span>Following</span><span>Saved</span></div>
   <div class="glass vcard"><div class="vw"><img class="thumb" src="assets/video/vid-madhere.jpg" alt="">
     <span class="dur">1:24</span></div><div class="in">
     <div class="t">How I found opportunities as a first-generation student</div>
@@ -524,18 +501,32 @@ const MENTEE=[
     <div class="t">Keeping options open. Having different experiences.</div>
     <div class="by">Paul M &middot; Chief Executive</div></div></div>`},
 
-{key:"profile",label:"Profile",note:"The fifth tab, in the current app",tabs:"profile",html:`
+{key:"opps",label:"Opportunities",note:"Filters live in the button, not as chips",tabs:"opps",html:`
+  <div class="ahead"><div><div class="t">Opportunities</div><div class="s">124 open &middot; 8 closing soon</div></div>
+    <div class="sp"></div><div class="gbtn">${gSliders}</div></div>
+  <div class="seg" style="margin-bottom:9px"><span>All</span><span class="on">Scholarships</span>
+    <span>Internships</span><span>Jobs</span></div>
+  <div class="glass opp"><img class="thumb" src="https://images.pexels.com/photos/30562665/pexels-photo-30562665.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=360&w=640" alt="">
+    <div class="in"><div class="t">Golden Door Scholars Scholarship</div>
+      <div class="row"><span class="pill prog">Closes in 9 days</span></div></div></div>
+  <div class="glass opp"><img class="thumb" src="https://images.pexels.com/photos/6129680/pexels-photo-6129680.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=360&w=640" alt="">
+    <div class="in"><div class="t">National Restaurant Association Foundation</div>
+      <div class="row"><span class="pill ok">Closes Mar 2027</span></div></div></div>
+  <div class="glass opp"><img class="thumb" src="https://images.pexels.com/photos/7693201/pexels-photo-7693201.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=360&w=640" alt="">
+    <div class="in"><div class="t">Goldman Sachs HBCU Possibilities</div>
+      <div class="row"><span class="pill wait">Closes in 6 weeks</span></div></div></div>`},
+
+{key:"profile",label:"Profile",note:"Reached from the home avatar",tabs:null,html:`
   <div class="ahead"><div><div class="t">Profile</div><div class="s">Reached from the home avatar</div></div>
     <div class="sp"></div><div class="gbtn">${gSliders}</div></div>
-  <div class="glass" style="padding:12px">
-    <div class="mrow">${menteeAvatar(52,GR.indigo,"person")}
+  <div class="glass" style="padding:11px">
+    <div class="mrow">${menteeAvatar(46,GR.indigo,"person")}
       <div style="flex:1;min-width:0">
-        <div class="nm" style="font-size:.92rem">Maya R.</div>
-        <div class="rl">Chicago &middot; Class of 2027</div>
-        <div class="why"><span class="hl">Healthcare</span><span>First-gen</span></div></div>
-      <span class="btno" style="margin-left:auto">Edit</span></div></div>
+        <div class="nm" style="font-size:.9rem">Maya R.</div>
+        <div class="rl">Chicago &middot; Class of 2027</div></div>
+      <span class="lnk" style="margin-left:auto">Edit</span></div></div>
   <div class="sect">Your pathway</div>
-  <div class="glass" style="padding:12px">
+  <div class="glass" style="padding:11px">
     <div class="mrow"><div style="flex:1;min-width:0">
       <div class="nm">College &amp; Career</div>
       <div class="rl">Next: visit or research 3 colleges</div>
@@ -553,32 +544,38 @@ const MENTEE=[
       <span class="btno" style="margin-left:auto">Ask</span></div></div>
   <div class="sect">Account</div>
   <div class="glass" style="padding:3px 11px">
-    ${["Your questions","My needs survey","Notifications","Support","Privacy policy","Log out"]
+    ${["Your questions","My needs survey","Career Navigator","Notifications","Support","Log out"]
       .map((r,i,a)=>`<div class="mrow" style="padding:9px 0">
         <div style="font-size:.75rem;font-weight:700;color:${r==='Log out'?'var(--crimson)':'var(--ink)'}">${r}</div>
         ${r==='Log out'?'':`<span style="margin-left:auto;color:var(--faint);transform:rotate(-90deg)">${gChev}</span>`}
       </div>${i<a.length-1?'<div class="rowdiv" style="margin:0"></div>':''}`).join("")}</div>`},
 ];
 
-/* =========================== MENTOR =========================== */
 const MENTOR=[
-{key:"profile",label:"Profile",note:"Impact first, questions waiting",tabs:"profile",html:`
-  <div class="ahead"><div><div class="t">Profile</div><div class="s">3 students are waiting</div></div>
-    <div class="sp"></div><div class="gbtn">${gBell}</div></div>
+{key:"welcome",label:"Welcome",note:"One entry point for both personas",tabs:null,plain:true,light:true,html:`
+  <div class="welcome"><div class="grid"></div><div class="glow"></div>
+    <div class="wtop">
+      <img class="wmark" src="assets/p3-logo-horizontal.png" alt="P3">
+      <h2>Talent is universal.<br><em>Access is not.</em></h2>
+      <p class="sub">For students building a future, and the people who can help them get there.</p></div>
+    <div class="wcta"><span class="btn p">Create your account</span>
+      <span class="btn g">I already have an account</span></div></div>`},
+
+{key:"profile",label:"Home",note:"Questions lead. No stat row competing",tabs:"profile",html:`
+  <div class="ahead"><div><div class="t">Home</div><div class="s">3 students are waiting</div></div>
+    <div class="sp"></div><div class="gbtn">${gBell}</div>
+    <img class="av" src="assets/mentors/m13.jpg" width="30" height="30" alt=""
+      style="border:1.5px solid var(--hair)"></div>
   <div class="hero"><h3>Good afternoon, <em>Gerald</em></h3>
     <p>Ninety seconds is all it takes to answer one.</p></div>
-  <div class="stat" style="margin-top:9px">
-    <div class="glass s"><div class="v">12</div><div class="k">MENTEES</div></div>
-    <div class="glass s"><div class="v">38</div><div class="k">ANSWERS</div></div>
-    <div class="glass s"><div class="v">2.4k</div><div class="k">VIEWS</div></div></div>
   <div class="sect">Waiting on you <span class="more">See all 3</span></div>
   <div class="glass qcard"><div class="q">How do I choose between a paid internship and a better-named
     unpaid one?</div><div class="m">${menteeAvatar(18,GR.indigo,"person")}
     <span class="n">Maya R. &middot; 2 days ago</span>
-    <span class="pill wait" style="margin-left:auto">Awaiting</span></div></div>
+    <span class="btnp" style="margin-left:auto">Answer</span></div></div>
   <div class="glass qcard"><div class="q">Is law school worth it if I already have an offer?</div>
     <div class="m">${menteeAvatar(18,GR.sage,"law")}<span class="n">Jasmine T. &middot; 4 days ago</span>
-    <span class="pill wait" style="margin-left:auto">Awaiting</span></div></div>
+    <span class="btnp" style="margin-left:auto">Answer</span></div></div>
   <div class="sect">Mentee progress</div>
   ${menteeRow("Andre W.",GR.teal,"health","Health Sciences",8,10,"1d ago")}
   <div class="sect">Your latest</div>
@@ -587,19 +584,74 @@ const MENTOR=[
     <div class="t">Keeping options open. Having different experiences.</div>
     <div class="by">312 views &middot; 7 followers</div></div></div>`},
 
-{key:"mentees",label:"Mentees",note:"Gradient + industry glyph, never photos",tabs:"mentees",html:`
-  <div class="ahead"><div><div class="t">Your mentees</div><div class="s">12 active &middot; 2 pending</div></div>
+{key:"mentees",label:"Mentees",note:"Capacity is real: the app has a max-mentees stepper",tabs:"mentees",html:`
+  <div class="ahead"><div><div class="t">Your mentees</div><div class="s">1 of 3 places filled</div></div>
     <div class="sp"></div><div class="gbtn">${gSearch}</div></div>
-  <div class="chips" style="margin-bottom:9px"><span class="chip on">Active</span><span class="chip">Pending</span>
-    <span class="chip">Past</span></div>
+  <div class="glass" style="padding:10px 11px;margin-bottom:9px">
+    <div class="mrow"><div style="flex:1;min-width:0">
+      <div style="font-size:.68rem;font-weight:800;color:var(--muted);letter-spacing:.02em">MENTEE CAPACITY</div>
+      <div class="mstrack" style="margin-top:6px"><span style="width:33%"></span></div></div>
+      <div style="display:flex;align-items:center;gap:8px;flex:none">
+        <div class="gbtn" style="width:26px;height:26px;color:var(--crimson);font-weight:800">&minus;</div>
+        <div class="msnum" style="font-size:1rem">3</div>
+        <div class="gbtn" style="width:26px;height:26px;color:var(--crimson);font-weight:800">+</div>
+      </div></div></div>
+  <div class="seg" style="margin-bottom:9px"><span class="on">Mentees</span><span>Requests</span></div>
   ${menteeRow("Maya R.",GR.indigo,"person","College &amp; Career",3,10,"2d ago")}
-  ${menteeRow("Jasmine T.",GR.sage,"law","Law &amp; Advocacy",6,10,"5d ago")}
-  ${menteeRow("Andre W.",GR.teal,"health","Health Sciences",8,10,"1d ago")}
-  ${menteeRow("Devon K.",GR.amber,"tech","Technology",2,10,"3w ago")}
-  ${menteeRow("Tasha B.",GR.mauve,"edu","Education",5,10,"6d ago")}`},
+  <div class="glass" style="padding:11px;margin-bottom:7px;border-style:dashed;background:rgba(255,255,255,.5)">
+    <div class="mrow"><div class="av" style="width:42px;height:42px;background:#f2efec;display:grid;place-items:center">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#b9afa5" stroke-width="1.9"
+        stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></div>
+      <div><div class="nm" style="color:var(--muted)">Mentorship available</div>
+        <div class="rl">A student can be matched here</div></div></div></div>
+  <div class="glass" style="padding:11px;border-style:dashed;background:rgba(255,255,255,.5)">
+    <div class="mrow"><div class="av" style="width:42px;height:42px;background:#f2efec;display:grid;place-items:center">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#b9afa5" stroke-width="1.9"
+        stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></div>
+      <div><div class="nm" style="color:var(--muted)">Mentorship available</div>
+        <div class="rl">A student can be matched here</div></div></div></div>`},
 
-{key:"record",label:"Answer a question",note:"All four fields the upload actually requires",tabs:null,html:`
-  <div style="flex:none;padding:0 14px 10px;display:flex;align-items:center;gap:9px">
+{key:"videos",label:"Questions",note:"The mentor's actual job, given its own tab",tabs:"videos",html:`
+  <div class="ahead"><div><div class="t">Questions</div><div class="s">2 unread &middot; 2 total</div></div>
+    <div class="sp"></div><div class="gbtn">${gSearch}</div></div>
+  <div class="seg" style="margin-bottom:9px"><span class="on">My mentees</span><span>Public</span>
+    <span>Answered</span></div>
+  <div class="glass qcard"><div class="q">How do I choose between a paid internship and a better-named
+    unpaid one?</div><div class="m">${menteeAvatar(18,GR.indigo,"person")}
+    <span class="n">Maya R. &middot; 2 days ago</span>
+    <span class="btnp" style="margin-left:auto">Answer</span></div></div>
+  <div class="glass qcard"><div class="q">Is law school worth it if I already have an offer?</div>
+    <div class="m">${menteeAvatar(18,GR.sage,"law")}<span class="n">Jasmine T. &middot; 4 days ago</span>
+    <span class="btnp" style="margin-left:auto">Answer</span></div></div>
+  <div class="sect">Your answers</div>
+  <div class="glass vcard"><div class="vw"><img class="thumb" src="assets/video/vid-paulm.jpg" alt="">
+    <span class="dur">1:29</span></div><div class="in">
+    <div class="t">Keeping options open. Having different experiences.</div>
+    <div class="by">312 views &middot; 7 followers</div></div></div>`},
+
+{key:"opps",label:"Opportunities",note:"Posting is the page. The feed is a tab",tabs:"opps",html:`
+  <div class="ahead"><div><div class="t">Opportunities</div><div class="s">You have posted 6</div></div>
+    <div class="sp"></div><div class="gbtn">${gSliders}</div></div>
+  <div class="seg" style="margin-bottom:9px"><span class="on">Post</span><span>My posts</span>
+    <span>Browse</span></div>
+  <div class="glass" style="padding:12px">
+    <div style="font-family:var(--head);font-size:.85rem;font-weight:800;color:var(--deep);margin-bottom:9px">
+      Share an opening</div>
+    <div style="font-size:.66rem;font-weight:800;color:var(--muted);margin-bottom:4px">Title</div>
+    <div class="field" style="margin-bottom:9px">Name of the scholarship, internship or job</div>
+    <div style="font-size:.66rem;font-weight:800;color:var(--muted);margin-bottom:4px">Link</div>
+    <div class="field" style="margin-bottom:9px">Where should a student apply?</div>
+    <div style="display:flex;gap:8px;margin-bottom:9px">
+      <div style="flex:1"><div style="font-size:.66rem;font-weight:800;color:var(--muted);margin-bottom:4px">Type</div>
+        <div class="field">Scholarship ${gChev}</div></div>
+      <div style="flex:1"><div style="font-size:.66rem;font-weight:800;color:var(--muted);margin-bottom:4px">Deadline</div>
+        <div class="field">Pick a date</div></div></div>
+    <div style="font-size:.66rem;font-weight:800;color:var(--muted);margin-bottom:4px">Industry</div>
+    <div class="field" style="margin-bottom:11px">Choose one or more ${gChev}</div>
+    <div class="btnwide">${gPlus} Post opportunity</div></div>`},
+
+{key:"record",label:"Answer a question",note:"All four fields the upload requires",tabs:null,html:`
+  <div style="flex:none;padding:0 13px 10px;display:flex;align-items:center;gap:9px">
     <div class="gbtn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#4a1020"
       stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></div>
     <div style="font-family:var(--head);font-size:1rem;font-weight:800;color:var(--deep);
@@ -631,38 +683,13 @@ const MENTOR=[
         <span style="margin-left:auto;color:var(--faint);transform:rotate(-90deg)">${gChev}</span></div>
       <div class="rowdiv" style="margin:11px 0"></div>
       <div class="mrow"><div><div style="font-size:.7rem;font-weight:800;color:var(--ink)">Tags</div>
-        <div style="font-size:.6rem;font-weight:700;color:var(--crimson);margin-top:2px">This will help mentees find you</div></div>
+        <div style="font-size:.6rem;font-weight:700;color:var(--crimson);margin-top:2px">Helps mentees find you</div></div>
         <span style="margin-left:auto;color:var(--faint);transform:rotate(-90deg)">${gChev}</span></div></div>
     <div style="display:flex;gap:7px;margin-top:11px">
       <span class="btn g" style="flex:1;margin:0;background:#f2efec;color:#6b5f52;
         border:1px solid var(--hair);padding:10px;font-size:.75rem">Cancel</span>
       <span class="btn p" style="flex:2;margin:0;padding:10px;font-size:.75rem">Upload</span></div>
   </div>`,raw:true},
-
-{key:"opps",label:"Opportunities",note:"Posting is the mentor's job here",tabs:"opps",html:`
-  <div class="ahead"><div><div class="t">Opportunities</div><div class="s">You have posted 6</div></div>
-    <div class="sp"></div><div class="gbtn">${gSliders}</div></div>
-  <div class="btnwide" style="margin-bottom:9px">${gPlus} Post an opportunity</div>
-  <div class="seg" style="margin-bottom:9px"><span class="on">Mine</span><span>Shared</span><span>All</span></div>
-  <div class="glass opp"><img class="thumb" src="https://images.pexels.com/photos/6077091/pexels-photo-6077091.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=360&w=640" alt="">
-    <div class="in"><div class="t">DOJ Summer Law Intern Program</div>
-      <div class="row"><span class="pill prog">Closes in 12 days</span><span class="pill vio">You posted</span></div></div></div>
-  <div class="glass opp"><img class="thumb" src="https://images.pexels.com/photos/14608504/pexels-photo-14608504.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=360&w=640" alt="">
-    <div class="in"><div class="t">White House Internship Program</div>
-      <div class="row"><span class="pill ok">Closes Jan 2027</span><span class="pill vio">You posted</span></div></div></div>`},
-
-{key:"settings",label:"Settings",note:"The fifth mentor tab, in the current app",tabs:"settings",html:`
-  <div class="ahead"><div><div class="t">Settings</div><div class="s">Your account and notifications</div></div></div>
-  <div class="glass" style="padding:12px;margin-bottom:9px"><div class="mrow">
-    <img class="av" src="assets/mentors/m13.jpg" width="44" height="44" alt="">
-    <div><div class="nm">Gerald Whitfield</div><div class="rl">Attorney &middot; Chicago</div></div>
-    <span class="btno" style="margin-left:auto">Edit</span></div></div>
-  <div class="glass" style="padding:4px 11px">
-    ${["Profile video","Notifications","Mentorship preferences","Blocked accounts","Privacy policy","Log out"]
-      .map((r,i,a)=>`<div class="mrow" style="padding:9px 0">
-        <div style="font-size:.74rem;font-weight:700;color:${r==='Log out'?'var(--crimson)':'var(--ink)'}">${r}</div>
-        ${r==='Log out'?'':`<span style="margin-left:auto;color:var(--faint);transform:rotate(-90deg)">${gChev}</span>`}
-        </div>${i<a.length-1?'<div class="rowdiv" style="margin:0"></div>':''}`).join("")}</div>`},
 ];
 
 /* =========================== render =========================== */
