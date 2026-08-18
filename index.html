@@ -75,7 +75,7 @@ body{margin:0;background:#f4f1ee;color:var(--ink);font-family:var(--body);
 .sbar .rr{display:flex;align-items:center;gap:5px;}
 .sbar.light{color:#fff;}
 
-.body{flex:1;overflow-y:auto;overflow-x:hidden;padding:0 14px 14px;
+.body{flex:1;overflow-y:auto;overflow-x:hidden;padding:0 13px 13px;
       scrollbar-width:none;-ms-overflow-style:none;}
 .body::-webkit-scrollbar{display:none;}
 
@@ -90,8 +90,8 @@ body{margin:0;background:#f4f1ee;color:var(--ink);font-family:var(--body);
 .glass{background:var(--card);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
        border:1px solid var(--hair);border-radius:16px;box-shadow:0 2px 8px rgba(20,20,43,.05);
        overflow:hidden;}
-.sect{font-family:var(--head);font-size:.85rem;font-weight:800;color:var(--deep);
-      margin:14px 0 8px;display:flex;align-items:baseline;}
+.sect{font-family:var(--head);font-size:.87rem;font-weight:800;color:var(--deep);
+      margin:12px 0 7px;display:flex;align-items:baseline;}
 .sect .more{margin-left:auto;font-family:var(--body);font-size:.66rem;font-weight:700;color:var(--crimson);}
 
 .hero{border-radius:16px;padding:13px 14px 14px;color:#fff;position:relative;overflow:hidden;
@@ -128,7 +128,7 @@ body{margin:0;background:#f4f1ee;color:var(--ink);font-family:var(--body);
 .pill.ok{background:var(--ok-b);color:var(--ok-t);}
 .pill.neut{background:var(--neut-b);color:var(--neut-t);}
 .pill.vio{background:#f0eafb;color:var(--violet);}
-.rowdiv{height:1px;background:var(--hair);margin:9px 0;}
+.rowdiv{height:1px;background:var(--hair);margin:8px 0;}
 .thumb{width:100%;display:block;object-fit:cover;background:var(--seg);}
 .av{border-radius:50%;object-fit:cover;flex:none;}
 /* mentee avatar: gradient + industry glyph, never a photo, never initials */
@@ -149,9 +149,9 @@ body{margin:0;background:#f4f1ee;color:var(--ink);font-family:var(--body);
 .tb.on .ic{background:rgba(217,58,58,.11);}
 
 /* ---- welcome: clean grid, no photo ---- */
-.welcome{flex:1;display:flex;flex-direction:column;padding:0 22px 26px;color:#fff;
-         position:relative;overflow:hidden;
-         background:linear-gradient(168deg,#1a0510 0%,#4a1020 55%,#140510 100%);}
+.welcome{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;
+         padding:64px 22px 30px;color:#fff;overflow:hidden;
+         background:linear-gradient(168deg,#2a0714 0%,#5d1526 42%,#7a1a2c 68%,#3a0c18 100%);}
 .welcome .grid{position:absolute;inset:0;opacity:.5;
   background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),
                    linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);
@@ -190,12 +190,21 @@ body{margin:0;background:#f4f1ee;color:var(--ink);font-family:var(--body);
 .opp .t{font-family:var(--head);font-size:.79rem;font-weight:800;color:var(--deep);line-height:1.22;margin-bottom:5px;}
 .opp .row{display:flex;align-items:center;gap:5px;flex-wrap:wrap;}
 .mrow{display:flex;gap:9px;align-items:center;}
-.mrow .nm{font-family:var(--head);font-size:.8rem;font-weight:800;color:var(--deep);line-height:1.2;}
-.mrow .rl{font-size:.645rem;color:var(--muted);margin-top:1px;line-height:1.3;}
+.mrow .nm{font-family:var(--head);font-size:.84rem;font-weight:800;color:var(--deep);line-height:1.2;}
+.mrow .rl{font-size:.67rem;color:var(--muted);margin-top:1px;line-height:1.3;}
 .why{display:flex;gap:4px;margin-top:6px;flex-wrap:wrap;}
 .why span{font-size:.565rem;font-weight:700;padding:2.5px 6px;border-radius:50px;
           background:var(--neut-b);color:var(--neut-t);}
 .why span.hl{background:var(--prog-b);color:var(--crimson-dk);}
+.mstrack{height:5px;border-radius:50px;background:#ece7e1;margin-top:7px;overflow:hidden;}
+.mstrack span{display:block;height:100%;border-radius:50px;
+  background:linear-gradient(90deg,#d93a3a,#f5c56b);}
+.msnum{font-family:var(--head);font-size:.92rem;font-weight:800;color:var(--deep);line-height:1;}
+.msnum span{font-size:.66rem;color:var(--faint);font-weight:700;}
+.ring{width:46px;height:46px;position:relative;flex:none;}
+.ring .lbl{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--head);
+  font-size:.62rem;font-weight:800;color:var(--deep);}
+.mslast{font-size:.56rem;color:var(--faint);font-weight:600;margin-top:3px;white-space:nowrap;}
 
 /* videos: thumbnail-forward, no mentor photo */
 .vcard{margin-bottom:9px;}
@@ -325,16 +334,18 @@ const gPlus=`<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke=
 
 /* mentee industry glyphs, mirroring the web app's industry-glyph mapping */
 const IND = {
-  health:`<path d="M9 3v4a5 5 0 0 0 10 0V3" /><circle cx="18" cy="16" r="3"/><path d="M14 8v3a5 5 0 0 0 4 4.9"/>`,
-  tech:`<rect x="7" y="7" width="10" height="10" rx="2"/><path d="M9 3v4M15 3v4M9 17v4M15 17v4M3 9h4M3 15h4M17 9h4M17 15h4"/>`,
-  law:`<path d="M12 3v18M7 21h10M4 8h16M6 8l-3 6h6zM18 8l3 6h-6z"/>`,
-  edu:`<path d="M12 4 2 8.5 12 13l10-4.5z"/><path d="M6 10.7V15c0 1.6 2.7 2.8 6 2.8s6-1.2 6-2.8v-4.3"/>`,
-  person:`<circle cx="12" cy="8.4" r="3.6"/><path d="M5 19.6a7.2 7.2 0 0 1 14 0"/>`,
+  person:`<circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/>`,
+  health:`<path d="M11 2v2"/><path d="M5 2v2"/><path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"/><path d="M8 15a6 6 0 0 0 12 0v-3"/><circle cx="20" cy="10" r="2"/>`,
+  tech:`<rect width="16" height="16" x="4" y="4" rx="2"/><rect width="6" height="6" x="9" y="9" rx="1"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/>`,
+  law:`<path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/>`,
+  edu:`<path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/>`,
+  business:`<path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/>`,
+  finance:`<rect width="20" height="12" x="2" y="6" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/>`,
 };
 function menteeAvatar(size, grad, glyph){
   return `<div class="mav" style="width:${size}px;height:${size}px;background:${grad}">
     <svg width="${Math.round(size*0.5)}" height="${Math.round(size*0.5)}" viewBox="0 0 24 24" fill="none"
-      stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${IND[glyph]}</svg></div>`;
+      stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${IND[glyph]}</svg></div>`;
 }
 /* the web palette, verbatim */
 const GR = {
@@ -344,8 +355,27 @@ const GR = {
   indigo:"linear-gradient(135deg,#8074AE,#544885)", mauve:"linear-gradient(135deg,#AC6E98,#7D4A6C)",
 };
 
-const MENTEE_TABS=[["explore","Explore"],["videos","Videos"],["mentors","Mentors"],["opps","Opportunities"],["profile","Profile"]];
-const MENTOR_TABS=[["profile","Profile"],["videos","Videos"],["mentees","Mentees"],["opps","Opportunities"],["settings","Settings"]];
+
+/* Milestone viewer. Every value here comes from mentorMenteePathwayEnrollments:
+   pathwayName, completedEligibleMilestoneCount, eligibleMilestoneCount,
+   lastMilestoneCompletedAt. No invented status labels. */
+function menteeRow(name, grad, glyph, pathway, done, total, last){
+  const pct = Math.round((done/total)*100);
+  return `<div class="glass" style="padding:11px;margin-bottom:7px">
+    <div class="mrow">${menteeAvatar(42,grad,glyph)}
+      <div style="flex:1;min-width:0">
+        <div class="nm">${name}</div>
+        <div class="rl">${pathway}</div>
+        <div class="mstrack"><span style="width:${pct}%"></span></div>
+      </div>
+      <div style="text-align:right;flex:none">
+        <div class="msnum">${done}<span>/${total}</span></div>
+        <div class="mslast">${last}</div>
+      </div></div></div>`;
+}
+
+const MENTEE_TABS=[["explore","Home"],["mentors","Mentors"],["videos","Answers"],["opps","Opportunities"]];
+const MENTOR_TABS=[["profile","Home"],["mentees","Mentees"],["videos","Answers"],["opps","Opportunities"]];
 
 /* =========================== MENTEE =========================== */
 const MENTEE=[
@@ -361,11 +391,30 @@ const MENTEE=[
       <div class="wfree">Free, always</div></div></div>`},
 
 {key:"explore",label:"Explore",note:"Mentor picker for multiple mentors",tabs:"explore",html:`
-  <div class="ahead"><div><div class="t">Explore</div><div class="s">2 new opportunities</div></div>
-    <div class="sp"></div><div class="gbtn">${gBell}</div></div>
+  <div class="ahead"><div><div class="t">Home</div><div class="s">2 new opportunities</div></div>
+    <div class="sp"></div><div class="gbtn">${gBell}</div>
+    <div class="av" style="width:30px;height:30px;overflow:hidden;border:1.5px solid var(--hair)">
+      ${menteeAvatar(27,GR.indigo,"person")}</div></div>
   <div class="hero"><h3>Good afternoon, <em>Maya</em></h3>
     <p>Mentorship, scholarships and a network that opens doors.</p></div>
-  <div class="glass" style="padding:11px;margin-top:9px">
+  <div class="sect">Milestone pathways <span class="more">View</span></div>
+  <div class="glass" style="padding:11px;margin-top:0">
+    <div class="mrow">
+      <div class="ring">
+        <svg width="46" height="46" viewBox="0 0 46 46">
+          <circle cx="23" cy="23" r="19" fill="none" stroke="#ece7e1" stroke-width="5"/>
+          <circle cx="23" cy="23" r="19" fill="none" stroke="url(#msg)" stroke-width="5"
+            stroke-linecap="round" stroke-dasharray="119.4" stroke-dashoffset="83.6"
+            transform="rotate(-90 23 23)"/>
+          <defs><linearGradient id="msg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#d93a3a"/><stop offset="1" stop-color="#f5c56b"/>
+          </linearGradient></defs></svg>
+        <div class="lbl">3/10</div></div>
+      <div style="flex:1;min-width:0">
+        <div class="nm">College &amp; Career</div>
+        <div class="rl">Up next: visit or research 3 colleges</div></div>
+      <span style="color:var(--faint);transform:rotate(-90deg);flex:none">${gChev}</span></div></div>
+  <div class="glass" style="padding:12px;margin-top:8px">
     <div style="font-family:var(--head);font-size:.83rem;font-weight:800;color:var(--deep);margin-bottom:8px">Ask a question</div>
     <div class="seg" style="margin-bottom:7px"><span class="on">My Mentor</span><span>Public</span></div>
     <div style="display:flex;align-items:center;gap:6px;margin-bottom:7px">
@@ -378,7 +427,7 @@ const MENTEE=[
     <div class="field">Ask about careers, college, or your next step&hellip;</div>
     <div style="display:flex;align-items:center;margin-top:8px"><span class="lnk">Need ideas?</span>
       <span style="margin-left:auto" class="btnp">Submit</span></div></div>
-  <div class="glass" style="padding:11px;margin-top:9px">
+  <div class="glass" style="padding:12px;margin-top:8px">
     <div style="display:flex;align-items:baseline;margin-bottom:8px">
       <div style="font-family:var(--head);font-size:.83rem;font-weight:800;color:var(--deep)">Your mentors</div>
       <span class="lnk" style="margin-left:auto">Browse</span></div>
@@ -405,8 +454,6 @@ const MENTEE=[
 {key:"opps",label:"Opportunities",note:"New: imagery + industry / deadline / location",tabs:"opps",html:`
   <div class="ahead"><div><div class="t">Opportunities</div><div class="s">124 open &middot; 8 closing soon</div></div>
     <div class="sp"></div><div class="gbtn">${gSliders}</div></div>
-  <div class="aicard" style="margin-bottom:8px"><div class="t">${gSpark} Matched to you</div>
-    <p>3 healthcare scholarships that fit your pathway and close within 60 days.</p></div>
   <div class="seg" style="margin-bottom:7px"><span>All</span><span class="on">Scholarships</span>
     <span>Intern</span><span>Jobs</span></div>
   <div class="chips" style="margin-bottom:9px"><span class="chip on">Healthcare</span>
@@ -430,17 +477,17 @@ const MENTEE=[
       <div><div class="nm">Gerald Whitfield</div><div class="rl">Your mentor &middot; Attorney</div></div>
       <span class="btno" style="margin-left:auto">Ask</span></div></div>
   <div class="sect" style="margin-top:4px">Recommended</div>
-  <div class="glass" style="padding:10px;margin-bottom:8px"><div class="mrow" style="align-items:flex-start">
+  <div class="glass" style="padding:11px;margin-bottom:7px"><div class="mrow" style="align-items:flex-start">
     <img class="av" src="assets/mentors/m12.jpg" width="56" height="56" alt="">
     <div style="flex:1"><div class="nm">Alicia Bell</div>
       <div class="rl">Software Engineer &middot; Technology</div>
       <div class="why"><span class="hl">Expert</span><span>12 videos</span><span>48 mentees</span></div></div></div></div>
-  <div class="glass" style="padding:10px;margin-bottom:8px"><div class="mrow" style="align-items:flex-start">
+  <div class="glass" style="padding:11px;margin-bottom:7px"><div class="mrow" style="align-items:flex-start">
     <img class="av" src="assets/mentors/m9.jpg" width="56" height="56" alt="">
     <div style="flex:1"><div class="nm">Marcus Tran</div>
       <div class="rl">Commercial Pilot &middot; Aviation</div>
       <div class="why"><span class="hl">Guide</span><span>7 videos</span><span>21 mentees</span></div></div></div></div>
-  <div class="glass" style="padding:10px;margin-bottom:8px"><div class="mrow" style="align-items:flex-start">
+  <div class="glass" style="padding:11px;margin-bottom:7px"><div class="mrow" style="align-items:flex-start">
     <div class="av" style="width:56px;height:56px;background:linear-gradient(135deg,#efe9e3,#ded5cb);
       display:grid;place-items:center">
       <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#a89c8f" stroke-width="1.7"
@@ -474,31 +521,39 @@ const MENTEE=[
     <div class="by">Paul M &middot; Chief Executive</div></div></div>`},
 
 {key:"profile",label:"Profile",note:"The fifth tab, in the current app",tabs:"profile",html:`
-  <div class="ahead"><div><div class="t">Profile</div><div class="s">Your P3 account</div></div>
+  <div class="ahead"><div><div class="t">Profile</div><div class="s">Reached from the home avatar</div></div>
     <div class="sp"></div><div class="gbtn">${gSliders}</div></div>
-  <div class="glass" style="padding:14px;text-align:center">
-    ${menteeAvatar(66,GR.indigo,"person").replace('class="mav"','class="mav" style="margin:0 auto 9px"')}
-    <div style="font-family:var(--head);font-size:.95rem;font-weight:800;color:var(--deep)">Maya R.</div>
-    <div style="font-size:.66rem;color:var(--faint);font-weight:600;margin-top:2px">Chicago &middot; Class of 2027</div>
-    <div class="why" style="justify-content:center;margin-top:9px"><span class="hl">Healthcare</span>
-      <span>College pathway</span></div></div>
-  <div class="stat" style="margin-top:9px">
-    <div class="glass s"><div class="v">3</div><div class="k">MILESTONES</div></div>
-    <div class="glass s"><div class="v">2</div><div class="k">MENTORS</div></div>
-    <div class="glass s"><div class="v">8</div><div class="k">QUESTIONS</div></div></div>
-  <div class="sect">Your questions</div>
-  <div class="glass qcard"><div class="q">How do I choose between a paid internship and a better-named
-    unpaid one?</div><div class="m"><span class="n">Asked 2 days ago</span>
-    <span class="pill wait" style="margin-left:auto">Awaiting</span></div></div>
-  <div class="glass qcard"><div class="q">Is it worth applying early decision?</div>
-    <div class="m"><span class="n">Asked 1 week ago</span>
-    <span class="pill ok" style="margin-left:auto">Answered</span></div></div>
-  <div class="glass" style="padding:11px;margin-top:2px">
-    <div class="mrow"><div style="font-size:.74rem;font-weight:700;color:var(--ink)">Settings</div>
-      <span style="margin-left:auto;color:var(--faint);transform:rotate(-90deg)">${gChev}</span></div>
+  <div class="glass" style="padding:12px">
+    <div class="mrow">${menteeAvatar(52,GR.indigo,"person")}
+      <div style="flex:1;min-width:0">
+        <div class="nm" style="font-size:.92rem">Maya R.</div>
+        <div class="rl">Chicago &middot; Class of 2027</div>
+        <div class="why"><span class="hl">Healthcare</span><span>First-gen</span></div></div>
+      <span class="btno" style="margin-left:auto">Edit</span></div></div>
+  <div class="sect">Your pathway</div>
+  <div class="glass" style="padding:12px">
+    <div class="mrow"><div style="flex:1;min-width:0">
+      <div class="nm">College &amp; Career</div>
+      <div class="rl">Next: visit or research 3 colleges</div>
+      <div class="mstrack"><span style="width:30%"></span></div></div>
+      <div style="text-align:right;flex:none"><div class="msnum">3<span>/10</span></div>
+        <div class="mslast">2d ago</div></div></div></div>
+  <div class="sect">Your mentors</div>
+  <div class="glass" style="padding:11px">
+    <div class="mrow"><img class="av" src="assets/mentors/m13.jpg" width="34" height="34" alt="">
+      <div><div class="nm">Gerald Whitfield</div><div class="rl">Attorney</div></div>
+      <span class="btno" style="margin-left:auto">Ask</span></div>
     <div class="rowdiv"></div>
-    <div class="mrow"><div style="font-size:.74rem;font-weight:700;color:var(--ink)">Retake needs survey</div>
-      <span style="margin-left:auto;color:var(--faint);transform:rotate(-90deg)">${gChev}</span></div></div>`},
+    <div class="mrow"><img class="av" src="assets/mentors/m12.jpg" width="34" height="34" alt="">
+      <div><div class="nm">Alicia Bell</div><div class="rl">Software Engineer</div></div>
+      <span class="btno" style="margin-left:auto">Ask</span></div></div>
+  <div class="sect">Account</div>
+  <div class="glass" style="padding:3px 11px">
+    ${["Your questions","My needs survey","Notifications","Support","Privacy policy","Log out"]
+      .map((r,i,a)=>`<div class="mrow" style="padding:9px 0">
+        <div style="font-size:.75rem;font-weight:700;color:${r==='Log out'?'var(--crimson)':'var(--ink)'}">${r}</div>
+        ${r==='Log out'?'':`<span style="margin-left:auto;color:var(--faint);transform:rotate(-90deg)">${gChev}</span>`}
+      </div>${i<a.length-1?'<div class="rowdiv" style="margin:0"></div>':''}`).join("")}</div>`},
 ];
 
 /* =========================== MENTOR =========================== */
@@ -520,6 +575,8 @@ const MENTOR=[
   <div class="glass qcard"><div class="q">Is law school worth it if I already have an offer?</div>
     <div class="m">${menteeAvatar(18,GR.sage,"law")}<span class="n">Jasmine T. &middot; 4 days ago</span>
     <span class="pill wait" style="margin-left:auto">Awaiting</span></div></div>
+  <div class="sect">Mentee progress</div>
+  ${menteeRow("Andre W.",GR.teal,"health","Health Sciences",8,10,"1d ago")}
   <div class="sect">Your latest</div>
   <div class="glass vcard"><div class="vw"><img class="thumb" src="assets/video/vid-paulm.jpg" alt="">
     <span class="dur">1:29</span></div><div class="in">
@@ -531,26 +588,11 @@ const MENTOR=[
     <div class="sp"></div><div class="gbtn">${gSearch}</div></div>
   <div class="chips" style="margin-bottom:9px"><span class="chip on">Active</span><span class="chip">Pending</span>
     <span class="chip">Past</span></div>
-  <div class="glass" style="padding:10px;margin-bottom:8px"><div class="mrow">
-    ${menteeAvatar(44,GR.indigo,"person")}
-    <div><div class="nm">Maya R.</div><div class="rl">College &middot; 3 of 10 milestones</div></div>
-    <span class="pill wait" style="margin-left:auto">Awaiting</span></div></div>
-  <div class="glass" style="padding:10px;margin-bottom:8px"><div class="mrow">
-    ${menteeAvatar(44,GR.sage,"law")}
-    <div><div class="nm">Jasmine T.</div><div class="rl">Law &middot; 6 of 10 milestones</div></div>
-    <span class="pill wait" style="margin-left:auto">Awaiting</span></div></div>
-  <div class="glass" style="padding:10px;margin-bottom:8px"><div class="mrow">
-    ${menteeAvatar(44,GR.teal,"health")}
-    <div><div class="nm">Andre W.</div><div class="rl">Healthcare &middot; 8 of 10 milestones</div></div>
-    <span class="pill ok" style="margin-left:auto">On track</span></div></div>
-  <div class="glass" style="padding:10px;margin-bottom:8px"><div class="mrow">
-    ${menteeAvatar(44,GR.amber,"tech")}
-    <div><div class="nm">Devon K.</div><div class="rl">Technology &middot; 2 of 10 milestones</div></div>
-    <span class="pill neut" style="margin-left:auto">Quiet</span></div></div>
-  <div class="glass" style="padding:10px"><div class="mrow">
-    ${menteeAvatar(44,GR.mauve,"edu")}
-    <div><div class="nm">Tasha B.</div><div class="rl">Education &middot; 5 of 10 milestones</div></div>
-    <span class="pill ok" style="margin-left:auto">On track</span></div></div>`},
+  ${menteeRow("Maya R.",GR.indigo,"person","College &amp; Career",3,10,"2d ago")}
+  ${menteeRow("Jasmine T.",GR.sage,"law","Law &amp; Advocacy",6,10,"5d ago")}
+  ${menteeRow("Andre W.",GR.teal,"health","Health Sciences",8,10,"1d ago")}
+  ${menteeRow("Devon K.",GR.amber,"tech","Technology",2,10,"3w ago")}
+  ${menteeRow("Tasha B.",GR.mauve,"edu","Education",5,10,"6d ago")}`},
 
 {key:"record",label:"Answer a question",note:"All four fields the upload actually requires",tabs:null,html:`
   <div style="flex:none;padding:0 14px 10px;display:flex;align-items:center;gap:9px">
@@ -597,11 +639,6 @@ const MENTOR=[
   <div class="ahead"><div><div class="t">Opportunities</div><div class="s">You have posted 6</div></div>
     <div class="sp"></div><div class="gbtn">${gSliders}</div></div>
   <div class="btnwide" style="margin-bottom:9px">${gPlus} Post an opportunity</div>
-  <div class="aicard" style="margin-bottom:9px;border-color:rgba(217,58,58,.20);
-    background:linear-gradient(135deg,#fff6f5,#fbeae9)">
-    <div class="t" style="color:var(--crimson-dk)">Your network is the product</div>
-    <p style="color:#8c5b5b">An opening you know about is worth more to your mentees than anything an
-       algorithm finds. Share one.</p></div>
   <div class="seg" style="margin-bottom:9px"><span class="on">Mine</span><span>Shared</span><span>All</span></div>
   <div class="glass opp"><img class="thumb" src="https://images.pexels.com/photos/6077091/pexels-photo-6077091.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=360&w=640" alt="">
     <div class="in"><div class="t">DOJ Summer Law Intern Program</div>
