@@ -32,8 +32,8 @@ body{margin:0;background:#f4f1ee;color:var(--ink);font-family:var(--body);
             box-shadow:0 12px 40px rgba(0,0,0,.10);}
 .wt h1{font-family:var(--head);font-size:clamp(1.5rem,2.7vw,2.15rem);font-weight:800;
        letter-spacing:-.03em;color:var(--deep);margin:0 0 4px;line-height:1.1;}
-.wt .sub{font-size:1.02rem;color:#6b5f52;font-weight:600;}
-.wt .meta{font-size:.85rem;color:#6b6560;font-weight:600;margin-top:8px;}
+.wt .sub{font-size:0.918rem;color:#6b5f52;font-weight:600;}
+.wt .meta{font-size:0.765rem;color:#6b6560;font-weight:600;margin-top:8px;}
 .wt .meta b{color:var(--crimson);font-weight:800;}
 
 /* ---- controls: prominent role toggle ---- */
@@ -41,13 +41,13 @@ body{margin:0;background:#f4f1ee;color:var(--ink);font-family:var(--body);
 .roleseg{display:inline-flex;background:#e4ded7;border-radius:50px;padding:5px;gap:4px;
          box-shadow:inset 0 1px 3px rgba(40,15,22,.08);}
 .roleseg button{appearance:none;border:0;cursor:pointer;font-family:var(--body);
-  font-size:.95rem;font-weight:800;padding:11px 30px;border-radius:50px;background:none;
+  font-size:0.855rem;font-weight:800;padding:11px 30px;border-radius:50px;background:none;
   color:#6b5f52;transition:all .2s ease;letter-spacing:-.01em;display:flex;align-items:center;gap:8px;}
 .roleseg button[aria-pressed="true"]{background:var(--deep);color:#fff;
   box-shadow:0 4px 14px rgba(74,16,32,.28);}
 .roleseg button[aria-pressed="true"] .dot{background:var(--crimson);}
 .roleseg .dot{width:7px;height:7px;border-radius:50%;background:#b9afa5;}
-.hint{font-size:.83rem;color:#6b6560;font-weight:600;}
+.hint{font-size:0.747rem;color:#6b6560;font-weight:600;}
 .hint b{color:#6b5f52;}
 
 /* ---- strip ---- */
@@ -68,57 +68,56 @@ body{margin:0;background:#f4f1ee;color:var(--ink);font-family:var(--body);
 
 /* iOS status bar, matching the App Store screenshots */
 .sbar{position:relative;z-index:5;height:40px;flex:none;display:flex;align-items:center;justify-content:space-between;
-      padding:0 19px 0 21px;font-size:.72rem;font-weight:700;color:var(--ink);letter-spacing:-.2px;}
+      padding:0 19px 0 21px;font-size:0.648rem;font-weight:700;color:var(--ink);letter-spacing:-.2px;}
 .sbar .rr{display:flex;align-items:center;gap:5px;}
 .sbar.light{color:#fff;}
 
-.body{flex:1;overflow-y:auto;overflow-x:hidden;padding:0 13px 13px;
+.body{flex:1;overflow-y:auto;overflow-x:hidden;padding:0 12px 12px;
       scrollbar-width:none;-ms-overflow-style:none;}
 .body::-webkit-scrollbar{display:none;}
 
 .ahead{display:flex;align-items:center;gap:8px;padding:0 0 9px;}
-.ahead .t{font-family:var(--head);font-size:1.2rem;font-weight:800;letter-spacing:-.026em;
+.ahead .t{font-family:var(--head);font-size:1.08rem;font-weight:800;letter-spacing:-.026em;
           color:var(--deep);line-height:1.14;}
-.ahead .s{font-size:.665rem;color:var(--faint);font-weight:600;margin-top:2px;white-space:nowrap;}
+.ahead .s{font-size:0.599rem;color:var(--faint);font-weight:600;margin-top:2px;white-space:nowrap;}
 .ahead .sp{margin-left:auto;}
 .gbtn{width:30px;height:30px;border-radius:50%;background:#fff;
       border:1px solid var(--hair);display:grid;place-items:center;flex:none;}
 
-.glass{background:var(--card);border:1px solid var(--hair);border-radius:16px;
-       box-shadow:0 2px 8px rgba(20,20,43,.05);overflow:hidden;}
-.sect{font-family:var(--head);font-size:.87rem;font-weight:800;color:var(--deep);
-      margin:12px 0 7px;display:flex;align-items:baseline;}
-.sect .more{margin-left:auto;font-family:var(--body);font-size:.66rem;font-weight:700;color:var(--crimson-dk);}
+.glass{background:var(--card);border:1px solid var(--hair);border-radius:14px;overflow:hidden;}
+.sect{font-family:var(--head);font-size:0.8rem;font-weight:800;color:var(--deep);
+      margin:11px 0 6px;display:flex;align-items:baseline;}
+.sect .more{margin-left:auto;font-family:var(--body);font-size:0.594rem;font-weight:700;color:var(--crimson-dk);}
 
 .hero{border-radius:16px;padding:13px 14px 14px;color:#fff;position:relative;overflow:hidden;
       background:linear-gradient(112deg,#2e0614 0%,#4a1020 46%,#7a1a2c 100%);
       box-shadow:0 8px 20px rgba(40,15,22,.20);}
-.hero h3{font-family:var(--head);font-size:1.04rem;line-height:1.18;letter-spacing:-.02em;
+.hero h3{font-family:var(--head);font-size:0.936rem;line-height:1.18;letter-spacing:-.02em;
          font-weight:800;margin:0 0 4px;}
 .hero h3 em{font-style:normal;color:var(--crimson);}
-.hero p{margin:0;font-size:.69rem;line-height:1.46;color:rgba(255,255,255,.76);}
+.hero p{margin:0;font-size:0.621rem;line-height:1.46;color:rgba(255,255,255,.76);}
 
 .seg{display:flex;background:var(--seg);border-radius:50px;padding:3px;gap:2px;}
-.seg span{flex:1;text-align:center;font-size:.665rem;font-weight:700;padding:6.5px 6px;
+.seg span{flex:1;text-align:center;font-size:0.599rem;font-weight:700;padding:6.5px 6px;
           border-radius:50px;color:var(--muted);white-space:nowrap;}
 .seg span.on{background:#fff;color:var(--deep);box-shadow:0 1px 3px rgba(0,0,0,.09);}
 .chips{display:flex;gap:5px;overflow:hidden;}
-.chip{font-size:.635rem;font-weight:700;padding:4.5px 10px;border-radius:50px;white-space:nowrap;
+.chip{font-size:0.572rem;font-weight:700;padding:4.5px 10px;border-radius:50px;white-space:nowrap;
       background:#fff;border:1px solid var(--hair);color:var(--muted);}
 .chip.on{background:var(--deep);border-color:var(--deep);color:#fff;}
-.btnp{background:var(--crimson);color:#fff;font-size:.685rem;font-weight:800;padding:7px 13px;
+.btnp{background:var(--crimson);color:#fff;font-size:0.617rem;font-weight:800;padding:7px 13px;
       border-radius:50px;box-shadow:0 3px 10px rgba(217,58,58,.26);white-space:nowrap;}
-.btno{border:1px solid rgba(217,58,58,.40);color:var(--crimson);font-size:.655rem;font-weight:800;
+.btno{border:1px solid rgba(217,58,58,.40);color:var(--crimson);font-size:0.59rem;font-weight:800;
       padding:5.5px 11px;border-radius:50px;display:inline-flex;align-items:center;gap:4px;
       background:#fff;white-space:nowrap;}
 .btnwide{display:flex;align-items:center;justify-content:center;gap:6px;background:var(--crimson);
-      color:#fff;font-size:.75rem;font-weight:800;padding:10px;border-radius:12px;
+      color:#fff;font-size:0.675rem;font-weight:800;padding:10px;border-radius:12px;
       box-shadow:0 4px 14px rgba(217,58,58,.28);}
-.lnk{font-size:.655rem;font-weight:800;color:var(--crimson-dk);}
+.lnk{font-size:0.59rem;font-weight:800;color:var(--crimson-dk);}
 .field{background:var(--quiet);border:1px solid var(--hair);border-radius:11px;padding:9px 10px;
-       font-size:.69rem;color:var(--faint);line-height:1.4;}
-.req{font-size:.6rem;font-weight:800;color:var(--crimson);margin-top:4px;}
-.pill{font-size:.6rem;font-weight:800;padding:3px 8px;border-radius:50px;display:inline-block;}
+       font-size:0.621rem;color:var(--faint);line-height:1.4;}
+.req{font-size:0.54rem;font-weight:800;color:var(--crimson);margin-top:4px;}
+.pill{font-size:0.54rem;font-weight:800;padding:3px 8px;border-radius:50px;display:inline-block;}
 .pill.prog{background:var(--prog-b);color:var(--prog-t);}
 .pill.wait{background:var(--wait-b);color:var(--wait-t);}
 .pill.ok{background:var(--ok-b);color:var(--ok-t);}
@@ -142,7 +141,7 @@ body{margin:0;background:#f4f1ee;color:var(--ink);font-family:var(--body);
     padding:0;transition:color .18s ease;}
 .tb .ic{position:relative;width:34px;height:22px;display:grid;place-items:center;
         border-radius:11px;transition:background .2s ease;}
-.tb .lbl{font-size:.5rem;font-weight:600;line-height:1.25;letter-spacing:0;white-space:nowrap;
+.tb .lbl{font-size:0.45rem;font-weight:600;line-height:1.25;letter-spacing:0;white-space:nowrap;
          max-width:100%;overflow:hidden;text-overflow:ellipsis;}
 .tb.on{color:var(--crimson);}
 .tb.on .ic{background:rgba(217,58,58,.12);}
@@ -164,12 +163,12 @@ body{margin:0;background:#f4f1ee;color:var(--ink);font-family:var(--body);
   background:radial-gradient(circle,rgba(217,58,58,.40),transparent 68%);}
 .wtop{flex:1;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:2;}
 .wmark{width:136px;margin-bottom:20px;filter:brightness(0) invert(1);}
-.welcome h2{font-family:var(--head);font-size:1.62rem;line-height:1.13;letter-spacing:-.032em;
+.welcome h2{font-family:var(--head);font-size:1.458rem;line-height:1.13;letter-spacing:-.032em;
             font-weight:800;margin:0 0 11px;}
 .welcome h2 em{font-style:normal;color:var(--crimson);}
-.welcome .sub{font-size:.8rem;line-height:1.56;color:rgba(255,255,255,.76);margin:0;}
+.welcome .sub{font-size:0.72rem;line-height:1.56;color:rgba(255,255,255,.76);margin:0;}
 .wcta{position:relative;z-index:2;}
-.btn{display:block;text-align:center;font-size:.79rem;font-weight:800;padding:12px;
+.btn{display:block;text-align:center;font-size:0.711rem;font-weight:800;padding:12px;
      border-radius:12px;margin-bottom:8px;}
 .btn.p{background:var(--crimson);color:#fff;box-shadow:0 4px 16px rgba(217,58,58,.40);}
 .btn.g{background:rgba(255,255,255,.09);color:#fff;border:1px solid rgba(255,255,255,.26);}
@@ -180,64 +179,69 @@ body{margin:0;background:#f4f1ee;color:var(--ink);font-family:var(--body);
 .pathitem{flex:none;width:132px;}
 .pathitem .thumb{height:66px;}
 .pathitem .in{padding:8px 9px 9px;}
-.pathitem .t{font-family:var(--head);font-size:.76rem;font-weight:800;color:var(--deep);line-height:1.16;}
-.pathitem .sal{font-size:.68rem;font-weight:800;color:var(--ok-t);margin-top:4px;}
-.pathitem .meta{font-size:.585rem;color:var(--faint);margin-top:2px;font-weight:600;}
+.pathitem .t{font-family:var(--head);font-size:0.684rem;font-weight:800;color:var(--deep);line-height:1.16;}
+.pathitem .sal{font-size:0.612rem;font-weight:800;color:var(--ok-t);margin-top:4px;}
+.pathitem .meta{font-size:0.526rem;color:var(--faint);margin-top:2px;font-weight:600;}
 .aicard{border-radius:15px;padding:10px 11px;border:1px solid rgba(106,79,176,.24);
         background:linear-gradient(135deg,#faf7ff 0%,#ece4fb 100%);}
-.aicard .t{font-size:.71rem;font-weight:800;color:var(--violet);display:flex;align-items:center;gap:5px;}
-.aicard p{margin:4px 0 0;font-size:.645rem;line-height:1.4;color:#6b5f86;}
-.opp{margin-bottom:8px;padding:10px;display:flex;gap:9px;align-items:flex-start;}
+.aicard .t{font-size:0.639rem;font-weight:800;color:var(--violet);display:flex;align-items:center;gap:5px;}
+.aicard p{margin:4px 0 0;font-size:0.581rem;line-height:1.4;color:#6b5f86;}
+.opp{margin-bottom:7px;padding:9px;display:flex;gap:9px;align-items:flex-start;}
 .opp .th{width:62px;height:45px;border-radius:8px;overflow:hidden;flex:none;background:var(--seg);}
 .opp .th img{width:100%;height:100%;object-fit:cover;display:block;}
 .opp .in{flex:1;min-width:0;}
-.opp .t{font-family:var(--head);font-size:.78rem;font-weight:800;color:var(--deep);
+.opp .t{font-family:var(--head);font-size:0.702rem;font-weight:800;color:var(--deep);
   line-height:1.24;margin-bottom:3px;}
-.opp .d{font-size:.64rem;line-height:1.4;color:var(--muted);margin-bottom:6px;
+.opp .d{font-size:0.576rem;line-height:1.4;color:var(--muted);margin-bottom:6px;
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
 .opp .row{display:flex;align-items:center;gap:5px;flex-wrap:wrap;}
-.opp .type{font-size:.575rem;font-weight:800;letter-spacing:.03em;padding:2.5px 7px;
-  border-radius:5px;background:var(--deep);color:#fff;}
+.opp .kick{font-size:.49rem;font-weight:800;letter-spacing:.085em;text-transform:uppercase;
+  color:var(--faint);margin-bottom:2px;}
+.opp .meta{display:flex;align-items:center;gap:4px;margin-top:5px;font-size:.545rem;font-weight:700;}
+.opp .meta i{width:5px;height:5px;border-radius:50%;flex:none;display:block;}
+.opp .soon{color:var(--crimson-dk);} .opp .soon i{background:var(--crimson);}
+.opp .later{color:var(--ok-t);}      .opp .later i{background:var(--ok-t);}
+.opp .mid{color:var(--wait-t);}      .opp .mid i{background:var(--wait-t);}
 .mrow{display:flex;gap:9px;align-items:center;}
-.mrow .nm{font-family:var(--head);font-size:.84rem;font-weight:800;color:var(--deep);line-height:1.2;}
-.mrow .rl{font-size:.67rem;color:var(--muted);margin-top:1px;line-height:1.3;}
+.mrow .nm{font-family:var(--head);font-size:0.756rem;font-weight:800;color:var(--deep);line-height:1.2;}
+.mrow .rl{font-size:0.603rem;color:var(--muted);margin-top:1px;line-height:1.3;}
 .why{display:flex;gap:4px;margin-top:6px;flex-wrap:wrap;}
-.why span{font-size:.565rem;font-weight:700;padding:2.5px 6px;border-radius:50px;
+.why span{font-size:0.508rem;font-weight:700;padding:2.5px 6px;border-radius:50px;
           background:var(--neut-b);color:var(--neut-t);}
 .why span.hl{background:var(--prog-b);color:var(--crimson-dk);}
 .mstrack{height:5px;border-radius:50px;background:#ece7e1;margin-top:7px;overflow:hidden;}
 .mstrack span{display:block;height:100%;border-radius:50px;
   background:linear-gradient(90deg,#d93a3a,#f5c56b);}
-.msnum{font-family:var(--head);font-size:.92rem;font-weight:800;color:var(--deep);line-height:1;}
-.msnum span{font-size:.66rem;color:var(--faint);font-weight:700;}
+.msnum{font-family:var(--head);font-size:0.828rem;font-weight:800;color:var(--deep);line-height:1;}
+.msnum span{font-size:0.594rem;color:var(--faint);font-weight:700;}
 .ring{width:46px;height:46px;position:relative;flex:none;}
 .ring .lbl{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--head);
-  font-size:.62rem;font-weight:800;color:var(--deep);}
-.mslast{font-size:.56rem;color:var(--faint);font-weight:600;margin-top:3px;white-space:nowrap;}
+  font-size:0.558rem;font-weight:800;color:var(--deep);}
+.mslast{font-size:0.504rem;color:var(--faint);font-weight:600;margin-top:3px;white-space:nowrap;}
 
 /* videos: thumbnail-forward, no mentor photo */
 .vcard{margin-bottom:9px;}
 .vcard .vw{position:relative;}
 .vcard .thumb{height:104px;}
 .vcard .dur{position:absolute;right:6px;bottom:6px;background:rgba(0,0,0,.76);color:#fff;
-            font-size:.575rem;font-weight:800;padding:2px 6px;border-radius:4px;}
+            font-size:0.517rem;font-weight:800;padding:2px 6px;border-radius:4px;}
 .vcard .in{padding:9px 11px 11px;}
-.vcard .t{font-size:.755rem;font-weight:800;color:var(--deep);line-height:1.28;}
-.vcard .by{font-size:.625rem;color:var(--faint);font-weight:600;margin-top:4px;}
+.vcard .t{font-size:0.679rem;font-weight:800;color:var(--deep);line-height:1.28;}
+.vcard .by{font-size:0.562rem;color:var(--faint);font-weight:600;margin-top:4px;}
 
 .qcard{padding:10px 11px;margin-bottom:8px;}
-.qcard .q{font-size:.74rem;font-weight:700;color:var(--ink);line-height:1.32;}
+.qcard .q{font-size:0.666rem;font-weight:700;color:var(--ink);line-height:1.32;}
 .qcard .m{display:flex;align-items:center;gap:6px;margin-top:8px;}
-.qcard .m .n{font-size:.62rem;font-weight:700;color:var(--muted);}
+.qcard .m .n{font-size:0.558rem;font-weight:700;color:var(--muted);}
 .stat{display:flex;gap:7px;}
 .stat .s{flex:1;padding:9px 8px;text-align:center;}
-.stat .v{font-family:var(--head);font-size:1.1rem;font-weight:800;color:var(--deep);line-height:1;}
-.stat .k{font-size:.57rem;color:var(--faint);font-weight:700;margin-top:4px;}
+.stat .v{font-family:var(--head);font-size:0.99rem;font-weight:800;color:var(--deep);line-height:1;}
+.stat .k{font-size:0.513rem;color:var(--faint);font-weight:700;margin-top:4px;}
 
 footer{border-top:1px solid #e4ded7;margin-top:6px;padding:24px 0 54px;}
-footer p{font-size:.83rem;color:#5f5954;line-height:1.62;margin:0 0 9px;max-width:80ch;}
+footer p{font-size:0.747rem;color:#5f5954;line-height:1.62;margin:0 0 9px;max-width:80ch;}
 footer b{color:#6b5f52;}
-footer code{background:#eae5df;padding:1px 5px;border-radius:4px;font-size:.79rem;}
+footer code{background:#eae5df;padding:1px 5px;border-radius:4px;font-size:0.711rem;}
 @media (max-width:760px){.page{padding:26px 18px;}.store-icon{width:76px;height:76px;border-radius:18px;}
   .we-row{padding:18px;gap:16px;}}
 </style>
@@ -411,14 +415,14 @@ const MENTEE=[
   <div class="hero"><h3>Good afternoon, <em>Maya</em></h3>
     <p>Mentorship, scholarships and a network that opens doors.</p></div>
   <div class="glass" style="padding:12px;margin-top:8px">
-    <div style="font-family:var(--head);font-size:.85rem;font-weight:800;color:var(--deep);margin-bottom:8px">Ask a question</div>
+    <div style="font-family:var(--head);font-size:0.765rem;font-weight:800;color:var(--deep);margin-bottom:8px">Ask a question</div>
     <div class="seg" style="margin-bottom:7px"><span class="on">My Mentor</span><span>Public</span></div>
     <div style="display:flex;align-items:center;gap:6px;margin-bottom:7px">
-      <span style="font-size:.63rem;color:var(--faint);font-weight:700">To</span>
+      <span style="font-size:0.567rem;color:var(--faint);font-weight:700">To</span>
       <div style="flex:1;display:flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--hair);
         border-radius:10px;padding:5px 8px">
         <img class="av" src="assets/mentors/m13.jpg" width="18" height="18" alt="">
-        <span style="font-size:.68rem;font-weight:700;color:var(--deep)">Gerald Whitfield</span>
+        <span style="font-size:0.612rem;font-weight:700;color:var(--deep)">Gerald Whitfield</span>
         <span style="margin-left:auto;color:var(--faint)">${gChev}</span></div></div>
     <div class="field">Ask about careers, college, or your next step&hellip;</div>
     <div style="display:flex;align-items:center;margin-top:8px"><span class="lnk">Need ideas?</span>
@@ -454,12 +458,12 @@ const MENTEE=[
     <div class="glass pathitem" style="width:158px">
       <div style="position:relative"><img class="thumb" src="assets/video/vid-madhere.jpg" style="height:86px" alt="">
         <span class="dur" style="position:absolute;right:5px;bottom:5px">1:24</span></div>
-      <div class="in"><div class="t" style="font-size:.72rem">How I found opportunities as a first-gen student</div>
+      <div class="in"><div class="t" style="font-size:0.648rem">How I found opportunities as a first-gen student</div>
         <div class="meta">Dr. Max Madhere</div></div></div>
     <div class="glass pathitem" style="width:158px">
       <div style="position:relative"><img class="thumb" src="assets/video/vid-semien.jpg" style="height:86px" alt="">
         <span class="dur" style="position:absolute;right:5px;bottom:5px">2:06</span></div>
-      <div class="in"><div class="t" style="font-size:.72rem">Stay in state for college, or leave?</div>
+      <div class="in"><div class="t" style="font-size:0.648rem">Stay in state for college, or leave?</div>
         <div class="meta">Dr. Joseph Semien</div></div></div>
     <div class="pathitem" style="width:34px"></div></div>`},
 
@@ -477,9 +481,9 @@ const MENTEE=[
         stroke-linecap="round" stroke-linejoin="round"><circle cx="9.2" cy="8.4" r="3.5"/>
         <path d="M2.9 19.4a6.3 6.3 0 0 1 12.6 0"/><path d="M16.4 5.4a3.5 3.5 0 0 1 0 6.1"/>
         <path d="M18.2 19.4a6.3 6.3 0 0 0-2.3-4.9"/></svg></div>
-    <div style="font-family:var(--head);font-size:.87rem;font-weight:800;color:var(--deep)">
+    <div style="font-family:var(--head);font-size:0.783rem;font-weight:800;color:var(--deep)">
       You do not have a mentor yet</div>
-    <div style="font-size:.68rem;line-height:1.45;color:var(--muted);margin:5px 0 11px">
+    <div style="font-size:0.612rem;line-height:1.45;color:var(--muted);margin:5px 0 11px">
       We match on your goals, your background and where you are headed.</div>
     <div class="btnwide">${gSpark} Match me with a mentor</div></div>
   <div class="sect">Milestone pathways</div>
@@ -557,22 +561,22 @@ const MENTEE=[
     <span>Internships</span><span>Jobs</span></div>
   <div class="glass opp">
     <div class="th"><img src="https://images.pexels.com/photos/30562665/pexels-photo-30562665.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=360&w=640" alt=""></div>
-    <div class="in"><div class="t">Golden Door Scholars Scholarship</div>
+    <div class="in"><div class="kick">Scholarship</div>
+      <div class="t">Golden Door Scholars Scholarship</div>
       <div class="d">Full-ride scholarships for high-performing undocumented students, covering tuition, room and board.</div>
-      <div class="row"><span class="type">SCHOLARSHIP</span>
-        <span class="pill prog">Closes in 9 days</span></div></div></div>
+      <div class="meta soon"><i></i>Closes in 9 days</div></div></div>
   <div class="glass opp">
     <div class="th"><img src="https://images.pexels.com/photos/6129680/pexels-photo-6129680.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=360&w=640" alt=""></div>
-    <div class="in"><div class="t">National Restaurant Association Foundation</div>
+    <div class="in"><div class="kick">Scholarship</div>
+      <div class="t">National Restaurant Association Foundation</div>
       <div class="d">Awards for students pursuing a career in the restaurant and hospitality industry.</div>
-      <div class="row"><span class="type">SCHOLARSHIP</span>
-        <span class="pill ok">Closes Mar 2027</span></div></div></div>
+      <div class="meta later"><i></i>Closes Mar 2027</div></div></div>
   <div class="glass opp">
     <div class="th"><img src="https://images.pexels.com/photos/7693201/pexels-photo-7693201.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=360&w=640" alt=""></div>
-    <div class="in"><div class="t">Goldman Sachs HBCU Possibilities</div>
+    <div class="in"><div class="kick">Internship</div>
+      <div class="t">Goldman Sachs HBCU Possibilities</div>
       <div class="d">A summit for HBCU students exploring careers in finance, with interview coaching.</div>
-      <div class="row"><span class="type">INTERNSHIP</span>
-        <span class="pill wait">Closes in 6 weeks</span></div></div></div>`},
+      <div class="meta mid"><i></i>Closes in 6 weeks</div></div></div>`},
 
 {key:"profile",label:"Profile",note:"Reached from the home avatar",tabs:null,html:`
   <div class="ahead"><div><div class="t">Profile</div><div class="s">Reached from the home avatar</div></div>
@@ -580,7 +584,7 @@ const MENTEE=[
   <div class="glass" style="padding:11px">
     <div class="mrow">${menteeAvatar(46,GR.indigo,"person")}
       <div style="flex:1;min-width:0">
-        <div class="nm" style="font-size:.9rem">Maya R.</div>
+        <div class="nm" style="font-size:0.81rem">Maya R.</div>
         <div class="rl">Chicago &middot; Class of 2027</div></div>
       <span class="lnk" style="margin-left:auto">Edit</span></div></div>
   <div class="sect">Your pathway</div>
@@ -604,7 +608,7 @@ const MENTEE=[
   <div class="glass" style="padding:3px 11px">
     ${["Your questions","My needs survey","Career Navigator","Notifications","Support","Log out"]
       .map((r,i,a)=>`<div class="mrow" style="padding:9px 0">
-        <div style="font-size:.75rem;font-weight:700;color:${r==='Log out'?'var(--crimson)':'var(--ink)'}">${r}</div>
+        <div style="font-size:0.675rem;font-weight:700;color:${r==='Log out'?'var(--crimson)':'var(--ink)'}">${r}</div>
         ${r==='Log out'?'':`<span style="margin-left:auto;color:var(--faint);transform:rotate(-90deg)">${gChev}</span>`}
       </div>${i<a.length-1?'<div class="rowdiv" style="margin:0"></div>':''}`).join("")}</div>`},
 ];
@@ -625,14 +629,20 @@ const MENTOR=[
     <img class="av" src="assets/mentors/m13.jpg" width="30" height="30" alt=""
       style="border:1.5px solid var(--hair)"></div>
   <div class="hero"><h3>Good afternoon, <em>Gerald</em></h3>
-    <p>Ninety seconds is all it takes to answer one.</p></div>
+    <p>3 questions waiting for your guidance, and your mentees are making progress.</p>
+    <div style="display:flex;gap:22px;margin-top:11px">
+      <div><div style="font-family:var(--head);font-size:1.05rem;font-weight:800;line-height:1;color:#fff">3</div>
+        <div style="font-size:.5rem;color:rgba(255,255,255,.6);margin-top:4px">To answer</div></div>
+      <div><div style="font-family:var(--head);font-size:1.05rem;font-weight:800;line-height:1;color:#fff">12</div>
+        <div style="font-size:.5rem;color:rgba(255,255,255,.6);margin-top:4px">Mentees</div></div>
+      <div><div style="font-family:var(--head);font-size:1.05rem;font-weight:800;line-height:1;color:#fff">2.4k</div>
+        <div style="font-size:.5rem;color:rgba(255,255,255,.6);margin-top:4px">Video plays</div></div>
+    </div></div>
   <div class="glass" style="padding:11px;margin-top:8px;border-color:rgba(217,58,58,.28)">
     <div class="mrow"><div style="flex:1;min-width:0">
-      <div style="font-family:var(--head);font-size:.79rem;font-weight:800;color:var(--deep)">Add a profile video</div>
+      <div style="font-family:var(--head);font-size:0.711rem;font-weight:800;color:var(--deep)">Add a profile video</div>
       <div class="rl">Mentees see mentors with a video first.</div></div>
       <span class="btnp" style="margin-left:auto">Record</span></div></div>
-  <div class="stat" style="margin-top:8px">
-    <div class="glass s"><div class="v">12</div><div class="k">Mentees</div></div>
     <div class="glass s"><div class="v">7</div><div class="k">Followers</div></div>
     <div class="glass s"><div class="v">6</div><div class="k">Answers</div></div></div>
   <div class="sect">Unread questions <span class="more">See all 3</span></div>
@@ -667,18 +677,17 @@ const MENTOR=[
 {key:"videos",label:"Community",note:"Students with no mentor. Already built, currently buried",tabs:"videos",html:`
   <div class="ahead"><div><div class="t">Community</div><div class="s">Students without a mentor</div></div>
     <div class="sp"></div><div class="gbtn">${gSearch}</div></div>
-  <div class="glass" style="padding:12px;margin-bottom:9px;
-    background:linear-gradient(135deg,rgba(255,255,255,.94),rgba(251,234,233,.9))">
-    <div style="font-family:var(--head);font-size:.85rem;font-weight:800;color:var(--deep)">
-      12 unanswered public questions</div>
-    <div style="font-size:.68rem;line-height:1.45;color:var(--muted);margin-top:4px">
-      From students with no mentor yet. One answer reaches all of them.</div></div>
-  <div class="glass" style="padding:11px;margin-bottom:9px;border-color:rgba(74,16,32,.22)">
-    <div style="font-size:.58rem;font-weight:800;letter-spacing:.09em;color:var(--deep);
-      margin-bottom:5px">QUESTION OF THE DAY</div>
-    <div class="q" style="font-size:.76rem;font-weight:700;color:var(--ink);line-height:1.32">
+  <div style="border-radius:14px;padding:11px 12px;margin-bottom:10px;
+    background:linear-gradient(122deg,#2e0614,#4a1020 62%,#5d1526);">
+    <div style="display:flex;align-items:center;gap:5px;margin-bottom:5px">
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="#f5c56b"><path d="m12 3 2.4 5.9 6.3.5-4.8 4.1
+        1.5 6.1L12 16.4l-5.4 3.2 1.5-6.1-4.8-4.1 6.3-.5z"/></svg>
+      <span style="font-size:.46rem;font-weight:800;letter-spacing:.1em;color:#f5c56b">QUESTION OF THE DAY</span></div>
+    <div style="font-size:.68rem;font-weight:700;color:#fff;line-height:1.34">
       What is one thing you wish you had known at 17?</div>
-    <div style="display:flex;margin-top:9px"><span class="btnp" style="margin-left:auto">Answer</span></div></div>
+    <div style="display:flex;align-items:center;margin-top:9px">
+      <span style="font-size:.5rem;color:rgba(255,255,255,.55);font-weight:600">Everyone sees this one</span>
+      <span class="btnp" style="margin-left:auto">Answer</span></div></div>
   <div class="glass qcard"><div class="q">Can I become a lawyer if I did not do well in high school?</div>
     <div class="m"><span class="n">A student in Illinois &middot; 1 day ago</span>
       <span class="btnp" style="margin-left:auto">Answer</span></div></div>
@@ -689,43 +698,22 @@ const MENTOR=[
     <div class="m"><span class="n">A student in Georgia &middot; 6 days ago</span>
       <span class="btnp" style="margin-left:auto">Answer</span></div></div>`},
 
-{key:"opps",label:"Opportunities",note:"Posting is the page. The feed is a tab",tabs:"opps",html:`
-  <div class="ahead"><div><div class="t">Opportunities</div><div class="s">You have posted 6</div></div>
-    <div class="sp"></div><div class="gbtn">${gSliders}</div></div>
-  <div class="seg" style="margin-bottom:9px"><span class="on">Post</span><span>My posts</span>
-    <span>Browse</span></div>
-  <div class="glass" style="padding:12px">
-    <div style="font-family:var(--head);font-size:.85rem;font-weight:800;color:var(--deep);margin-bottom:9px">
-      Share an opening</div>
-    <div style="font-size:.66rem;font-weight:800;color:var(--muted);margin-bottom:4px">Title</div>
-    <div class="field" style="margin-bottom:9px">Name of the scholarship, internship or job</div>
-    <div style="font-size:.66rem;font-weight:800;color:var(--muted);margin-bottom:4px">Link</div>
-    <div class="field" style="margin-bottom:9px">Where should a student apply?</div>
-    <div style="display:flex;gap:8px;margin-bottom:9px">
-      <div style="flex:1"><div style="font-size:.66rem;font-weight:800;color:var(--muted);margin-bottom:4px">Type</div>
-        <div class="field">Scholarship ${gChev}</div></div>
-      <div style="flex:1"><div style="font-size:.66rem;font-weight:800;color:var(--muted);margin-bottom:4px">Deadline</div>
-        <div class="field">Pick a date</div></div></div>
-    <div style="font-size:.66rem;font-weight:800;color:var(--muted);margin-bottom:4px">Industry</div>
-    <div class="field" style="margin-bottom:11px">Choose one or more ${gChev}</div>
-    <div class="btnwide">${gPlus} Post opportunity</div></div>`},
-
 {key:"record",label:"Answer a question",note:"All four fields the upload requires",tabs:null,html:`
   <div style="flex:none;padding:0 13px 10px;display:flex;align-items:center;gap:9px">
     <div class="gbtn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#4a1020"
       stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></div>
-    <div style="font-family:var(--head);font-size:1rem;font-weight:800;color:var(--deep);
+    <div style="font-family:var(--head);font-size:0.9rem;font-weight:800;color:var(--deep);
       letter-spacing:-.022em">Respond to</div></div>
   <div class="body">
     <div class="glass" style="padding:11px">
       <div style="display:flex;align-items:center;gap:6px;margin-bottom:7px">
         ${menteeAvatar(18,GR.indigo,"person")}
-        <span style="font-size:.63rem;font-weight:700;color:var(--muted)">Maya R. &middot; 2 days ago</span></div>
-      <div style="font-size:.78rem;font-weight:700;color:var(--ink);line-height:1.34">
+        <span style="font-size:0.567rem;font-weight:700;color:var(--muted)">Maya R. &middot; 2 days ago</span></div>
+      <div style="font-size:0.702rem;font-weight:700;color:var(--ink);line-height:1.34">
         How do I choose between a paid internship and a better-named unpaid one?</div></div>
     <div class="sect" style="margin-top:11px">Add video</div>
     <div class="glass" style="padding:11px">
-      <div style="font-size:.66rem;font-weight:800;color:var(--muted);margin-bottom:5px">Video title</div>
+      <div style="font-size:0.594rem;font-weight:800;color:var(--muted);margin-bottom:5px">Video title</div>
       <div class="field">Give it a title mentees can search&hellip;</div>
       <div class="req">Required</div>
       <div style="margin-top:10px;height:120px;border-radius:12px;
@@ -735,21 +723,42 @@ const MENTOR=[
           border:1.5px solid rgba(255,255,255,.34);display:grid;place-items:center">
           <div style="width:21px;height:21px;border-radius:50%;background:var(--crimson);
             box-shadow:0 0 16px rgba(217,58,58,.75)"></div></div>
-        <div style="position:absolute;bottom:8px;right:10px;font-size:.56rem;font-weight:800;
+        <div style="position:absolute;bottom:8px;right:10px;font-size:0.504rem;font-weight:800;
           color:rgba(255,255,255,.72)">90 SECS MAX</div></div>
       <div class="rowdiv" style="margin:11px 0"></div>
-      <div class="mrow"><div><div style="font-size:.7rem;font-weight:800;color:var(--ink)">Add description</div>
-        <div style="font-size:.6rem;font-weight:700;color:var(--crimson);margin-top:2px">Please add</div></div>
+      <div class="mrow"><div><div style="font-size:0.63rem;font-weight:800;color:var(--ink)">Add description</div>
+        <div style="font-size:0.54rem;font-weight:700;color:var(--crimson);margin-top:2px">Please add</div></div>
         <span style="margin-left:auto;color:var(--faint);transform:rotate(-90deg)">${gChev}</span></div>
       <div class="rowdiv" style="margin:11px 0"></div>
-      <div class="mrow"><div><div style="font-size:.7rem;font-weight:800;color:var(--ink)">Tags</div>
-        <div style="font-size:.6rem;font-weight:700;color:var(--crimson);margin-top:2px">Helps mentees find you</div></div>
+      <div class="mrow"><div><div style="font-size:0.63rem;font-weight:800;color:var(--ink)">Tags</div>
+        <div style="font-size:0.54rem;font-weight:700;color:var(--crimson);margin-top:2px">Helps mentees find you</div></div>
         <span style="margin-left:auto;color:var(--faint);transform:rotate(-90deg)">${gChev}</span></div></div>
     <div style="display:flex;gap:7px;margin-top:11px">
       <span class="btn g" style="flex:1;margin:0;background:#f2efec;color:#6b5f52;
-        border:1px solid var(--hair);padding:10px;font-size:.75rem">Cancel</span>
-      <span class="btn p" style="flex:2;margin:0;padding:10px;font-size:.75rem">Upload</span></div>
+        border:1px solid var(--hair);padding:10px;font-size:0.675rem">Cancel</span>
+      <span class="btn p" style="flex:2;margin:0;padding:10px;font-size:0.675rem">Upload</span></div>
   </div>`,raw:true},
+{key:"opps",label:"Opportunities",note:"Posting is the page. The feed is a tab",tabs:"opps",html:`
+  <div class="ahead"><div><div class="t">Opportunities</div><div class="s">You have posted 6</div></div>
+    <div class="sp"></div><div class="gbtn">${gSliders}</div></div>
+  <div class="seg" style="margin-bottom:9px"><span class="on">Post</span><span>My posts</span>
+    <span>Browse</span></div>
+  <div class="glass" style="padding:12px">
+    <div style="font-family:var(--head);font-size:0.765rem;font-weight:800;color:var(--deep);margin-bottom:9px">
+      Share an opening</div>
+    <div style="font-size:0.594rem;font-weight:800;color:var(--muted);margin-bottom:4px">Title</div>
+    <div class="field" style="margin-bottom:9px">Name of the scholarship, internship or job</div>
+    <div style="font-size:0.594rem;font-weight:800;color:var(--muted);margin-bottom:4px">Link</div>
+    <div class="field" style="margin-bottom:9px">Where should a student apply?</div>
+    <div style="display:flex;gap:8px;margin-bottom:9px">
+      <div style="flex:1"><div style="font-size:0.594rem;font-weight:800;color:var(--muted);margin-bottom:4px">Type</div>
+        <div class="field">Scholarship ${gChev}</div></div>
+      <div style="flex:1"><div style="font-size:0.594rem;font-weight:800;color:var(--muted);margin-bottom:4px">Deadline</div>
+        <div class="field">Pick a date</div></div></div>
+    <div style="font-size:0.594rem;font-weight:800;color:var(--muted);margin-bottom:4px">Industry</div>
+    <div class="field" style="margin-bottom:11px">Choose one or more ${gChev}</div>
+    <div class="btnwide">${gPlus} Post opportunity</div></div>`},
+
 ];
 
 /* =========================== render =========================== */
