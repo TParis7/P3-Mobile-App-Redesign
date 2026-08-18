@@ -153,8 +153,12 @@ body{margin:0;background:#f4f1ee;color:var(--ink);font-family:var(--body);
 
 /* ---- welcome: clean grid, no photo ---- */
 .welcome{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;
-         padding:64px 22px 30px;color:#fff;overflow:hidden;
-         background:linear-gradient(168deg,#2a0714 0%,#5d1526 42%,#7a1a2c 68%,#3a0c18 100%);}
+         padding:64px 22px 30px;color:#fff;overflow:hidden;background:#2a0714;}
+.welcome .photo{position:absolute;inset:0;background:url("assets/campus-bg.jpg") center/cover no-repeat;
+  opacity:.30;}
+.welcome .veil{position:absolute;inset:0;
+  background:linear-gradient(168deg,rgba(42,7,20,.86) 0%,rgba(93,21,38,.80) 42%,
+             rgba(122,26,44,.74) 68%,rgba(58,12,24,.94) 100%);}
 .welcome .grid{position:absolute;inset:0;opacity:.5;
   background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),
                    linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);
@@ -402,7 +406,7 @@ const MENTOR_TABS=[["explore","Home"],["mentees","Mentees"],["videos","Community
 /* =========================== MENTEE =========================== */
 const MENTEE=[
 {key:"welcome",label:"Welcome",note:"One entry point for both personas",tabs:null,plain:true,light:true,html:`
-  <div class="welcome"><div class="grid"></div><div class="glow"></div>
+  <div class="welcome"><div class="photo"></div><div class="veil"></div><div class="grid"></div><div class="glow"></div>
     <div class="wtop">
       <img class="wmark" src="assets/p3-logo-horizontal.png" alt="P3">
       <h2>Talent is universal.<br><em>Access is not.</em></h2>
@@ -609,7 +613,7 @@ const MENTEE=[
 
 const MENTOR=[
 {key:"welcome",label:"Welcome",note:"One entry point for both personas",tabs:null,plain:true,light:true,html:`
-  <div class="welcome"><div class="grid"></div><div class="glow"></div>
+  <div class="welcome"><div class="photo"></div><div class="veil"></div><div class="grid"></div><div class="glow"></div>
     <div class="wtop">
       <img class="wmark" src="assets/p3-logo-horizontal.png" alt="P3">
       <h2>Talent is universal.<br><em>Access is not.</em></h2>
