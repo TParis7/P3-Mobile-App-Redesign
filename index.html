@@ -134,23 +134,24 @@ body{margin:0;background:#f4f1ee;color:var(--ink);font-family:var(--body);
 /* mentee avatar: gradient + industry glyph, never a photo, never initials */
 .mav{border-radius:50%;display:grid;place-items:center;flex:none;color:#fff;}
 
-/* ---- floating tab bar: label rides on the active tab only ---- */
-.tabbar{flex:none;position:relative;margin:0 9px 9px;height:54px;border-radius:21px;
-  display:flex;align-items:center;justify-content:space-evenly;padding:0 5px;
-  background:rgba(255,255,255,.74);
-  backdrop-filter:blur(26px) saturate(190%);-webkit-backdrop-filter:blur(26px) saturate(190%);
-  border:1px solid rgba(255,255,255,.72);
-  box-shadow:0 8px 26px rgba(40,15,22,.15),0 1px 2px rgba(40,15,22,.06),
-             inset 0 1px 0 rgba(255,255,255,.92);}
-.tb{display:flex;align-items:center;gap:5px;border-radius:15px;padding:8px 9px;flex:none;
-    color:#8a8580;background:none;border:0;cursor:pointer;font-family:var(--body);
-    transition:background .26s cubic-bezier(.4,0,.2,1),color .2s ease,padding .26s cubic-bezier(.4,0,.2,1);}
-.tb .ic{width:22px;height:22px;display:grid;place-items:center;flex:none;}
-.tb .lbl{font-size:.69rem;font-weight:800;letter-spacing:-.012em;white-space:nowrap;
-  max-width:0;opacity:0;overflow:hidden;
-  transition:max-width .26s cubic-bezier(.4,0,.2,1),opacity .18s ease;}
-.tb.on{background:rgba(217,58,58,.115);color:var(--crimson);padding:8px 13px 8px 11px;}
-.tb.on .lbl{max-width:104px;opacity:1;}
+/* ---- tab bar: opaque, full bleed, all four labels, sentence case ----
+   Sizes are the real spec scaled ~0.7 for these 286px mocks:
+   56pt content band + safe-area inset, 24pt icon, 11/14 label, weight 600. */
+.tabbar{flex:none;position:relative;height:40px;display:flex;align-items:center;
+  padding:0 6px;background:#fff;border-top:1px solid rgba(26,26,26,.08);}
+.homebar{flex:none;height:15px;background:#fff;display:grid;place-items:center;}
+.homebar i{display:block;width:88px;height:3.5px;border-radius:3px;background:#1a1a1a;opacity:.22;}
+.tb{flex:1 1 0;min-width:0;display:flex;flex-direction:column;align-items:center;gap:2px;
+    border:0;background:none;cursor:pointer;font-family:var(--body);color:#8a8580;
+    padding:0;transition:color .18s ease;}
+.tb .ic{position:relative;width:34px;height:22px;display:grid;place-items:center;
+        border-radius:11px;transition:background .2s ease;}
+.tb .lbl{font-size:.5rem;font-weight:600;line-height:1.25;letter-spacing:0;white-space:nowrap;
+         max-width:100%;overflow:hidden;text-overflow:ellipsis;}
+.tb.on{color:var(--crimson);}
+.tb.on .ic{background:rgba(217,58,58,.12);}
+.tb .dot{position:absolute;top:1px;right:5px;width:5px;height:5px;border-radius:50%;
+  background:var(--crimson);box-shadow:0 0 0 1.5px #fff;}
 .tb:hover:not(.on){color:#6b5f52;}
 
 /* ---- welcome: clean grid, no photo ---- */
@@ -381,7 +382,7 @@ function menteeRow(name, grad, glyph, pathway, done, total, last){
 }
 
 const MENTEE_TABS=[["explore","Home"],["mentors","Mentors"],["videos","Answers"],["opps","Opportunities"]];
-const MENTOR_TABS=[["profile","Home"],["mentees","Mentees"],["videos","Community"],["opps","Opportunities"]];
+const MENTOR_TABS=[["explore","Home"],["mentees","Mentees"],["videos","Community"],["opps","Opportunities"]];
 
 /* =========================== MENTEE =========================== */
 const MENTEE=[
@@ -566,7 +567,7 @@ const MENTOR=[
     <div class="wcta"><span class="btn p">Create your account</span>
       <span class="btn g">I already have an account</span></div></div>`},
 
-{key:"profile",label:"Home",note:"Your own mentees only. Community is separate",tabs:"profile",html:`
+{key:"profile",label:"Home",note:"Your own mentees only. Community is separate",tabs:"explore",html:`
   <div class="ahead"><div><div class="t">Home</div><div class="s">3 students are waiting</div></div>
     <div class="sp"></div><div class="gbtn">${gBell}</div>
     <img class="av" src="assets/mentors/m13.jpg" width="30" height="30" alt=""
@@ -690,13 +691,17 @@ const MENTOR=[
 /* =========================== render =========================== */
 const strip=document.getElementById("strip");
 let role="mentee";
+/* Unread indicators the shipping bar already computes: hasUnseenVideos /
+   hasUnseenFollowingVideos, hasUnseenPublicQuestions, pending connections. */
+const DOTS = { mentee:["videos"], mentor:["videos","mentees"] };
 function tabbar(set,activeKey){
   const tabs = set==="mentor" ? MENTOR_TABS : MENTEE_TABS;
   return `<div class="tabbar">`+tabs.map(([k,lab])=>{
     const on=k===activeKey;
-    return `<button class="tb ${on?'on':''}" data-goto="${k}" aria-label="${lab}"
-      aria-current="${on?'page':'false'}"><span class="ic">${G[k]}</span><span class="lbl">${lab}</span></button>`;
-  }).join("")+`</div>`;
+    const dot = DOTS[set] && DOTS[set].includes(k) ? '<span class="dot"></span>' : '';
+    return `<button class="tb ${on?'on':''}" data-goto="${k}" aria-current="${on?'page':'false'}">
+      <span class="ic">${G[k]}${dot}</span><span class="lbl">${lab}</span></button>`;
+  }).join("")+`</div><div class="homebar"><i></i></div>`;
 }
 function render(){
   const screens = role==="mentee"?MENTEE:MENTOR;
