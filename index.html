@@ -134,19 +134,24 @@ body{margin:0;background:#f4f1ee;color:var(--ink);font-family:var(--body);
 /* mentee avatar: gradient + industry glyph, never a photo, never initials */
 .mav{border-radius:50%;display:grid;place-items:center;flex:none;color:#fff;}
 
-/* ---- liquid glass tab bar ---- */
-.tabbar{flex:none;height:58px;display:flex;align-items:center;padding:0 2px 5px;position:relative;
-  background:linear-gradient(to bottom,rgba(255,255,255,.55),rgba(255,255,255,.82));
-  backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 -1px 18px rgba(40,15,22,.055);
-  border-top:1px solid rgba(255,255,255,.5);}
-.tb{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;
-    font-size:.52rem;font-weight:700;color:#9a938d;padding:5px 0 0;background:none;border:0;
-    font-family:var(--body);transition:color .2s ease;letter-spacing:0;}
-.tb .ic{width:30px;height:24px;display:grid;place-items:center;border-radius:9px;
-        transition:all .22s cubic-bezier(.4,0,.2,1);}
-.tb.on{color:var(--crimson);}
-.tb.on .ic{background:rgba(217,58,58,.11);}
+/* ---- floating tab bar: label rides on the active tab only ---- */
+.tabbar{flex:none;position:relative;margin:0 9px 9px;height:54px;border-radius:21px;
+  display:flex;align-items:center;justify-content:space-evenly;padding:0 5px;
+  background:rgba(255,255,255,.74);
+  backdrop-filter:blur(26px) saturate(190%);-webkit-backdrop-filter:blur(26px) saturate(190%);
+  border:1px solid rgba(255,255,255,.72);
+  box-shadow:0 8px 26px rgba(40,15,22,.15),0 1px 2px rgba(40,15,22,.06),
+             inset 0 1px 0 rgba(255,255,255,.92);}
+.tb{display:flex;align-items:center;gap:5px;border-radius:15px;padding:8px 9px;flex:none;
+    color:#8a8580;background:none;border:0;cursor:pointer;font-family:var(--body);
+    transition:background .26s cubic-bezier(.4,0,.2,1),color .2s ease,padding .26s cubic-bezier(.4,0,.2,1);}
+.tb .ic{width:22px;height:22px;display:grid;place-items:center;flex:none;}
+.tb .lbl{font-size:.69rem;font-weight:800;letter-spacing:-.012em;white-space:nowrap;
+  max-width:0;opacity:0;overflow:hidden;
+  transition:max-width .26s cubic-bezier(.4,0,.2,1),opacity .18s ease;}
+.tb.on{background:rgba(217,58,58,.115);color:var(--crimson);padding:8px 13px 8px 11px;}
+.tb.on .lbl{max-width:104px;opacity:1;}
+.tb:hover:not(.on){color:#6b5f52;}
 
 /* ---- welcome: clean grid, no photo ---- */
 .welcome{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;
@@ -584,32 +589,14 @@ const MENTOR=[
     <div class="t">Keeping options open. Having different experiences.</div>
     <div class="by">312 views &middot; 7 followers</div></div></div>`},
 
-{key:"mentees",label:"Mentees",note:"Capacity is real: the app has a max-mentees stepper",tabs:"mentees",html:`
-  <div class="ahead"><div><div class="t">Your mentees</div><div class="s">1 of 3 places filled</div></div>
+{key:"mentees",label:"Mentees",note:"Roster and requests",tabs:"mentees",html:`
+  <div class="ahead"><div><div class="t">Your mentees</div><div class="s">1 active &middot; 2 requests</div></div>
     <div class="sp"></div><div class="gbtn">${gSearch}</div></div>
-  <div class="glass" style="padding:10px 11px;margin-bottom:9px">
-    <div class="mrow"><div style="flex:1;min-width:0">
-      <div style="font-size:.68rem;font-weight:800;color:var(--muted);letter-spacing:.02em">MENTEE CAPACITY</div>
-      <div class="mstrack" style="margin-top:6px"><span style="width:33%"></span></div></div>
-      <div style="display:flex;align-items:center;gap:8px;flex:none">
-        <div class="gbtn" style="width:26px;height:26px;color:var(--crimson);font-weight:800">&minus;</div>
-        <div class="msnum" style="font-size:1rem">3</div>
-        <div class="gbtn" style="width:26px;height:26px;color:var(--crimson);font-weight:800">+</div>
-      </div></div></div>
   <div class="seg" style="margin-bottom:9px"><span class="on">Mentees</span><span>Requests</span></div>
   ${menteeRow("Maya R.",GR.indigo,"person","College &amp; Career",3,10,"2d ago")}
-  <div class="glass" style="padding:11px;margin-bottom:7px;border-style:dashed;background:rgba(255,255,255,.5)">
-    <div class="mrow"><div class="av" style="width:42px;height:42px;background:#f2efec;display:grid;place-items:center">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#b9afa5" stroke-width="1.9"
-        stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></div>
-      <div><div class="nm" style="color:var(--muted)">Mentorship available</div>
-        <div class="rl">A student can be matched here</div></div></div></div>
-  <div class="glass" style="padding:11px;border-style:dashed;background:rgba(255,255,255,.5)">
-    <div class="mrow"><div class="av" style="width:42px;height:42px;background:#f2efec;display:grid;place-items:center">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#b9afa5" stroke-width="1.9"
-        stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></div>
-      <div><div class="nm" style="color:var(--muted)">Mentorship available</div>
-        <div class="rl">A student can be matched here</div></div></div></div>`},
+  ${menteeRow("Jasmine T.",GR.sage,"law","Law &amp; Advocacy",6,10,"5d ago")}
+  ${menteeRow("Andre W.",GR.teal,"health","Health Sciences",8,10,"1d ago")}
+  ${menteeRow("Devon K.",GR.amber,"tech","Technology",2,10,"3w ago")}`},
 
 {key:"videos",label:"Questions",note:"The mentor's actual job, given its own tab",tabs:"videos",html:`
   <div class="ahead"><div><div class="t">Questions</div><div class="s">2 unread &middot; 2 total</div></div>
@@ -699,7 +686,8 @@ function tabbar(set,activeKey){
   const tabs = set==="mentor" ? MENTOR_TABS : MENTEE_TABS;
   return `<div class="tabbar">`+tabs.map(([k,lab])=>{
     const on=k===activeKey;
-    return `<button class="tb ${on?'on':''}" data-goto="${k}"><span class="ic">${G[k]}</span>${lab}</button>`;
+    return `<button class="tb ${on?'on':''}" data-goto="${k}" aria-label="${lab}"
+      aria-current="${on?'page':'false'}"><span class="ic">${G[k]}</span><span class="lbl">${lab}</span></button>`;
   }).join("")+`</div>`;
 }
 function render(){
