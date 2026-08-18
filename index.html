@@ -11,7 +11,7 @@
 @font-face{font-family:"Plus Jakarta Sans";src:url("assets/fonts/PlusJakartaSans.ttf") format("truetype");
            font-weight:200 800;font-display:swap;}
 :root{
-  --canvas:#ece6df; --card:rgba(255,255,255,.90); --hair:#ece9e6;
+  --canvas:#ece6df; --card:#ffffff; --hair:#ece9e6;
   --ink:#1a1a1a; --deep:#4a1020; --muted:#8a8580; --faint:#9a938d;
   --crimson:#d93a3a; --crimson-dk:#b82e2e; --violet:#6a4fb0; --gold:#f5c56b;
   --ok-t:#1b7f4b; --ok-b:#e7f4ec; --wait-t:#b26b00; --wait-b:#fcf1dd;
@@ -62,10 +62,7 @@ body{margin:0;background:#f4f1ee;color:var(--ink);font-family:var(--body);
        box-shadow:0 22px 64px rgba(40,15,22,.20),0 3px 10px rgba(0,0,0,.10);position:relative;}
 .screen{width:100%;height:100%;border-radius:33px;overflow:hidden;position:relative;
         display:flex;flex-direction:column;background:var(--canvas);isolation:isolate;}
-.screen::before{content:"";position:absolute;inset:0;z-index:0;
-  background:url("assets/campus-bg.jpg") center/cover no-repeat;opacity:.20;}
 .screen>*{position:relative;z-index:1;}
-.screen.plain::before{display:none;}
 .notch{position:absolute;top:8px;left:50%;transform:translateX(-50%);width:82px;height:22px;
        background:#131013;border-radius:20px;z-index:30;}
 
@@ -84,12 +81,11 @@ body{margin:0;background:#f4f1ee;color:var(--ink);font-family:var(--body);
           color:var(--deep);line-height:1.14;}
 .ahead .s{font-size:.665rem;color:var(--faint);font-weight:600;margin-top:2px;white-space:nowrap;}
 .ahead .sp{margin-left:auto;}
-.gbtn{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.80);
+.gbtn{width:30px;height:30px;border-radius:50%;background:#fff;
       border:1px solid var(--hair);display:grid;place-items:center;flex:none;}
 
-.glass{background:var(--card);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
-       border:1px solid var(--hair);border-radius:16px;box-shadow:0 2px 8px rgba(20,20,43,.05);
-       overflow:hidden;}
+.glass{background:var(--card);border:1px solid var(--hair);border-radius:16px;
+       box-shadow:0 2px 8px rgba(20,20,43,.05);overflow:hidden;}
 .sect{font-family:var(--head);font-size:.87rem;font-weight:800;color:var(--deep);
       margin:12px 0 7px;display:flex;align-items:baseline;}
 .sect .more{margin-left:auto;font-family:var(--body);font-size:.66rem;font-weight:700;color:var(--crimson);}
@@ -108,13 +104,13 @@ body{margin:0;background:#f4f1ee;color:var(--ink);font-family:var(--body);
 .seg span.on{background:#fff;color:var(--deep);box-shadow:0 1px 3px rgba(0,0,0,.09);}
 .chips{display:flex;gap:5px;overflow:hidden;}
 .chip{font-size:.635rem;font-weight:700;padding:4.5px 10px;border-radius:50px;white-space:nowrap;
-      background:rgba(255,255,255,.80);border:1px solid var(--hair);color:var(--muted);}
+      background:#fff;border:1px solid var(--hair);color:var(--muted);}
 .chip.on{background:var(--deep);border-color:var(--deep);color:#fff;}
 .btnp{background:var(--crimson);color:#fff;font-size:.685rem;font-weight:800;padding:7px 13px;
       border-radius:50px;box-shadow:0 3px 10px rgba(217,58,58,.26);white-space:nowrap;}
 .btno{border:1px solid rgba(217,58,58,.40);color:var(--crimson);font-size:.655rem;font-weight:800;
       padding:5.5px 11px;border-radius:50px;display:inline-flex;align-items:center;gap:4px;
-      background:rgba(255,255,255,.62);white-space:nowrap;}
+      background:#fff;white-space:nowrap;}
 .btnwide{display:flex;align-items:center;justify-content:center;gap:6px;background:var(--crimson);
       color:#fff;font-size:.75rem;font-weight:800;padding:10px;border-radius:12px;
       box-shadow:0 4px 14px rgba(217,58,58,.28);}
@@ -236,7 +232,7 @@ body{margin:0;background:#f4f1ee;color:var(--ink);font-family:var(--body);
 .stat{display:flex;gap:7px;}
 .stat .s{flex:1;padding:9px 8px;text-align:center;}
 .stat .v{font-family:var(--head);font-size:1.1rem;font-weight:800;color:var(--deep);line-height:1;}
-.stat .k{font-size:.55rem;color:var(--faint);font-weight:700;margin-top:4px;}
+.stat .k{font-size:.57rem;color:var(--faint);font-weight:700;margin-top:4px;}
 
 footer{border-top:1px solid #e4ded7;margin-top:6px;padding:24px 0 54px;}
 footer p{font-size:.83rem;color:#8a8580;line-height:1.62;margin:0 0 9px;max-width:80ch;}
@@ -277,9 +273,13 @@ footer code{background:#eae5df;padding:1px 5px;border-radius:4px;font-size:.79re
        <b>Resources salary bands and skill counts come from the bundled web corpus</b>
        (<code>guide/lib/pathways.json</code>), not from the CMS, which does not carry those fields.
        They are only true once that corpus ships with the app.</p>
-    <p><b>Build note:</b> React Native has no <code>backdrop-filter</code>. Frosted surfaces need
-       <code>@react-native-community/blur</code>, with a solid <code>rgba(255,255,255,.94)</code>
-       fallback on low-end Android. The layout must read without the blur.</p>
+    <p><b>Build note:</b> the campus wallpaper and the frosted surfaces are gone. On a phone there
+       are no gutters for a watermark to live in, so it sat behind body text and dropped some
+       copy to 1.64:1 contrast. It was also the only reason cards were translucent, which was the
+       only reason a blur was in the spec. Cards are now opaque white on the flat
+       <code>#ECE6DF</code> canvas, so <code>@react-native-community/blur</code> is not needed at
+       all (it was never in <code>package.json</code>). Two non-flat surfaces remain by choice: the
+       welcome gradient and the maroon hero band.</p>
   </div>
 </footer>
 
@@ -463,6 +463,41 @@ const MENTEE=[
         <div class="meta">Dr. Joseph Semien</div></div></div>
     <div class="pathitem" style="width:34px"></div></div>`},
 
+{key:"day0",label:"Home, day 0",note:"Ask is dead without a mentor, so Match Me leads",tabs:"explore",html:`
+  <div class="ahead"><div><div class="t">Home</div><div class="s">Welcome to P3</div></div>
+    <div class="sp"></div><div class="gbtn">${gBell}</div>
+    <div class="av" style="width:30px;height:30px;overflow:hidden;border:1.5px solid var(--hair)">
+      ${menteeAvatar(27,GR.indigo,"person")}</div></div>
+  <div class="hero"><h3>Welcome, <em>Maya</em></h3>
+    <p>Let's find someone who has already done what you want to do.</p></div>
+  <div class="glass" style="padding:14px;margin-top:8px;text-align:center">
+    <div style="width:44px;height:44px;border-radius:50%;background:var(--prog-b);margin:0 auto 9px;
+      display:grid;place-items:center">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#d93a3a" stroke-width="1.9"
+        stroke-linecap="round" stroke-linejoin="round"><circle cx="9.2" cy="8.4" r="3.5"/>
+        <path d="M2.9 19.4a6.3 6.3 0 0 1 12.6 0"/><path d="M16.4 5.4a3.5 3.5 0 0 1 0 6.1"/>
+        <path d="M18.2 19.4a6.3 6.3 0 0 0-2.3-4.9"/></svg></div>
+    <div style="font-family:var(--head);font-size:.87rem;font-weight:800;color:var(--deep)">
+      You do not have a mentor yet</div>
+    <div style="font-size:.68rem;line-height:1.45;color:var(--muted);margin:5px 0 11px">
+      We match on your goals, your background and where you are headed.</div>
+    <div class="btnwide">${gSpark} Match me with a mentor</div></div>
+  <div class="sect">Milestone pathways</div>
+  <div class="glass" style="padding:12px">
+    <div class="mrow"><div style="flex:1;min-width:0">
+      <div class="nm">Choose a pathway</div>
+      <div class="rl">Track the steps to college or a career.</div></div>
+      <span class="btno" style="margin-left:auto">Start</span></div></div>
+  <div class="sect">Resources <span class="more">See all 11</span></div>
+  <div class="rail2">
+    <div class="glass pathitem"><img class="thumb" src="https://images.pexels.com/photos/6129680/pexels-photo-6129680.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=360&w=640" alt="">
+      <div class="in"><div class="t">Healthcare</div><div class="sal">$60k &rarr; $400k+</div>
+        <div class="meta">4 roles &middot; 7 skills</div></div></div>
+    <div class="glass pathitem"><img class="thumb" src="https://images.pexels.com/photos/36706459/pexels-photo-36706459.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=360&w=640" alt="">
+      <div class="in"><div class="t">Technology</div><div class="sal">$80k &rarr; $400k+</div>
+        <div class="meta">4 roles &middot; 7 skills</div></div></div>
+    <div class="pathitem" style="width:34px"></div></div>`},
+
 {key:"mentors",label:"Mentors",note:"Match Me, then people. No invented descriptors",tabs:"mentors",html:`
   <div class="ahead"><div><div class="t">Mentors</div><div class="s">Find someone who has done it</div></div>
     <div class="sp"></div><div class="gbtn">${gSearch}</div></div>
@@ -585,13 +620,22 @@ const MENTOR=[
       <span class="btn g">I already have an account</span></div></div>`},
 
 {key:"profile",label:"Home",note:"Your own mentees only. Community is separate",tabs:"explore",html:`
-  <div class="ahead"><div><div class="t">Home</div><div class="s">3 students are waiting</div></div>
+  <div class="ahead"><div><div class="t">Home</div><div class="s">3 unread questions</div></div>
     <div class="sp"></div><div class="gbtn">${gBell}</div>
     <img class="av" src="assets/mentors/m13.jpg" width="30" height="30" alt=""
       style="border:1.5px solid var(--hair)"></div>
   <div class="hero"><h3>Good afternoon, <em>Gerald</em></h3>
     <p>Ninety seconds is all it takes to answer one.</p></div>
-  <div class="sect">Your mentees are waiting <span class="more">See all 3</span></div>
+  <div class="glass" style="padding:11px;margin-top:8px;border-color:rgba(217,58,58,.28)">
+    <div class="mrow"><div style="flex:1;min-width:0">
+      <div style="font-family:var(--head);font-size:.79rem;font-weight:800;color:var(--deep)">Add a profile video</div>
+      <div class="rl">Mentees see mentors with a video first.</div></div>
+      <span class="btnp" style="margin-left:auto">Record</span></div></div>
+  <div class="stat" style="margin-top:8px">
+    <div class="glass s"><div class="v">12</div><div class="k">Mentees</div></div>
+    <div class="glass s"><div class="v">7</div><div class="k">Followers</div></div>
+    <div class="glass s"><div class="v">6</div><div class="k">Answers</div></div></div>
+  <div class="sect">Unread questions <span class="more">See all 3</span></div>
   <div class="glass qcard"><div class="q">How do I choose between a paid internship and a better-named
     unpaid one?</div><div class="m">${menteeAvatar(18,GR.indigo,"person")}
     <span class="n">Maya R. &middot; 2 days ago</span>
@@ -601,11 +645,15 @@ const MENTOR=[
     <span class="btnp" style="margin-left:auto">Answer</span></div></div>
   <div class="sect">Mentee progress</div>
   ${menteeRow("Andre W.",GR.teal,"health","Health Sciences",8,10,"1d ago")}
-  <div class="sect">Your latest</div>
+  <div class="sect">Your answers <span class="more">See all 6</span></div>
   <div class="glass vcard"><div class="vw"><img class="thumb" src="assets/video/vid-paulm.jpg" alt="">
     <span class="dur">1:29</span></div><div class="in">
     <div class="t">Keeping options open. Having different experiences.</div>
-    <div class="by">312 views &middot; 7 followers</div></div></div>`},
+    <div class="by">312 views</div></div></div>
+  <div class="glass vcard"><div class="vw"><img class="thumb" src="assets/video/vid-semien.jpg" alt="">
+    <span class="dur">2:06</span></div><div class="in">
+    <div class="t">Should I stay in state for college, or leave?</div>
+    <div class="by">188 views</div></div></div>`},
 
 {key:"mentees",label:"Mentees",note:"Roster and requests",tabs:"mentees",html:`
   <div class="ahead"><div><div class="t">Your mentees</div><div class="s">1 active &middot; 2 requests</div></div>
@@ -622,11 +670,15 @@ const MENTOR=[
   <div class="glass" style="padding:12px;margin-bottom:9px;
     background:linear-gradient(135deg,rgba(255,255,255,.94),rgba(251,234,233,.9))">
     <div style="font-family:var(--head);font-size:.85rem;font-weight:800;color:var(--deep)">
-      12 students are waiting on anyone</div>
+      12 unanswered public questions</div>
     <div style="font-size:.68rem;line-height:1.45;color:var(--muted);margin-top:4px">
-      These questions came from students who have not been matched yet. One answer reaches all of them.</div></div>
-  <div class="seg" style="margin-bottom:9px"><span class="on">Open</span><span>Law</span>
-    <span>Answered</span></div>
+      From students with no mentor yet. One answer reaches all of them.</div></div>
+  <div class="glass" style="padding:11px;margin-bottom:9px;border-color:rgba(74,16,32,.22)">
+    <div style="font-size:.58rem;font-weight:800;letter-spacing:.09em;color:var(--deep);
+      margin-bottom:5px">QUESTION OF THE DAY</div>
+    <div class="q" style="font-size:.76rem;font-weight:700;color:var(--ink);line-height:1.32">
+      What is one thing you wish you had known at 17?</div>
+    <div style="display:flex;margin-top:9px"><span class="btnp" style="margin-left:auto">Answer</span></div></div>
   <div class="glass qcard"><div class="q">Can I become a lawyer if I did not do well in high school?</div>
     <div class="m"><span class="n">A student in Illinois &middot; 1 day ago</span>
       <span class="btnp" style="margin-left:auto">Answer</span></div></div>
@@ -635,12 +687,7 @@ const MENTOR=[
       <span class="btnp" style="margin-left:auto">Answer</span></div></div>
   <div class="glass qcard"><div class="q">What does a paralegal actually do day to day?</div>
     <div class="m"><span class="n">A student in Georgia &middot; 6 days ago</span>
-      <span class="btnp" style="margin-left:auto">Answer</span></div></div>
-  <div class="sect">Your reach</div>
-  <div class="glass vcard"><div class="vw"><img class="thumb" src="assets/video/vid-paulm.jpg" alt="">
-    <span class="dur">1:29</span></div><div class="in">
-    <div class="t">Keeping options open. Having different experiences.</div>
-    <div class="by">312 views &middot; answered for the community</div></div></div>`},
+      <span class="btnp" style="margin-left:auto">Answer</span></div></div>`},
 
 {key:"opps",label:"Opportunities",note:"Posting is the page. The feed is a tab",tabs:"opps",html:`
   <div class="ahead"><div><div class="t">Opportunities</div><div class="s">You have posted 6</div></div>
