@@ -217,8 +217,6 @@ body{margin:0;background:#f4f1ee;color:var(--ink);font-family:var(--body);
        Ported from AscentWatermark.tsx. The parent must clip it. ---- */
 .wmcard{position:relative;overflow:hidden;}
 .wmcard .ascent{position:absolute;right:0;bottom:0;pointer-events:none;}
-.donepill{display:inline-flex;align-items:center;gap:4px;font-size:0.505rem;font-weight:800;
-  color:#7D5A16;background:rgba(245,197,107,.24);border-radius:50px;padding:2px 7px;}
 
 /* ---- cards ---- */
 .rail2{display:flex;gap:8px;overflow:hidden;}
@@ -442,6 +440,24 @@ function menteeRow(name, grad, glyph, pathway, done, total, last){
       </div></div></div>`;
 }
 
+/* The Ascent watermark, ported from src/components/atoms/AscentWatermark.tsx.
+   Sunset and two ridges in the same crimson-to-gold the progress ring runs on.
+   Gradient ids are global to the renderer, so each instance passes its own. */
+function ascent(id){ return `<svg class="ascent" width="185" height="44" viewBox="0 0 236 56" aria-hidden="true">
+    <defs>
+      <linearGradient id="ascR_${id}" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#D93A3A" stop-opacity="0"/>
+        <stop offset=".55" stop-color="#D93A3A" stop-opacity=".11"/>
+        <stop offset="1" stop-color="#F5C56B" stop-opacity=".22"/></linearGradient>
+      <linearGradient id="ascF_${id}" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#D93A3A" stop-opacity="0"/>
+        <stop offset="1" stop-color="#D93A3A" stop-opacity=".15"/></linearGradient>
+    </defs>
+    <circle cx="186" cy="26" r="13" fill="#F5C56B" opacity=".26"/>
+    <path d="M0 56 L52 24 L88 40 L130 14 L170 38 L200 26 L236 56 Z" fill="url(#ascR_${id})"/>
+    <path d="M0 56 L44 40 L84 48 L124 32 L166 50 L204 38 L236 56 Z" fill="url(#ascF_${id})"/>
+  </svg>`; }
+
 const MENTEE_TABS=[["explore","Home"],["mentors","Mentors"],["videos","Answers"],["opps","Opportunities"]];
 const MENTOR_TABS=[["explore","Home"],["mentees","Mentees"],["videos","Community"],["opps","Opportunities"]];
 
@@ -484,7 +500,7 @@ const MENTEE=[
     <div style="display:flex;align-items:center;margin-top:8px"><span class="lnk">Need ideas?</span>
       <span style="margin-left:auto" class="btnp">Submit</span></div></div>
   <div class="sect">Milestone pathways <span class="more">View</span></div>
-  <div class="glass" style="padding:11px">
+  <div class="glass wmcard" style="padding:11px">${ascent("home")}
     <div class="mrow">
       <div class="ring">
         <svg width="46" height="46" viewBox="0 0 46 46">
@@ -558,80 +574,6 @@ const MENTEE=[
         <div class="meta">4 roles &middot; 7 skills</div></div></div>
     <div class="pathitem" style="width:34px"></div></div>`},
 
-{key:"done",label:"Home, pathway complete",note:"The Ascent watermark appears only once a pathway is finished",tabs:"explore",html:`
-  <div class="ahead"><div><div class="t">Home</div><div class="s">2 new opportunities</div></div>
-    <div class="sp"></div><div class="gbtn">${gBell}</div>
-    <div class="av" style="width:30px;height:30px;overflow:hidden;border:1.5px solid var(--hair)">
-      ${menteeAvatar(27,GR.indigo,"person")}</div></div>
-  <div class="hero"><h3>Good afternoon, <em>Maya</em></h3>
-    <p>Mentorship, scholarships and a network that opens doors.</p></div>
-  <div class="glass" style="padding:12px;margin-top:8px">
-    <div style="font-family:var(--head);font-size:0.775rem;font-weight:800;color:var(--deep);margin-bottom:8px">Ask a question</div>
-    <div class="seg" style="margin-bottom:7px"><span class="on">My Mentor</span><span>Public</span></div>
-    <div style="display:flex;align-items:center;gap:6px;margin-bottom:7px">
-      <span style="font-size:0.545rem;color:var(--faint);font-weight:700">To</span>
-      <div style="flex:1;display:flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--hair);
-        border-radius:10px;padding:5px 8px">
-        <img class="av" src="assets/mentors/m13.jpg" width="18" height="18" alt="">
-        <span style="font-size:0.59rem;font-weight:700;color:var(--deep)">Gerald Whitfield</span>
-        <span style="margin-left:auto;color:var(--faint)">${gChev}</span></div></div>
-    <div class="field">Ask about careers, college, or your next step&hellip;</div>
-    <div style="display:flex;align-items:center;margin-top:8px"><span class="lnk">Need ideas?</span>
-      <span style="margin-left:auto" class="btnp">Submit</span></div></div>
-  <div class="sect">Milestone pathways <span class="more">View</span></div>
-  <div class="glass wmcard" style="padding:11px">
-    <svg class="ascent" width="150" height="36" viewBox="0 0 236 56" aria-hidden="true">
-      <defs>
-        <linearGradient id="ascRidge" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0" stop-color="#D93A3A" stop-opacity="0"/>
-          <stop offset=".55" stop-color="#D93A3A" stop-opacity=".11"/>
-          <stop offset="1" stop-color="#F5C56B" stop-opacity=".22"/></linearGradient>
-        <linearGradient id="ascFront" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0" stop-color="#D93A3A" stop-opacity="0"/>
-          <stop offset="1" stop-color="#D93A3A" stop-opacity=".15"/></linearGradient>
-      </defs>
-      <circle cx="186" cy="26" r="13" fill="#F5C56B" opacity=".26"/>
-      <path d="M0 56 L52 24 L88 40 L130 14 L170 38 L200 26 L236 56 Z" fill="url(#ascRidge)"/>
-      <path d="M0 56 L44 40 L84 48 L124 32 L166 50 L204 38 L236 56 Z" fill="url(#ascFront)"/>
-    </svg>
-    <div class="mrow">
-      <div class="ring">
-        <svg width="46" height="46" viewBox="0 0 46 46">
-          <circle cx="23" cy="23" r="19" fill="none" stroke="#ece7e1" stroke-width="5"/>
-          <circle cx="23" cy="23" r="19" fill="none" stroke="url(#msgd)" stroke-width="5"
-            stroke-linecap="round" stroke-dasharray="119.4" stroke-dashoffset="0"
-            transform="rotate(-90 23 23)"/>
-          <defs><linearGradient id="msgd" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#d93a3a"/><stop offset="1" stop-color="#f5c56b"/>
-          </linearGradient></defs></svg>
-        <div class="lbl">10/10</div></div>
-      <div style="flex:1;min-width:0">
-        <div class="nm">College &amp; Career</div>
-        <div class="rl" style="margin-bottom:4px">Finished Aug 2026</div>
-        <span class="donepill">Pathway complete</span></div>
-      <span style="color:var(--faint);transform:rotate(-90deg);flex:none">${gChev}</span></div></div>
-  <div class="sect">Resources <span class="more">See all 11</span></div>
-  <div class="rail2">
-    <div class="glass pathitem"><img class="thumb" src="https://images.pexels.com/photos/6129680/pexels-photo-6129680.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=360&w=640" alt="">
-      <div class="in"><div class="t">Healthcare</div><div class="sal">$60k &rarr; $400k+</div>
-        <div class="meta">4 roles &middot; 7 skills</div></div></div>
-    <div class="glass pathitem"><img class="thumb" src="https://images.pexels.com/photos/36706459/pexels-photo-36706459.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=360&w=640" alt="">
-      <div class="in"><div class="t">Technology</div><div class="sal">$80k &rarr; $400k+</div>
-        <div class="meta">4 roles &middot; 7 skills</div></div></div>
-    <div class="pathitem" style="width:34px"></div></div>
-  <div class="sect">Featured answers <span class="more">See all</span></div>
-  <div class="rail2">
-    <div class="glass pathitem" style="width:158px">
-      <div style="position:relative"><img class="thumb" src="assets/video/vid-madhere.jpg" style="height:86px" alt="">
-        <span class="dur" style="position:absolute;right:5px;bottom:5px">1:24</span></div>
-      <div class="in"><div class="t" style="font-size:0.68rem">How I found opportunities as a first-gen student</div>
-        <div class="meta">Dr. Max Madhere</div></div></div>
-    <div class="glass pathitem" style="width:158px">
-      <div style="position:relative"><img class="thumb" src="assets/video/vid-semien.jpg" style="height:86px" alt="">
-        <span class="dur" style="position:absolute;right:5px;bottom:5px">2:06</span></div>
-      <div class="in"><div class="t" style="font-size:0.68rem">Stay in state for college, or leave?</div>
-        <div class="meta">Dr. Joseph Semien</div></div></div>
-    <div class="pathitem" style="width:34px"></div></div>`},
 {key:"mentors",label:"Mentors",note:"Match Me, then people. No invented descriptors",tabs:"mentors",html:`
   <div class="ahead"><div><div class="t">Mentors</div><div class="s">Find someone who has done it</div></div>
     <div class="sp"></div><div class="gbtn">${gSearch}</div></div>
@@ -748,7 +690,7 @@ const MENTEE=[
         <div class="rl">Chicago &middot; Class of 2027</div></div>
       <span class="lnk" style="margin-left:auto">Edit</span></div></div>
   <div class="sect">Your pathway</div>
-  <div class="glass" style="padding:11px">
+  <div class="glass wmcard" style="padding:11px">${ascent("profile")}
     <div class="mrow"><div style="flex:1;min-width:0">
       <div class="nm">College &amp; Career</div>
       <div class="rl">Next: visit or research 3 colleges</div>
@@ -757,7 +699,7 @@ const MENTEE=[
         <div class="mslast">2d ago</div></div></div></div>
   <div class="sect">Account</div>
   <div class="glass" style="padding:3px 11px">
-    ${["Your questions","My needs survey","Career Navigator","Notifications","Support","Log out"]
+    ${["My asked questions","My bookmarks","Following","Pathways","My needs survey","Share the Pulse","Help center","Log out"]
       .map((r,i,a)=>`<div class="mrow" style="padding:9px 0">
         <div style="font-size:0.68rem;font-weight:700;color:${r==='Log out'?'var(--crimson)':'var(--ink)'}">${r}</div>
         ${r==='Log out'?'':`<span style="margin-left:auto;color:var(--faint);transform:rotate(-90deg)">${gChev}</span>`}
