@@ -469,7 +469,7 @@ const MENTEE=[
       <img class="wmark" src="assets/p3-logo-horizontal.png" alt="P3"></div>
     <div class="wspacer"></div>
     <div class="wcta">
-      <h2>Talent is universal. <em>Access is not.</em></h2>
+      <h2>Talent is universal.<br><em>Access is not.</em></h2>
       <p class="sub">For students building a future, and the people who can help them get there.</p>
       <span class="btn p">Create my account</span>
       <span class="btn g">Log in with email</span>
@@ -539,7 +539,7 @@ const MENTEE=[
         <div class="meta">Dr. Joseph Semien</div></div></div>
     <div class="pathitem" style="width:34px"></div></div>`},
 
-{key:"day0",label:"Home, day 0",note:"Ask is dead without a mentor, so Match Me leads",tabs:"explore",html:`
+{key:"day0",label:"Home, day 0",note:"Ask is dead without a mentor, so Match Me leads",tabs:"explore",hidden:true,html:`
   <div class="ahead"><div><div class="t">Home</div><div class="s">Welcome to P3</div></div>
     <div class="sp"></div><div class="gbtn">${gBell}</div>
     <div class="av" style="width:30px;height:30px;overflow:hidden;border:1.5px solid var(--hair)">
@@ -713,7 +713,7 @@ const MENTOR=[
       <img class="wmark" src="assets/p3-logo-horizontal.png" alt="P3"></div>
     <div class="wspacer"></div>
     <div class="wcta">
-      <h2>Talent is universal. <em>Access is not.</em></h2>
+      <h2>Talent is universal.<br><em>Access is not.</em></h2>
       <p class="sub">For students building a future, and the people who can help them get there.</p>
       <span class="btn p">Create my account</span>
       <span class="btn g">Log in with email</span>
@@ -734,15 +734,6 @@ const MENTOR=[
       <div><div class="hstat">3</div><div class="hlab">To answer</div></div>
       <div><div class="hstat">12</div><div class="hlab">Mentees</div></div>
       <div><div class="hstat">2.4k</div><div class="hlab">Video plays</div></div>
-    </div>
-  </div>
-  <div class="glass" style="padding:11px;margin-top:8px;border-color:rgba(217,58,58,.28)">
-    <div class="mrow">
-      <div style="flex:1;min-width:0">
-        <div class="nm">Add a profile video</div>
-        <div class="rl">Mentees see mentors with a video first.</div>
-      </div>
-      <span class="btnp">Record</span>
     </div>
   </div>
   <div class="sect">Unread questions <span class="more">See all 3</span></div>
@@ -886,7 +877,7 @@ function tabbar(set,activeKey){
   }).join("")+`</div><div class="homebar"><i></i></div>`;
 }
 function render(){
-  const screens = role==="mentee"?MENTEE:MENTOR;
+  const screens = (role==="mentee"?MENTEE:MENTOR).filter(s=>!s.hidden);
   strip.innerHTML = screens.map((s,i)=>`
     <div class="slot" data-key="${s.key}">
       <div class="phone"><div class="notch"></div>
