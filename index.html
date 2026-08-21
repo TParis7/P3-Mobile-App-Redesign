@@ -427,7 +427,7 @@ const GR = {
    lastMilestoneCompletedAt. No invented status labels. */
 function menteeRow(name, grad, glyph, pathway, done, total, last){
   const pct = Math.round((done/total)*100);
-  return `<div class="glass" style="padding:11px;margin-bottom:7px">
+  return `<div class="glass wmcard" style="padding:11px;margin-bottom:7px">${ascent("mentee")}
     <div class="mrow">${menteeAvatar(42,grad,glyph)}
       <div style="flex:1;min-width:0">
         <div class="nm">${name}</div>
@@ -443,7 +443,11 @@ function menteeRow(name, grad, glyph, pathway, done, total, last){
 /* The Ascent watermark, ported from src/components/atoms/AscentWatermark.tsx.
    Sunset and two ridges in the same crimson-to-gold the progress ring runs on.
    Gradient ids are global to the renderer, so each instance passes its own. */
-function ascent(id){ return `<svg class="ascent" width="185" height="44" viewBox="0 0 236 56" aria-hidden="true">
+let ascentSeq = 0;
+function ascent(id, w){
+  const W = w || 185, H = Math.round(W * 56 / 236);
+  id = `${id}_${++ascentSeq}`;
+  return `<svg class="ascent" width="${W}" height="${H}" viewBox="0 0 236 56" aria-hidden="true">
     <defs>
       <linearGradient id="ascR_${id}" x1="0" y1="0" x2="1" y2="0">
         <stop offset="0" stop-color="#D93A3A" stop-opacity="0"/>
