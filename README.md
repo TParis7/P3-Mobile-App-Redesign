@@ -12,6 +12,9 @@ P3 web platform's design language. The only genuinely new items are ones already
 on web: opportunity imagery and filters, richer career resources, and the Videos tab's
 Featured / Latest / Following / Saved views.
 
+It started as the spec for the build. As screens land on `p3/redesign-sandbox` it is being
+reconciled back against them, so it now tracks what exists rather than only what was proposed.
+
 ## How to use it
 
 Toggle **Mentee / Mentor**. Scroll inside any phone. Tap a phone's tab bar to jump the strip to
