@@ -442,8 +442,8 @@ function menteeRow(name, grad, glyph, pathway, done, total, last){
       </div></div></div>`;
 }
 
-const MENTEE_TABS=[["explore","Home"],["videos","Answers"],["mentors","Mentors"],["opps","Opportunities"],["profile","Profile"]];
-const MENTOR_TABS=[["explore","Home"],["videos","Community"],["mentees","Mentees"],["opps","Opportunities"],["settings","Settings"]];
+const MENTEE_TABS=[["explore","Home"],["mentors","Mentors"],["videos","Answers"],["opps","Opportunities"]];
+const MENTOR_TABS=[["explore","Home"],["mentees","Mentees"],["videos","Community"],["opps","Opportunities"]];
 
 /* =========================== MENTEE =========================== */
 const MENTEE=[
@@ -503,10 +503,10 @@ const MENTEE=[
   <div class="sect">Resources <span class="more">See all 11</span></div>
   <div class="rail2">
     <div class="glass pathitem"><img class="thumb" src="https://images.pexels.com/photos/6129680/pexels-photo-6129680.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=360&w=640" alt="">
-      <div class="in"><div class="t">Healthcare</div>
+      <div class="in"><div class="t">Healthcare</div><div class="sal">$60k &rarr; $400k+</div>
         <div class="meta">4 roles &middot; 7 skills</div></div></div>
     <div class="glass pathitem"><img class="thumb" src="https://images.pexels.com/photos/36706459/pexels-photo-36706459.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=360&w=640" alt="">
-      <div class="in"><div class="t">Technology</div>
+      <div class="in"><div class="t">Technology</div><div class="sal">$80k &rarr; $400k+</div>
         <div class="meta">4 roles &middot; 7 skills</div></div></div>
     <div class="pathitem" style="width:34px"></div></div>
   <div class="sect">Featured answers <span class="more">See all</span></div>
@@ -551,10 +551,10 @@ const MENTEE=[
   <div class="sect">Resources <span class="more">See all 11</span></div>
   <div class="rail2">
     <div class="glass pathitem"><img class="thumb" src="https://images.pexels.com/photos/6129680/pexels-photo-6129680.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=360&w=640" alt="">
-      <div class="in"><div class="t">Healthcare</div>
+      <div class="in"><div class="t">Healthcare</div><div class="sal">$60k &rarr; $400k+</div>
         <div class="meta">4 roles &middot; 7 skills</div></div></div>
     <div class="glass pathitem"><img class="thumb" src="https://images.pexels.com/photos/36706459/pexels-photo-36706459.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=360&w=640" alt="">
-      <div class="in"><div class="t">Technology</div>
+      <div class="in"><div class="t">Technology</div><div class="sal">$80k &rarr; $400k+</div>
         <div class="meta">4 roles &middot; 7 skills</div></div></div>
     <div class="pathitem" style="width:34px"></div></div>`},
 
@@ -613,10 +613,10 @@ const MENTEE=[
   <div class="sect">Resources <span class="more">See all 11</span></div>
   <div class="rail2">
     <div class="glass pathitem"><img class="thumb" src="https://images.pexels.com/photos/6129680/pexels-photo-6129680.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=360&w=640" alt="">
-      <div class="in"><div class="t">Healthcare</div>
+      <div class="in"><div class="t">Healthcare</div><div class="sal">$60k &rarr; $400k+</div>
         <div class="meta">4 roles &middot; 7 skills</div></div></div>
     <div class="glass pathitem"><img class="thumb" src="https://images.pexels.com/photos/36706459/pexels-photo-36706459.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=360&w=640" alt="">
-      <div class="in"><div class="t">Technology</div>
+      <div class="in"><div class="t">Technology</div><div class="sal">$80k &rarr; $400k+</div>
         <div class="meta">4 roles &middot; 7 skills</div></div></div>
     <div class="pathitem" style="width:34px"></div></div>
   <div class="sect">Featured answers <span class="more">See all</span></div>
@@ -687,7 +687,7 @@ const MENTEE=[
 {key:"opps",label:"Opportunities",note:"Filters live in the button, not as chips",tabs:"opps",html:`
   <div class="ahead"><div><div class="t">Opportunities</div><div class="s">124 open &middot; 8 closing soon</div></div>
     <div class="sp"></div><div class="gbtn">${gSliders}</div></div>
-  <div class="seg" style="margin-bottom:9px"><span>All</span><span class="on">Scholarships</span>
+  <div class="seg" style="margin-bottom:9px"><span class="on">All</span><span>Scholarships</span>
     <span>Internships</span><span>Jobs</span></div>
   <div class="glass opp">
     <div class="th"><img src="https://images.pexels.com/photos/30562665/pexels-photo-30562665.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=360&w=640" alt=""></div>
@@ -706,7 +706,37 @@ const MENTEE=[
     <div class="in"><div class="kick">Internship</div>
       <div class="t">Goldman Sachs HBCU Possibilities</div>
       <div class="d">A summit for HBCU students exploring careers in finance, with interview coaching.</div>
-      <div class="meta mid"><i></i>Closes in 6 weeks</div></div></div>`},
+      <div class="meta mid"><i></i>Closes in 6 weeks</div></div></div>
+  <div class="glass opp">
+    <div class="th"><img src="https://images.pexels.com/photos/36706459/pexels-photo-36706459.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=360&w=640" alt=""></div>
+    <div class="in"><div class="kick">Internship</div>
+      <div class="t">Google STEP Internship</div>
+      <div class="d">A twelve-week software engineering internship for first and second-year undergraduates.</div>
+      <div class="meta mid"><i></i>Closes in 5 weeks</div></div></div>
+  <div class="glass opp">
+    <div class="th"><img src="https://images.pexels.com/photos/6129680/pexels-photo-6129680.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=360&w=640" alt=""></div>
+    <div class="in"><div class="kick">Scholarship</div>
+      <div class="t">UNCF General Scholarship</div>
+      <div class="d">Need-based awards for students attending UNCF member institutions and other accredited schools.</div>
+      <div class="meta later"><i></i>Rolling deadline</div></div></div>
+  <div class="glass opp">
+    <div class="th"><img src="https://images.pexels.com/photos/30562665/pexels-photo-30562665.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=360&w=640" alt=""></div>
+    <div class="in"><div class="kick">Scholarship</div>
+      <div class="t">Ron Brown Scholar Program</div>
+      <div class="d">Four-year awards for Black high school seniors who show academic promise and community service.</div>
+      <div class="meta soon"><i></i>Closes in 12 days</div></div></div>
+  <div class="glass opp">
+    <div class="th"><img src="https://images.pexels.com/photos/7693201/pexels-photo-7693201.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=360&w=640" alt=""></div>
+    <div class="in"><div class="kick">Internship</div>
+      <div class="t">NASA OSTEM Internship</div>
+      <div class="d">Paid placements across NASA centers for students in science, technology, engineering and maths.</div>
+      <div class="meta mid"><i></i>Closes in 7 weeks</div></div></div>
+  <div class="glass opp">
+    <div class="th"><img src="https://images.pexels.com/photos/36706459/pexels-photo-36706459.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=360&w=640" alt=""></div>
+    <div class="in"><div class="kick">Job</div>
+      <div class="t">Dell Scholars Program</div>
+      <div class="d">Support for students who have overcome significant obstacles on their way to a degree.</div>
+      <div class="meta later"><i></i>Closes Jan 2027</div></div></div>`},
 
 {key:"profile",label:"Profile",note:"Reached from the home avatar",tabs:null,html:`
   <div class="ahead"><div><div class="t">Profile</div><div class="s">Reached from the home avatar</div></div>
