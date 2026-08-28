@@ -1,1 +1,4 @@
 _preview-server.mjs
+
+# macOS finder junk; never part of the design export.
+.DS_Store
