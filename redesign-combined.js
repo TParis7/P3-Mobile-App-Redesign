@@ -34,7 +34,7 @@ const PAIRS = {
     {key:"home",      label:"Home",          note:'The current app opens a mentor on their own profile. <b>The redesign opens on their mentees&rsquo; progress</b> and the questions still waiting.'},
     {key:"mentees",   label:"Mentees",       note:'Roster, capacity and requests in one place. <b>Each mentee&rsquo;s industry reads off the glyph and their milestone progress off the bar</b>, without opening anyone.'},
     {key:"community", label:"Community",     note:'What students are asking, <b>promoted out of a segment buried inside the mentor&rsquo;s own profile</b>.'},
-    {key:"opps",      label:"Opportunities", note:'<b>Share a listing with a mentee in one tap</b>, and post one P3 does not have yet in seconds, from the card that opens the page.'},
+    {key:"opps",      label:"Opportunities", note:'<b>Share a listing with a mentee in one tap</b>, and add a new opportunity in seconds.'},
   ],
 };
 const NEW = [
