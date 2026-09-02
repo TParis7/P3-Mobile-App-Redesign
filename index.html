@@ -52,7 +52,7 @@
 /* A grey flash over a phone-sized screenshot reads as the image breaking. */
 a,button{-webkit-tap-highlight-color:transparent}
 /* Hash links land below the sticky bar rather than under it. */
-.band{scroll-margin-top:76px}
+.pcard{scroll-margin-top:80px}
 [hidden]{display:none !important}
 img{-webkit-user-drag:none;user-select:none}
 :focus-visible{outline:2px solid var(--crimson);outline-offset:3px;border-radius:4px}
@@ -122,50 +122,53 @@ body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--body);
   text-decoration:none;padding:6px 11px;border-radius:999px;background:rgba(74,16,32,.05)}
 #chips a:hover{color:var(--deep);background:rgba(74,16,32,.10)}
 
-/* ---------------- pair bands ---------------- */
-.band{padding-block:clamp(48px,5.5vw,84px)}
-.band:nth-of-type(odd){background:var(--canvas-2)}
-.band:nth-of-type(even){background:var(--canvas)}
-.band-inner{max-width:1400px;margin:0 auto;
+/* ---------------- pair grid ----------------
+   One full-width band per pair meant eleven near-full screens of scrolling for
+   a reader who wanted the shape of the change in under a minute. The pairs are
+   a dense grid now: everything stays side by side, three across on a wide
+   laptop, and the whole mentee set is three rows instead of seven screens.
+   Detail did not go anywhere — every card opens the 2x lightbox. */
+.panel{background:var(--canvas-2);padding-block:clamp(32px,3.5vw,52px)}
+.pairgrid{max-width:1400px;margin:0 auto;
   padding-inline:max(clamp(20px,4vw,64px),env(safe-area-inset-left),env(safe-area-inset-right));
-  display:grid;grid-template-columns:minmax(320px,1fr) auto;gap:clamp(40px,5vw,88px);align-items:center}
-.band--flip .text{order:2}
-.band--flip .stage{order:1}
-.text{justify-self:start;max-width:36ch}
-.text .kicker{font-size:11px;font-weight:800;letter-spacing:.14em;color:var(--faint);margin:0 0 14px}
-.text .kicker i{font-style:normal;color:var(--crimson)}
-.text h2{font-family:var(--head);font-weight:800;font-size:clamp(1.75rem,2.9vw,2.5rem);
-  line-height:1.03;letter-spacing:-.032em;color:var(--deep);margin:0}
-.rule{border:0;height:2px;width:40px;background:var(--crimson);margin:18px 0}
-.note{font-size:clamp(1rem,1.05vw,1.0625rem);font-weight:500;line-height:1.6;color:var(--muted);margin:0}
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(390px,1fr));gap:clamp(18px,2vw,28px)}
+.pcard{background:var(--card);border:1px solid var(--hair);border-radius:22px;
+  padding:clamp(18px,1.6vw,24px);display:flex;flex-direction:column;
+  scroll-margin-top:80px;transition:border-color .22s,box-shadow .22s,transform .22s}
+.pcard .kicker{font-size:11px;font-weight:800;letter-spacing:.14em;color:var(--faint);margin:0 0 8px}
+.pcard .kicker i{font-style:normal;color:var(--crimson)}
+.pcard h2{font-family:var(--head);font-weight:800;font-size:clamp(1.375rem,1.7vw,1.75rem);
+  line-height:1.05;letter-spacing:-.03em;color:var(--deep);margin:0}
+.rule{border:0;height:2px;width:34px;background:var(--crimson);margin:12px 0}
+.note{font-size:.9375rem;font-weight:500;line-height:1.55;color:var(--muted);margin:0 0 clamp(16px,1.6vw,22px)}
 .note b{font-weight:700;color:var(--deep)}
-.hint{font-size:11.5px;font-weight:600;color:var(--faint);text-align:center;margin:18px 0 0}
+.hint{font-size:11.5px;font-weight:600;color:var(--faint);text-align:center;margin:14px 0 0}
 
-.stage{position:relative;display:flex;gap:26px;align-items:flex-start}
-.stage::before{content:"";position:absolute;inset:-6% 42% -8% -12%;pointer-events:none;z-index:0;
-  background:radial-gradient(ellipse 62% 52% at 50% 62%, rgba(217,58,58,.20), transparent 70%)}
-.shot{position:relative;z-index:1;margin:0;display:flex;flex-direction:column;align-items:center;gap:12px}
-.lab{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:800;letter-spacing:.14em}
-.lab.new{color:var(--crimson-dk);background:var(--card);border-radius:999px;padding:6px 12px;
-  box-shadow:0 4px 12px rgba(74,16,32,.14)}
+.stage{position:relative;display:flex;gap:clamp(12px,1.2vw,18px);align-items:flex-start;
+  justify-content:center;margin-top:auto}
+.stage::before{content:"";position:absolute;inset:-4% 44% -6% -8%;pointer-events:none;z-index:0;
+  background:radial-gradient(ellipse 62% 52% at 50% 62%, rgba(217,58,58,.16), transparent 70%)}
+.shot{position:relative;z-index:1;margin:0;display:flex;flex-direction:column;align-items:center;gap:10px}
+.lab{display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:800;letter-spacing:.13em}
+.lab.new{color:var(--crimson-dk);background:var(--canvas-2);border-radius:999px;padding:5px 10px}
 .lab.new::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--crimson)}
 .lab.cur{color:var(--faint)}
 .lab.cur::before{content:"";width:5px;height:5px;background:var(--hair)}
 .zoomwrap{position:relative;appearance:none;border:0;padding:0;background:none;cursor:zoom-in;display:block}
 .frame{--fp:calc(var(--pw)*.0303);--fr:calc(var(--pw)*.135);
   width:var(--pw);padding:var(--fp);border-radius:var(--fr);position:relative;
-  transition:transform .22s,box-shadow .22s,background .22s}
+  transition:transform .22s,box-shadow .22s}
 .screen{aspect-ratio:660/1434;border-radius:calc(var(--fr) - var(--fp));overflow:hidden;
   background:linear-gradient(180deg,#efe9e3,#e4ded7);position:relative}
 .screen img{width:100%;height:100%;object-fit:cover;display:block}
 .screen.missing img{display:none}
 .screen.missing::after{content:"Capturing";position:absolute;inset:0;display:grid;place-items:center;
-  font-family:var(--head);font-weight:800;font-size:.85rem;color:#b9afa5}
+  font-family:var(--head);font-weight:800;font-size:.8rem;color:#b9afa5}
 .frame--new{background:linear-gradient(158deg,#3a3238 0%,#141115 34%,#0d0b0e 68%,#2a242a 100%);
   box-shadow:inset 0 0 0 1px rgba(255,255,255,.10),0 2px 4px rgba(40,15,22,.06),
-             0 14px 28px rgba(40,15,22,.12),0 44px 76px -18px rgba(74,16,32,.28)}
-.frame--cur{background:var(--card);box-shadow:0 0 0 1px var(--hair),0 8px 18px -10px rgba(74,16,32,.22)}
-.zbadge{position:absolute;top:8px;right:8px;z-index:3;font-size:16px;line-height:1;opacity:.45;
+             0 12px 24px rgba(40,15,22,.12),0 30px 52px -18px rgba(74,16,32,.26)}
+.frame--cur{background:var(--canvas-2);box-shadow:0 0 0 1px var(--hair),0 6px 14px -9px rgba(74,16,32,.22)}
+.zbadge{position:absolute;top:7px;right:7px;z-index:3;font-size:14px;line-height:1;opacity:.4;
   color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.5);transition:opacity .2s;pointer-events:none}
 .frame--cur .zbadge{color:var(--faint);text-shadow:none}
 
@@ -199,41 +202,29 @@ body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--body);
 .lb[data-mode="single"] .lb-switch{display:none}
 
 /* ---------------- reveal ---------------- */
-.text,.shot--cur,.shot--new,.stage::before{will-change:opacity,transform}
-.band .text{opacity:0;transform:translateY(14px);transition:opacity .46s cubic-bezier(.22,.61,.36,1),transform .46s cubic-bezier(.22,.61,.36,1)}
-.band .shot--cur{opacity:0;transform:translateY(18px);transition:opacity .5s cubic-bezier(.22,.61,.36,1) .07s,transform .5s cubic-bezier(.22,.61,.36,1) .07s}
-.band .shot--new{opacity:0;transform:translateY(26px) scale(.985);transition:opacity .56s cubic-bezier(.16,.84,.3,1) .13s,transform .56s cubic-bezier(.16,.84,.3,1) .13s}
-.band .stage::before{opacity:0;transition:opacity .7s ease .18s}
-.band.is-in .text,.band.is-in .shot--cur,.band.is-in .shot--new{opacity:1;transform:none}
-.band.is-in .stage::before{opacity:1}
-.band.no-anim .text,.band.no-anim .shot--cur,.band.no-anim .shot--new,.band.no-anim .stage::before{transition:none}
+.pcard{opacity:0;transform:translateY(16px);
+  transition:opacity .5s cubic-bezier(.22,.61,.36,1),transform .5s cubic-bezier(.22,.61,.36,1)}
+.pcard.is-in{opacity:1;transform:none}
+.pcard.no-anim{transition:none}
 
 @media (hover:hover) and (pointer:fine){
+  .pcard:hover{border-color:rgba(217,58,58,.28);box-shadow:0 18px 40px -22px rgba(74,16,32,.30)}
   .zoomwrap:hover .frame--new{transform:translateY(-3px);
     box-shadow:inset 0 0 0 1px rgba(255,255,255,.10),0 2px 4px rgba(40,15,22,.06),
-               0 14px 28px rgba(40,15,22,.12),0 56px 92px -20px rgba(74,16,32,.34)}
+               0 12px 24px rgba(40,15,22,.12),0 40px 68px -20px rgba(74,16,32,.32)}
   .zoomwrap:hover .frame--cur{box-shadow:0 0 0 1px rgba(217,58,58,.5),0 8px 18px -10px rgba(74,16,32,.22)}
   .zoomwrap:hover .zbadge{opacity:1}
   .ncard:hover{transform:translateY(-4px);border-color:rgba(250,248,246,.26)}
 }
 
 /* ---------------- breakpoints ---------------- */
-.stage{--pw:clamp(238px,17.5vw,292px)}
-@media (max-width:1239px){
-  .stage{--pw:min(clamp(210px,17vw,238px),calc((92vh - 120px)/2.1016));gap:24px}
-  .band-inner{gap:48px}
-  .text{max-width:32ch}
-}
+.stage{--pw:clamp(150px,12vw,210px)}
+@media (max-width:1239px){ .stage{--pw:clamp(146px,15vw,190px)} }
 @media (max-width:1039px){ #chips{display:none} }
-@media (max-width:999px){
-  .band-inner{grid-template-columns:1fr;gap:32px;justify-items:center}
-  .band--flip .text,.band--flip .stage{order:initial}
-  .text{justify-self:center;text-align:center;max-width:46ch}
-  .rule{margin-inline:auto}
-  .stage{--pw:min(clamp(200px,26vw,250px),calc((92vh - 120px)/2.1016));gap:22px}
-  .band{padding-block:56px}
-  .band+.band .band-inner{border-top:1px solid var(--hair-soft);padding-top:40px}
-  .newgrid{grid-template-columns:repeat(2,1fr)}
+@media (max-width:899px){
+  .pairgrid{grid-template-columns:1fr;gap:16px}
+  .pcard{max-width:640px;margin-inline:auto;width:100%}
+  .stage{--pw:clamp(150px,24vw,230px)}
 }
 @media (max-width:759px){
   .mast-icon{width:64px;height:64px;border-radius:16px}
@@ -242,17 +233,12 @@ body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--body);
      column goes flush left. */
   .score{gap:20px;flex-direction:column;align-items:flex-start}
   .score div+div{border-left:0;padding-left:0;border-top:1px solid var(--hair);padding-top:20px;width:100%}
-  .stage{--pw:clamp(132px,calc((100vw - 54px)/2),190px);gap:14px}
-  .band{padding-block:40px}
+  .pcard{padding:16px;border-radius:18px}
+  .pcard h2{font-size:1.25rem}
+  .note{font-size:.875rem;margin-bottom:14px}
+  .stage{--pw:clamp(126px,calc((100vw - 78px)/2),180px);gap:10px}
   .bar-inner{min-height:52px;gap:12px}
   .bar .mark{display:none}
-  .lb-row{display:block}
-  .lb-fig{display:none}
-  .lb-fig.is-active{display:block}
-  .lb-switch{display:flex}
-  .lb-fig img{max-width:88vw;max-height:calc(100vh - 148px);max-height:calc(100dvh - 148px);height:auto}
-}
-@media (max-width:759px){
   /* Two-up as far down as it stays legible. One-up means four consecutive
      full-height phones, which is four screens of scrolling for four cards. */
   .newgrid{grid-template-columns:repeat(2,1fr);gap:12px}
@@ -264,6 +250,11 @@ body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--body);
   .newband{padding-block:44px}
   .newband h2{font-size:clamp(1.5rem,7vw,1.875rem)}
   .newband .lede{font-size:14px}
+  .lb-row{display:block}
+  .lb-fig{display:none}
+  .lb-fig.is-active{display:block}
+  .lb-switch{display:flex}
+  .lb-fig img{max-width:88vw;max-height:calc(100vh - 148px);max-height:calc(100dvh - 148px);height:auto}
 }
 /* 339, not 379: a 375px iPhone is the most common device that will open this
    and it must get the two-up grid. Only a 320px-class screen falls to one. */
@@ -271,8 +262,7 @@ body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--body);
 
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{transition:none !important;animation:none !important}
-  .band .text,.band .shot--cur,.band .shot--new{opacity:1;transform:none}
-  .band .stage::before{opacity:1}
+  .pcard{opacity:1;transform:none}
 }
 </style>
 </head>
@@ -386,19 +376,15 @@ function phone(role, p, side, i){
     </button>
   </figure>`;
 }
-function buildBand(role, p, i, total){
-  const flip = i % 2 === 1;
+function buildPairCard(role, p, i, total){
   const hint = i === 0 ? '<p class="hint">Tap either screen to enlarge.</p>' : '';
-  return `<section class="band${flip?' band--flip':''}" id="${role}-${p.key}">
-    <div class="band-inner">
-      <div class="text">
-        <p class="kicker">${ROLE_LABEL[role]} &middot; <i>${pad(i+1)}</i> / ${pad(total)}</p>
-        <h2>${p.label}</h2><hr class="rule">
-        <p class="note">${p.note}</p>${hint}
-      </div>
-      <div class="stage">${phone(role,p,"redesign",i)}${phone(role,p,"current",i)}</div>
-    </div>
-  </section>`;
+  return `<article class="pcard" id="${role}-${p.key}">
+    <p class="kicker">${ROLE_LABEL[role]} &middot; <i>${pad(i+1)}</i> / ${pad(total)}</p>
+    <h2>${p.label}</h2><hr class="rule">
+    <p class="note">${p.note}</p>
+    <div class="stage">${phone(role,p,"redesign",i)}${phone(role,p,"current",i)}</div>
+    ${hint}
+  </article>`;
 }
 function buildNewCard(item){
   return `<article class="ncard" data-key="${item.key}">
@@ -421,7 +407,7 @@ function buildNewCard(item){
 for (const role of ["mentee","mentor"]) {
   const list = PAIRS[role];
   document.getElementById("panel-"+role).innerHTML =
-    list.map((p,i) => buildBand(role,p,i,list.length)).join("");
+    `<div class="pairgrid">` + list.map((p,i) => buildPairCard(role,p,i,list.length)).join("") + `</div>`;
 }
 document.getElementById("newgrid").innerHTML = NEW.map(buildNewCard).join("");
 document.getElementById("c-mentee").textContent = PAIRS.mentee.length;
@@ -451,7 +437,7 @@ recount();
 const seg = document.getElementById("seg");
 const tabs = {mentee:document.getElementById("tab-mentee"), mentor:document.getElementById("tab-mentor")};
 function stampIn(role){
-  document.querySelectorAll(`#panel-${role} .band`).forEach(b => {
+  document.querySelectorAll(`#panel-${role} .pcard`).forEach(b => {
     b.classList.add("no-anim","is-in");
     requestAnimationFrame(() => requestAnimationFrame(() => b.classList.remove("no-anim")));
   });
@@ -492,9 +478,9 @@ if (!reduced) {
   const io = new IntersectionObserver((entries,obs) => {
     entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add("is-in"); obs.unobserve(en.target); } });
   }, {threshold:.2, rootMargin:"0px 0px -12% 0px"});
-  document.querySelectorAll(".band").forEach(b => io.observe(b));
+  document.querySelectorAll(".pcard").forEach(b => io.observe(b));
 } else {
-  document.querySelectorAll(".band").forEach(b => b.classList.add("is-in"));
+  document.querySelectorAll(".pcard").forEach(b => b.classList.add("is-in"));
 }
 new IntersectionObserver(([e]) => {
   document.getElementById("bar").classList.toggle("is-stuck", !e.isIntersecting);
