@@ -2,3 +2,9 @@ _preview-server.mjs
 
 # macOS finder junk; never part of the design export.
 .DS_Store
+
+# Capture tooling and raw simulator PNGs; the page ships only the converted webp shots.
+_*.sh
+_*.py
+raw/
+_clone_session.py
