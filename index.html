@@ -263,7 +263,23 @@ body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--body);
   .stage{--pw:clamp(150px,24vw,230px)}
 }
 @media (max-width:759px){
-  .mast-icon{width:52px;height:52px;border-radius:13px}
+  /* The four things above the first pair have to earn their height on a phone:
+     the header, its lede, the New Features link and the toggle are all that
+     stand between opening the page and seeing a comparison. */
+  .mast{padding:20px 0 18px}
+  /* flex-start, not center: centring against a three-line block floats the
+     icon beside the lede instead of sitting with the title. */
+  .mast-row{gap:13px;align-items:flex-start}
+  .mast-icon{width:46px;height:46px;border-radius:12px}
+  .mast h1{font-size:clamp(1.375rem,6.2vw,1.75rem);letter-spacing:-.03em;line-height:1.04}
+  .mast .sub{font-size:.8125rem;line-height:1.45;margin-top:7px}
+  .jump{margin-top:10px}
+  .jump a{font-size:12px;padding:7px 13px}
+  /* Full-width toggle: at 240px it sat marooned against the left edge with the
+     wordmark hidden, and half the bar was doing nothing. */
+  .seg{width:100%;max-width:none}
+  .seg button{font-size:.8125rem}
+  .bar-inner{padding-inline:16px;gap:10px}
   /* The rules divide figures sitting on ONE line. Once they wrap they read as
      indentation instead, so the divider becomes a horizontal rule and the
      column goes flush left. */
