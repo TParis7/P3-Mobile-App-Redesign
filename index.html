@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light">
 <meta name="robots" content="noindex, nofollow">
-<meta name="description" content="The P3 mobile app rebuilt in the web platform's design language, shown beside the app it replaces, plus four capabilities the current app does not have.">
+<meta name="description" content="The P3 mobile app rebuilt in the web platform's design language, shown beside the app it replaces, plus five capabilities the current app does not have.">
 <meta name="theme-color" content="#4a1020">
 
 <link rel="icon" href="favicon.ico" sizes="any">
@@ -18,7 +18,7 @@
 <meta property="og:site_name" content="Pulse of Perseverance Project">
 <meta property="og:url" content="https://tparis7.github.io/P3-Mobile-App-Redesign/">
 <meta property="og:title" content="P3 Mobile: the redesign, screen by screen">
-<meta property="og:description" content="Every screen rebuilt in the P3 web platform's design language, plus four surfaces the current app does not have.">
+<meta property="og:description" content="Every screen rebuilt in the P3 web platform's design language, plus five surfaces the current app does not have.">
 <meta property="og:image" content="https://tparis7.github.io/P3-Mobile-App-Redesign/assets/og-image.png?v=3">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
@@ -26,7 +26,7 @@
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="P3 Mobile: the redesign, screen by screen">
-<meta name="twitter:description" content="Every screen rebuilt in the P3 web platform's design language, plus four surfaces the current app does not have.">
+<meta name="twitter:description" content="Every screen rebuilt in the P3 web platform's design language, plus five surfaces the current app does not have.">
 <meta name="twitter:image" content="https://tparis7.github.io/P3-Mobile-App-Redesign/assets/og-image.png?v=3">
 <title>P3 Mobile: the redesign, screen by screen</title>
 <style>
@@ -96,7 +96,7 @@ body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--body);
 .newband h2 .hl{color:var(--crimson)}
 .newband .lede{font-size:15px;font-weight:500;line-height:1.6;color:rgba(250,248,246,.72);
   max-width:60ch;margin:16px auto 0;text-align:center}
-.newgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(16px,1.8vw,26px);
+.newgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(14px,1.6vw,22px);
   margin-top:clamp(36px,4vw,56px)}
 .ncard{background:rgba(250,248,246,.05);border:1px solid rgba(250,248,246,.14);
   border-radius:20px;padding:18px 18px 22px;transition:transform .22s,border-color .22s}
@@ -312,6 +312,8 @@ body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--body);
   /* Two-up as far down as it stays legible. One-up means four consecutive
      full-height phones, which is four screens of scrolling for four cards. */
   .newgrid{grid-template-columns:repeat(2,1fr);gap:12px}
+  /* Five cards two-up leaves one alone on the last row: keep its width, centre it. */
+  .ncard:last-child:nth-child(odd){grid-column:1 / -1;width:calc(50% - 6px);justify-self:center}
   .ncard{padding:10px 10px 14px;border-radius:16px}
   .ncard .shotwrap{margin-bottom:12px}
   .ncard h3{font-size:1.0625rem}
@@ -369,15 +371,15 @@ body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--body);
 <section class="newband" id="new">
   <div class="wrap">
     <p class="kicker">NEW IN THE REDESIGN</p>
-    <h2 id="new-h2">Four things the current app <span class="hl">cannot do at all</span>.</h2>
-    <p class="lede">A repaint cannot add a feature. These four surfaces have no counterpart in the app on the App Store today.</p>
+    <h2 id="new-h2">Five things the current app <span class="hl">cannot do at all</span>.</h2>
+    <p class="lede">A repaint cannot add a feature. These five surfaces have no counterpart in the app on the App Store today.</p>
     <div class="newgrid" id="newgrid"></div>
   </div>
 </section>
 
 <section class="closing">
   <div class="wrap">
-    <p>Same flows, same navigation, <span class="hl">repainted</span>. Plus four capabilities that simply were not there before.</p>
+    <p>Same flows, same navigation, <span class="hl">repainted</span>. Plus five capabilities that simply were not there before.</p>
     <p class="meta">The concept mockups this page grew out of are kept at <a href="concept.html">concept.html</a>. The app on the store today: <a href="https://apps.apple.com/us/app/p3-pulse-of-perseverance/id6478132244">P3: Pulse of Perseverance</a>.</p>
   </div>
 </section>
@@ -421,9 +423,10 @@ const NEW = [
   {key:"pulse-ai",        title:"Pulse AI",         status:"#f6f2ff", note:"An AI career coach inside the app. It opens with somewhere to start, not a blank box."},
   {key:"career-timeline", title:"Career Timeline",  status:"#ece6df", note:"Education, experience and goals as one record the student owns and a mentor can read."},
   {key:"pathway-discover",title:"Pathway Discover", status:"#ece6df", note:"Pathways ranked from what a student has already told P3, surfaced on Home as Find your fit."},
+  {key:"dark-mode",       title:"Dark mode",        status:"#141020", note:"A night palette for the whole app, one tap from Profile. Crimson and violet stay as the accents; the Ascent turns to twilight."},
 ];
 const ROLE_LABEL = {mentee:"MENTEE", mentor:"MENTOR"};
-const COUNT_WORD = {1:"One",2:"Two",3:"Three",4:"Four"};
+const COUNT_WORD = {1:"One",2:"Two",3:"Three",4:"Four",5:"Five"};
 const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const pad = n => String(n).padStart(2,"0");
 const shot = (role,key,side) => `assets/shots/${role}/${key}-${side}.webp`;
