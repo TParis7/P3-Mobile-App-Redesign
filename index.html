@@ -110,6 +110,30 @@ body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--body);
 .ncard h3{font-family:var(--head);font-weight:700;font-size:1.25rem;line-height:1.2;
   letter-spacing:-.02em;color:#faf8f6;margin:0 0 8px}
 .ncard p{font-size:14px;font-weight:500;line-height:1.55;color:rgba(250,248,246,.78);margin:0}
+/* The four new-capability shots sit in a real device. The pair grid's .frame
+   sizes itself from --pw, which only .stage defines, so inside .ncard the same
+   markup collapsed to a bare rectangle (Thomas, Sep 2 2026: "they are just
+   images"). This one sizes from its own container, restores the status bar the
+   captures were cropped of (148px of 1320, so 11.2% of the width) in the app's
+   own canvas colour, and puts the Dynamic Island and the side keys back. */
+.ncard .shotwrap{container-type:inline-size}
+.device{position:relative;width:100%;padding:3.2cqw;border-radius:15.5cqw;
+  background:linear-gradient(158deg,#4a4148 0%,#141115 34%,#0d0b0e 68%,#332b33 100%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.22),inset 0 0 0 1px rgba(255,255,255,.12),
+    0 2px 4px rgba(0,0,0,.28),0 14px 28px rgba(0,0,0,.36),
+    0 0 34px -6px rgba(217,58,58,.30),0 0 90px -20px rgba(217,58,58,.26);
+  transition:transform .22s}
+.device::before{content:"";position:absolute;left:-1.1cqw;top:19cqw;width:1.1cqw;height:7cqw;
+  border-radius:.8cqw 0 0 .8cqw;background:#28232a;
+  box-shadow:0 11cqw 0 0 #28232a,0 21.5cqw 0 0 #28232a}
+.device::after{content:"";position:absolute;right:-1.1cqw;top:31cqw;width:1.1cqw;height:15cqw;
+  border-radius:0 .8cqw .8cqw 0;background:#28232a}
+.device-screen{position:relative;border-radius:12.3cqw;overflow:hidden;background:var(--status,#ece6df)}
+.device-status{height:11.2cqw;position:relative;background:var(--status,#ece6df)}
+.device-status::after{content:"";position:absolute;left:50%;top:2.4cqw;transform:translateX(-50%);
+  width:27cqw;height:8cqw;border-radius:999px;background:#0b0a0c}
+.device-screen img{display:block;width:100%;height:auto}
+.device .zbadge{top:4.5cqw;right:5cqw}
 
 /* ---------------- sticky bar ---------------- */
 .bar{position:sticky;top:0;z-index:40;background:var(--card);border-bottom:1px solid transparent;
@@ -127,10 +151,6 @@ body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--body);
 .seg button{position:relative;z-index:1;min-height:44px;appearance:none;border:0;background:none;
   cursor:pointer;font:800 .875rem var(--body);color:var(--faint);transition:color .2s}
 .seg button[aria-selected="true"]{color:#fff}
-#chips{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto}
-#chips a{font-size:11.5px;font-weight:700;letter-spacing:.02em;color:var(--faint);
-  text-decoration:none;padding:6px 11px;border-radius:999px;background:rgba(74,16,32,.05)}
-#chips a:hover{color:var(--deep);background:rgba(74,16,32,.10)}
 
 /* ---------------- pair grid ----------------
    One full-width band per pair meant eleven near-full screens of scrolling for
@@ -250,13 +270,13 @@ body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--body);
                0 12px 24px rgba(40,15,22,.12),0 40px 68px -20px rgba(74,16,32,.26)}
   .zoomwrap:hover .frame--cur{box-shadow:0 0 0 1px rgba(217,58,58,.5),0 8px 18px -10px rgba(74,16,32,.22)}
   .zoomwrap:hover .zbadge{opacity:1}
+  .zoomwrap:hover .device{transform:translateY(-3px)}
   .ncard:hover{transform:translateY(-4px);border-color:rgba(250,248,246,.26)}
 }
 
 /* ---------------- breakpoints ---------------- */
 .stage{--pw:clamp(150px,12vw,210px)}
 @media (max-width:1239px){ .stage{--pw:clamp(146px,15vw,190px)} }
-@media (max-width:1039px){ #chips{display:none} }
 @media (max-width:899px){
   .pairgrid{grid-template-columns:1fr;gap:16px}
   .pcard{max-width:640px;margin-inline:auto;width:100%}
@@ -338,7 +358,6 @@ body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--body);
       <button role="tab" id="tab-mentee" aria-selected="true" aria-controls="panel-mentee" tabindex="0">Mentee</button>
       <button role="tab" id="tab-mentor" aria-selected="false" aria-controls="panel-mentor" tabindex="-1">Mentor</button>
     </div>
-    <nav id="chips" aria-label="Contents"></nav>
   </div>
 </div>
 
@@ -398,10 +417,10 @@ const PAIRS = {
   ],
 };
 const NEW = [
-  {key:"conversations",   title:"Conversations",    note:"A direct thread with your mentor: share a scholarship, ask a question, keep the answer."},
-  {key:"pulse-ai",        title:"Pulse AI",         note:"An AI career coach inside the app. It opens with somewhere to start, not a blank box."},
-  {key:"career-timeline", title:"Career Timeline",  note:"Education, experience and goals as one record the student owns and a mentor can read."},
-  {key:"pathway-discover",title:"Pathway Discover", note:"Pathways ranked from what a student has already told P3, surfaced on Home as Find your fit."},
+  {key:"conversations",   title:"Conversations",    status:"#ece6df", note:"A direct thread with your mentor: share a scholarship, ask a question, keep the answer."},
+  {key:"pulse-ai",        title:"Pulse AI",         status:"#f6f2ff", note:"An AI career coach inside the app. It opens with somewhere to start, not a blank box."},
+  {key:"career-timeline", title:"Career Timeline",  status:"#ece6df", note:"Education, experience and goals as one record the student owns and a mentor can read."},
+  {key:"pathway-discover",title:"Pathway Discover", status:"#ece6df", note:"Pathways ranked from what a student has already told P3, surfaced on Home as Find your fit."},
 ];
 const ROLE_LABEL = {mentee:"MENTEE", mentor:"MENTOR"};
 const COUNT_WORD = {1:"One",2:"Two",3:"Three",4:"Four"};
@@ -441,9 +460,9 @@ function buildNewCard(item){
     <div class="shotwrap">
       <button class="zoomwrap" data-mode="single" data-key="${item.key}" data-label="${item.title}"
               aria-label="Enlarge ${item.title}">
-        <div class="frame frame--new">
+        <div class="device" style="--status:${item.status}">
           <span class="zbadge" aria-hidden="true">&#10530;</span>
-          <div class="screen"><img src="assets/shots/new/${item.key}.webp" alt="${item.title}"
+          <div class="device-screen"><div class="device-status" aria-hidden="true"></div><img src="assets/shots/new/${item.key}.webp" alt="${item.title}"
             width="660" height="1360" loading="lazy" decoding="async" draggable="false"></div>
         </div>
       </button>
@@ -488,10 +507,6 @@ function stampIn(role){
     requestAnimationFrame(() => requestAnimationFrame(() => b.classList.remove("no-anim")));
   });
 }
-function buildChips(role){
-  document.getElementById("chips").innerHTML =
-    PAIRS[role].map(p => `<a href="#${role}-${p.key}">${p.label}</a>`).join("");
-}
 function setRole(role){
   seg.dataset.role = role;
   for (const r of ["mentee","mentor"]) {
@@ -500,7 +515,6 @@ function setRole(role){
     document.getElementById("panel-"+r).hidden = r!==role;
   }
   stampIn(role);
-  buildChips(role);
   const bar = document.getElementById("bar");
   if (bar.classList.contains("is-stuck")) {
     window.scrollTo({top: document.getElementById("sentinel").offsetTop, behavior:"auto"});
