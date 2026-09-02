@@ -49,6 +49,10 @@
   --s1:8px; --s2:12px; --s3:16px; --s4:24px; --s5:40px; --s6:64px;
 }
 *,*::before,*::after{box-sizing:border-box}
+/* A grey flash over a phone-sized screenshot reads as the image breaking. */
+a,button{-webkit-tap-highlight-color:transparent}
+/* Hash links land below the sticky bar rather than under it. */
+.band{scroll-margin-top:76px}
 [hidden]{display:none !important}
 img{-webkit-user-drag:none;user-select:none}
 :focus-visible{outline:2px solid var(--crimson);outline-offset:3px;border-radius:4px}
@@ -57,7 +61,8 @@ body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--body);
 
 /* ---------------- masthead ---------------- */
 .mast{background:var(--canvas-2);padding:clamp(40px,5vw,72px) 0 clamp(32px,4vw,56px)}
-.wrap{max-width:1400px;margin:0 auto;padding-inline:clamp(20px,4vw,64px)}
+.wrap{max-width:1400px;margin:0 auto;
+  padding-inline:max(clamp(20px,4vw,64px),env(safe-area-inset-left),env(safe-area-inset-right))}
 .mast-row{display:flex;align-items:flex-start;gap:clamp(18px,2.4vw,30px)}
 .mast-icon{width:88px;height:88px;border-radius:20px;flex:none;box-shadow:0 12px 34px rgba(40,15,22,.14)}
 .mast h1{font-family:var(--head);font-weight:800;font-size:clamp(2rem,4.2vw,3.25rem);
@@ -121,7 +126,8 @@ body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--body);
 .band{padding-block:clamp(48px,5.5vw,84px)}
 .band:nth-of-type(odd){background:var(--canvas-2)}
 .band:nth-of-type(even){background:var(--canvas)}
-.band-inner{max-width:1400px;margin:0 auto;padding-inline:clamp(20px,4vw,64px);
+.band-inner{max-width:1400px;margin:0 auto;
+  padding-inline:max(clamp(20px,4vw,64px),env(safe-area-inset-left),env(safe-area-inset-right));
   display:grid;grid-template-columns:minmax(320px,1fr) auto;gap:clamp(40px,5vw,88px);align-items:center}
 .band--flip .text{order:2}
 .band--flip .stage{order:1}
@@ -246,7 +252,22 @@ body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--body);
   .lb-switch{display:flex}
   .lb-fig img{max-width:88vw;max-height:calc(100vh - 148px);max-height:calc(100dvh - 148px);height:auto}
 }
-@media (max-width:559px){ .newgrid{grid-template-columns:1fr} }
+@media (max-width:759px){
+  /* Two-up as far down as it stays legible. One-up means four consecutive
+     full-height phones, which is four screens of scrolling for four cards. */
+  .newgrid{grid-template-columns:repeat(2,1fr);gap:12px}
+  .ncard{padding:10px 10px 14px;border-radius:16px}
+  .ncard .shotwrap{margin-bottom:12px}
+  .ncard h3{font-size:1.0625rem}
+  .ncard p{font-size:12.5px;line-height:1.5}
+  .ncard .sticker{font-size:9px;padding:3px 7px;top:7px;left:7px}
+  .newband{padding-block:44px}
+  .newband h2{font-size:clamp(1.5rem,7vw,1.875rem)}
+  .newband .lede{font-size:14px}
+}
+/* 339, not 379: a 375px iPhone is the most common device that will open this
+   and it must get the two-up grid. Only a 320px-class screen falls to one. */
+@media (max-width:339px){ .newgrid{grid-template-columns:1fr} }
 
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{transition:none !important;animation:none !important}
@@ -367,7 +388,7 @@ function phone(role, p, side, i){
 }
 function buildBand(role, p, i, total){
   const flip = i % 2 === 1;
-  const hint = i === 0 ? '<p class="hint">Click either screen to enlarge.</p>' : '';
+  const hint = i === 0 ? '<p class="hint">Tap either screen to enlarge.</p>' : '';
   return `<section class="band${flip?' band--flip':''}" id="${role}-${p.key}">
     <div class="band-inner">
       <div class="text">
