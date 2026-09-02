@@ -101,8 +101,12 @@ body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--body);
 .ncard{background:rgba(250,248,246,.05);border:1px solid rgba(250,248,246,.14);
   border-radius:20px;padding:18px 18px 22px;transition:transform .22s,border-color .22s}
 .ncard .shotwrap{position:relative;margin:0 0 16px}
-.ncard .sticker{position:absolute;top:10px;left:10px;z-index:2;background:var(--crimson);color:#fff;
-  font-size:10px;font-weight:800;letter-spacing:.12em;padding:4px 9px;border-radius:999px}
+/* Inline beside the title, not laid over the screenshot: three of these four
+   screens put their own header in the top-left corner, so the badge was
+   covering the very thing the card exists to show. */
+.ncard .sticker{display:inline-block;vertical-align:middle;margin-left:9px;position:relative;top:-2px;
+  background:var(--crimson);color:#fff;font-family:var(--body);
+  font-size:9.5px;font-weight:800;letter-spacing:.12em;padding:4px 9px;border-radius:999px}
 .ncard h3{font-family:var(--head);font-weight:700;font-size:1.25rem;line-height:1.2;
   letter-spacing:-.02em;color:#faf8f6;margin:0 0 8px}
 .ncard p{font-size:14px;font-weight:500;line-height:1.55;color:rgba(250,248,246,.78);margin:0}
@@ -156,24 +160,45 @@ body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--body);
 .stage::before{content:"";position:absolute;inset:-4% 44% -6% -8%;pointer-events:none;z-index:0;
   background:radial-gradient(ellipse 62% 52% at 50% 62%, rgba(217,58,58,.16), transparent 70%)}
 .shot{position:relative;z-index:1;margin:0;display:flex;flex-direction:column;align-items:center;gap:10px}
-.lab{display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:800;letter-spacing:.13em}
-.lab.new{color:var(--crimson-dk);background:var(--canvas-2);border-radius:999px;padding:5px 10px}
+/* Both labels get the SAME box — same padding, same border, same height — or
+   the two phones below them start at different y and the pair reads crooked.
+   Only the fill and the colour differ. */
+.lab{display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:800;
+  letter-spacing:.13em;padding:5px 10px;border-radius:999px;border:1px solid transparent;
+  height:24px;line-height:1;white-space:nowrap}
+.lab.new{color:var(--crimson-dk);background:var(--canvas-2);border-color:rgba(217,58,58,.22)}
 .lab.new::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--crimson)}
-.lab.cur{color:var(--faint)}
+.lab.cur{color:var(--faint);background:transparent}
 .lab.cur::before{content:"";width:5px;height:5px;background:var(--hair)}
+/* Belt and braces: even if a label ever wraps, the frames stay on one line. */
+.stage{align-items:flex-end}
+.shot{justify-content:flex-end}
 .zoomwrap{position:relative;appearance:none;border:0;padding:0;background:none;cursor:zoom-in;display:block}
 .frame{--fp:calc(var(--pw)*.0303);--fr:calc(var(--pw)*.135);
   width:var(--pw);padding:var(--fp);border-radius:var(--fr);position:relative;
   transition:transform .22s,box-shadow .22s}
-.screen{aspect-ratio:660/1434;border-radius:calc(var(--fr) - var(--fp));overflow:hidden;
+.screen{aspect-ratio:660/1350;border-radius:calc(var(--fr) - var(--fp));overflow:hidden;
   background:linear-gradient(180deg,#efe9e3,#e4ded7);position:relative}
 .screen img{width:100%;height:100%;object-fit:cover;display:block}
 .screen.missing img{display:none}
 .screen.missing::after{content:"Capturing";position:absolute;inset:0;display:grid;place-items:center;
   font-family:var(--head);font-weight:800;font-size:.8rem;color:#b9afa5}
-.frame--new{background:linear-gradient(158deg,#3a3238 0%,#141115 34%,#0d0b0e 68%,#2a242a 100%);
-  box-shadow:inset 0 0 0 1px rgba(255,255,255,.10),0 2px 4px rgba(40,15,22,.06),
-             0 12px 24px rgba(40,15,22,.12),0 30px 52px -18px rgba(74,16,32,.26)}
+/* The redesign frame catches light: a bright top edge, a warm crimson halo,
+   and a soft sheen down the left rail. The screenshot itself is never covered —
+   the sheen sits on the FRAME, outside .screen, so no glass glare is laid over
+   the evidence. */
+.frame--new{background:linear-gradient(158deg,#4a4148 0%,#141115 34%,#0d0b0e 68%,#332b33 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.22),
+    inset 0 0 0 1px rgba(255,255,255,.12),
+    0 2px 4px rgba(40,15,22,.06),
+    0 12px 24px rgba(40,15,22,.12),
+    0 30px 52px -18px rgba(74,16,32,.26),
+    0 0 34px -6px rgba(217,58,58,.34),
+    0 0 90px -20px rgba(217,58,58,.30)}
+.frame--new::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:linear-gradient(112deg,rgba(255,255,255,.17) 0%,rgba(255,255,255,.05) 16%,
+             transparent 34%,transparent 100%)}
 .frame--cur{background:var(--canvas-2);box-shadow:0 0 0 1px var(--hair),0 6px 14px -9px rgba(74,16,32,.22)}
 .zbadge{position:absolute;top:7px;right:7px;z-index:3;font-size:14px;line-height:1;opacity:.4;
   color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.5);transition:opacity .2s;pointer-events:none}
@@ -251,7 +276,7 @@ body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--body);
   .ncard .shotwrap{margin-bottom:12px}
   .ncard h3{font-size:1.0625rem}
   .ncard p{font-size:12.5px;line-height:1.5}
-  .ncard .sticker{font-size:9px;padding:3px 7px;top:7px;left:7px}
+  .ncard .sticker{font-size:9px;padding:3px 7px;margin-left:7px}
   .newband{padding-block:44px}
   .newband h2{font-size:clamp(1.5rem,7vw,1.875rem)}
   .newband .lede{font-size:14px}
@@ -353,9 +378,9 @@ const PAIRS = {
 };
 const NEW = [
   {key:"conversations",   title:"Conversations",    note:"A direct thread with your mentor: share a scholarship, ask a question, keep the answer."},
-  {key:"pulse-ai",        title:"Pulse AI",         note:"An AI career coach inside the app, answering in P3’s voice and pointing back to real opportunities."},
+  {key:"pulse-ai",        title:"Pulse AI",         note:"An AI career coach inside the app. It opens with somewhere to start, not a blank box."},
   {key:"career-timeline", title:"Career Timeline",  note:"Education, experience and goals as one record the student owns and a mentor can read."},
-  {key:"pathway-discover",title:"Pathway Discover", note:"Career pathways ranked from what a student has already told P3, with the reasoning shown."},
+  {key:"pathway-discover",title:"Pathway Discover", note:"Pathways ranked from what a student has already told P3, surfaced on Home as Find your fit."},
 ];
 const ROLE_LABEL = {mentee:"MENTEE", mentor:"MENTOR"};
 const COUNT_WORD = {1:"One",2:"Two",3:"Three",4:"Four"};
@@ -373,7 +398,7 @@ function phone(role, p, side, i){
       <div class="frame frame--${isNew?'new':'cur'}">
         <span class="zbadge" aria-hidden="true">&#10530;</span>
         <div class="screen"><img src="${shot(role,p.key,side)}" alt="${p.label}, ${isNew?'redesign':"today’s app"}"
-          width="660" height="1434" decoding="async" draggable="false"
+          width="660" height="1350" decoding="async" draggable="false"
           ${eager?'fetchpriority="high"':'loading="lazy"'}
           onerror="this.parentNode.classList.add('missing')"></div>
       </div>
@@ -393,17 +418,16 @@ function buildPairCard(role, p, i, total){
 function buildNewCard(item){
   return `<article class="ncard" data-key="${item.key}">
     <div class="shotwrap">
-      <span class="sticker">NEW</span>
       <button class="zoomwrap" data-mode="single" data-key="${item.key}" data-label="${item.title}"
               aria-label="Enlarge ${item.title}">
         <div class="frame frame--new">
           <span class="zbadge" aria-hidden="true">&#10530;</span>
           <div class="screen"><img src="assets/shots/new/${item.key}.webp" alt="${item.title}"
-            width="660" height="1434" loading="lazy" decoding="async" draggable="false"></div>
+            width="660" height="1350" loading="lazy" decoding="async" draggable="false"></div>
         </div>
       </button>
     </div>
-    <h3>${item.title}</h3><p>${item.note}</p>
+    <h3>${item.title}<span class="sticker">NEW</span></h3><p>${item.note}</p>
   </article>`;
 }
 
