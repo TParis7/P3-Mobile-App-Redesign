@@ -19,7 +19,7 @@
 <meta property="og:url" content="https://tparis7.github.io/P3-Mobile-App-Redesign/">
 <meta property="og:title" content="P3 Mobile — the redesign, screen by screen">
 <meta property="og:description" content="Every screen rebuilt in the P3 web platform's design language, plus four surfaces the current app does not have.">
-<meta property="og:image" content="https://tparis7.github.io/P3-Mobile-App-Redesign/assets/og-image.png?v=2">
+<meta property="og:image" content="https://tparis7.github.io/P3-Mobile-App-Redesign/assets/og-image.png?v=3">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -27,7 +27,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="P3 Mobile — the redesign, screen by screen">
 <meta name="twitter:description" content="Every screen rebuilt in the P3 web platform's design language, plus four surfaces the current app does not have.">
-<meta name="twitter:image" content="https://tparis7.github.io/P3-Mobile-App-Redesign/assets/og-image.png?v=2">
+<meta name="twitter:image" content="https://tparis7.github.io/P3-Mobile-App-Redesign/assets/og-image.png?v=3">
 <title>P3 Mobile — the redesign, screen by screen</title>
 <style>
 /* Both faces are variable. font-stretch and optical sizing are declared because
@@ -177,7 +177,7 @@ body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--body);
 .frame{--fp:calc(var(--pw)*.0303);--fr:calc(var(--pw)*.135);
   width:var(--pw);padding:var(--fp);border-radius:var(--fr);position:relative;
   transition:transform .22s,box-shadow .22s}
-.screen{aspect-ratio:660/1350;border-radius:calc(var(--fr) - var(--fp));overflow:hidden;
+.screen{aspect-ratio:660/1360;border-radius:calc(var(--fr) - var(--fp));overflow:hidden;
   background:linear-gradient(180deg,#efe9e3,#e4ded7);position:relative}
 .screen img{width:100%;height:100%;object-fit:cover;display:block}
 .screen.missing img{display:none}
@@ -200,6 +200,11 @@ body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--body);
   background:linear-gradient(112deg,rgba(255,255,255,.17) 0%,rgba(255,255,255,.05) 16%,
              transparent 34%,transparent 100%)}
 .frame--cur{background:var(--canvas-2);box-shadow:0 0 0 1px var(--hair),0 6px 14px -9px rgba(74,16,32,.22)}
+/* A light touch only. Dimming the old app to flatter the new one is the one
+   thing that makes a comparison read as rigged, so this takes the edge off the
+   current app's saturated red without changing what is legible in it. Scale,
+   crop and framing stay identical between the two. */
+.frame--cur .screen img{filter:saturate(.88)}
 .zbadge{position:absolute;top:7px;right:7px;z-index:3;font-size:14px;line-height:1;opacity:.4;
   color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.5);transition:opacity .2s;pointer-events:none}
 .frame--cur .zbadge{color:var(--faint);text-shadow:none}
@@ -364,10 +369,10 @@ const PAIRS = {
     {key:"welcome",   label:"Welcome",       note:'One entry point for both roles, with <b>Apple and Google sign-in</b>.'},
     {key:"home",      label:"Home",          note:'<b>Ask a mentor comes first</b>, then progress, then what to explore. What a student does most is what the screen opens on.'},
     {key:"milestones",label:"Milestones",    note:'The Ascent: <b>a pathway you can see yourself climbing</b>, instead of a list with a progress bar.'},
-    {key:"mentors",   label:"Mentors",       note:'Your mentors first, then who we would match you with. <b>Real photographs, no invented descriptors.</b>'},
+    {key:"mentors",   label:"Mentors",       note:'Your mentors first, then who we would match you with. <b>Photographs and names, with the clutter stripped out.</b>'},
     {key:"community", label:"Community",     note:'<b>Thumbnail first</b>, real answers from mentors, across Featured, Latest and Following.'},
     {key:"opps",      label:"Opportunities", note:'Recommended for you, with <b>imagery and filters ported from the web platform</b>.'},
-    {key:"profile",   label:"Profile",       note:'One page: <b>who you are, the few things you reach for, the way out.</b>'},
+    {key:"profile",   label:"Profile",       note:'One page instead of a settings maze: <b>who you are, your pathway, and the few things you actually reach for.</b>'},
   ],
   mentor: [
     {key:"home",      label:"Home",          note:'The current app opens a mentor on their own profile. <b>The redesign opens on their mentees&rsquo; progress</b> and the questions still waiting.'},
@@ -398,7 +403,7 @@ function phone(role, p, side, i){
       <div class="frame frame--${isNew?'new':'cur'}">
         <span class="zbadge" aria-hidden="true">&#10530;</span>
         <div class="screen"><img src="${shot(role,p.key,side)}" alt="${p.label}, ${isNew?'redesign':"today’s app"}"
-          width="660" height="1350" decoding="async" draggable="false"
+          width="660" height="1360" decoding="async" draggable="false"
           ${eager?'fetchpriority="high"':'loading="lazy"'}
           onerror="this.parentNode.classList.add('missing')"></div>
       </div>
@@ -423,7 +428,7 @@ function buildNewCard(item){
         <div class="frame frame--new">
           <span class="zbadge" aria-hidden="true">&#10530;</span>
           <div class="screen"><img src="assets/shots/new/${item.key}.webp" alt="${item.title}"
-            width="660" height="1350" loading="lazy" decoding="async" draggable="false"></div>
+            width="660" height="1360" loading="lazy" decoding="async" draggable="false"></div>
         </div>
       </button>
     </div>
