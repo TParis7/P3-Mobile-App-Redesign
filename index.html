@@ -127,7 +127,6 @@ body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--body);
 .seg button{position:relative;z-index:1;min-height:44px;appearance:none;border:0;background:none;
   cursor:pointer;font:800 .875rem var(--body);color:var(--faint);transition:color .2s}
 .seg button[aria-selected="true"]{color:#fff}
-.seg button span{font-size:.72em;opacity:.6;margin-left:6px}
 #chips{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto}
 #chips a{font-size:11.5px;font-weight:700;letter-spacing:.02em;color:var(--faint);
   text-decoration:none;padding:6px 11px;border-radius:999px;background:rgba(74,16,32,.05)}
@@ -309,7 +308,7 @@ body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--body);
     <div>
       <h1>P3 Mobile &mdash; the redesign, screen by screen</h1>
       <p class="sub">Every screen rebuilt in the P3 web platform&rsquo;s design language. September 2026, on TestFlight with the beta team.</p>
-      <p class="jump"><a href="#new">Plus <b id="jump-n">four</b> capabilities the current app does not have <span aria-hidden="true">&darr;</span></a></p>
+      <p class="jump"><a href="#new">New Features <span aria-hidden="true">&darr;</span></a></p>
     </div>
   </div>
 </header>
@@ -320,8 +319,8 @@ body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--body);
   <div class="bar-inner">
     <img class="mark" src="assets/p3-logo-horizontal.png" alt="P3">
     <div class="seg" id="seg" role="tablist" data-role="mentee" aria-label="Role">
-      <button role="tab" id="tab-mentee" aria-selected="true" aria-controls="panel-mentee" tabindex="0">Mentee<span id="c-mentee"></span></button>
-      <button role="tab" id="tab-mentor" aria-selected="false" aria-controls="panel-mentor" tabindex="-1">Mentor<span id="c-mentor"></span></button>
+      <button role="tab" id="tab-mentee" aria-selected="true" aria-controls="panel-mentee" tabindex="0">Mentee</button>
+      <button role="tab" id="tab-mentor" aria-selected="false" aria-controls="panel-mentor" tabindex="-1">Mentor</button>
     </div>
     <nav id="chips" aria-label="Contents"></nav>
   </div>
@@ -443,8 +442,6 @@ for (const role of ["mentee","mentor"]) {
     `<div class="pairgrid">` + list.map((p,i) => buildPairCard(role,p,i,list.length)).join("") + `</div>`;
 }
 document.getElementById("newgrid").innerHTML = NEW.map(buildNewCard).join("");
-document.getElementById("c-mentee").textContent = PAIRS.mentee.length;
-document.getElementById("c-mentor").textContent = PAIRS.mentor.length;
 
 // The new cards are the only claim that can go stale: a capture that 404s
 // removes its card and rewrites every number that counted it.
@@ -457,10 +454,9 @@ function recount(){
 }
 // The header claim and the section heading are the same number, written from
 // the same array, so a capture that fails to load cannot leave one of them lying.
-function writeScore(newCount){
-  const el = document.getElementById("jump-n");
-  if (el) el.textContent = (COUNT_WORD[newCount] || newCount).toLowerCase();
-}
+// The header link is a plain label now, so only the section heading carries a
+// count and there is nothing left that could disagree with it.
+function writeScore(){}
 document.querySelectorAll("#newgrid img").forEach(img => {
   img.addEventListener("error", () => { img.closest(".ncard")?.remove(); recount(); });
 });
