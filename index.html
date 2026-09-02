@@ -3,8 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
 <meta name="robots" content="noindex, nofollow">
-<meta name="description" content="The P3 mobile app as it ships today and the redesign, side by side, screen by screen. Real captures of both builds.">
+<meta name="description" content="The P3 mobile app rebuilt in the web platform's design language, shown beside the app it replaces, plus four capabilities the current app does not have.">
 <meta name="theme-color" content="#4a1020">
 
 <link rel="icon" href="favicon.ico" sizes="any">
@@ -16,185 +17,524 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Pulse of Perseverance Project">
 <meta property="og:url" content="https://tparis7.github.io/P3-Mobile-App-Redesign/">
-<meta property="og:title" content="P3 Mobile — Redesign vs Current">
-<meta property="og:description" content="The P3 mobile app as it ships today and the redesign, side by side, screen by screen.">
+<meta property="og:title" content="P3 Mobile — the redesign, screen by screen">
+<meta property="og:description" content="Every screen rebuilt in the P3 web platform's design language, plus four surfaces the current app does not have.">
 <meta property="og:image" content="https://tparis7.github.io/P3-Mobile-App-Redesign/assets/og-image.png?v=2">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="P3 Mobile — Redesign vs Current">
-<meta name="twitter:description" content="The P3 mobile app as it ships today and the redesign, side by side, screen by screen.">
+<meta name="twitter:title" content="P3 Mobile — the redesign, screen by screen">
+<meta name="twitter:description" content="Every screen rebuilt in the P3 web platform's design language, plus four surfaces the current app does not have.">
 <meta name="twitter:image" content="https://tparis7.github.io/P3-Mobile-App-Redesign/assets/og-image.png?v=2">
-<title>P3 Mobile — Redesign vs Current</title>
+<title>P3 Mobile — the redesign, screen by screen</title>
 <style>
+/* Both faces are variable. font-stretch and optical sizing are declared because
+   Bricolage's default optical size is 96, which renders 11px caps from the
+   display master and makes small labels look broken. */
 @font-face{font-family:"Bricolage Grotesque";src:url("assets/fonts/BricolageGrotesque.ttf") format("truetype");
-           font-weight:200 800;font-display:swap;}
+  font-weight:200 800;font-stretch:75% 100%;font-display:swap;}
 @font-face{font-family:"Plus Jakarta Sans";src:url("assets/fonts/PlusJakartaSans.ttf") format("truetype");
-           font-weight:200 800;font-display:swap;}
+  font-weight:200 800;font-display:swap;}
+
 :root{
-  --canvas:#ece6df; --card:#faf8f6; --hair:#e0d9d1;
-  --ink:#1a1a1a; --deep:#4a1020; --muted:#5f5954; --faint:#6b6560;
+  font-optical-sizing:auto;
+  --canvas:#ece6df; --canvas-2:#f4f1ee; --card:#faf8f6;
+  --hair:#ddd4ca; --hair-soft:rgba(74,16,32,.10);
+  --ink:#1a1a1a; --deep:#4a1020; --muted:#4a453f; --faint:#6b5f52;
   --crimson:#d93a3a; --crimson-dk:#b82e2e;
   --head:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
   --body:"Plus Jakarta Sans",ui-sans-serif,system-ui,-apple-system,sans-serif;
+  --s1:8px; --s2:12px; --s3:16px; --s4:24px; --s5:40px; --s6:64px;
 }
-*,*::before,*::after{box-sizing:border-box;}
-body{margin:0;background:#f4f1ee;color:var(--ink);font-family:var(--body);-webkit-font-smoothing:antialiased;}
-.page{max-width:1560px;margin:0 auto;padding:40px 48px 30px;}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none !important}
+img{-webkit-user-drag:none;user-select:none}
+:focus-visible{outline:2px solid var(--crimson);outline-offset:3px;border-radius:4px}
+body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--body);
+     -webkit-font-smoothing:antialiased}
 
-/* ---- header, matching the App Store preview page ---- */
-.we-row{display:flex;align-items:center;gap:30px;background:rgba(255,255,255,.08);
-        border:2.5px solid rgba(255,255,255,.55);border-radius:32px;padding:26px 38px;}
-.store-icon{width:118px;height:118px;border-radius:27px;flex:none;box-shadow:0 12px 40px rgba(0,0,0,.10);}
-.wt h1{font-family:var(--head);font-size:clamp(1.5rem,2.7vw,2.15rem);font-weight:800;
-       letter-spacing:-.03em;color:var(--deep);margin:0 0 4px;line-height:1.1;}
-.wt .sub{font-size:0.918rem;color:#6b5f52;font-weight:600;max-width:78ch;}
-.wt .meta{font-size:0.775rem;color:#6b6560;font-weight:600;margin-top:8px;}
-.wt .meta b{color:var(--crimson);font-weight:800;}
+/* ---------------- masthead ---------------- */
+.mast{background:var(--canvas-2);padding:clamp(40px,5vw,72px) 0 clamp(32px,4vw,56px)}
+.wrap{max-width:1400px;margin:0 auto;padding-inline:clamp(20px,4vw,64px)}
+.mast-row{display:flex;align-items:flex-start;gap:clamp(18px,2.4vw,30px)}
+.mast-icon{width:88px;height:88px;border-radius:20px;flex:none;box-shadow:0 12px 34px rgba(40,15,22,.14)}
+.mast h1{font-family:var(--head);font-weight:800;font-size:clamp(2rem,4.2vw,3.25rem);
+  line-height:.98;letter-spacing:-.035em;color:var(--deep);margin:0}
+.mast .sub{font-size:1rem;font-weight:500;line-height:1.55;color:var(--faint);max-width:74ch;margin:14px 0 0}
+.mast .status{font-size:13px;font-weight:600;color:var(--faint);margin:10px 0 0}
+.score{display:flex;gap:var(--s6);flex-wrap:wrap;margin-top:var(--s5);padding-top:var(--s4);
+  border-top:1px solid var(--hair)}
+.score div+div{border-left:1px solid var(--hair);padding-left:var(--s5)}
+.score b{display:block;font-family:var(--head);font-weight:800;
+  font-size:clamp(2.25rem,3.6vw,3rem);line-height:1;color:var(--deep)}
+.score div.hot b{color:var(--crimson)}
+.score span{display:block;font-size:13px;font-weight:600;color:var(--faint);margin-top:6px}
 
-/* ---- the TLDR ---- */
-.summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:18px 0 0;}
-.sum{background:rgba(255,255,255,.55);border:1px solid #e4ded7;border-radius:18px;padding:15px 17px 16px;}
-.sum b{display:block;font-family:var(--head);font-size:0.98rem;font-weight:800;color:var(--deep);
-       letter-spacing:-.02em;margin-bottom:4px;}
-.sum span{font-size:0.8rem;color:#5f5954;line-height:1.48;font-weight:500;}
+/* ---------------- new capabilities band ---------------- */
+.newband{border-top:3px solid var(--crimson);padding-block:clamp(56px,7vw,104px);
+  background:
+    radial-gradient(ellipse 70% 46% at 50% -8%, rgba(217,58,58,.30), transparent 62%),
+    linear-gradient(180deg,#4a1020 0%,#3a0d19 60%,#2d0812 100%);}
+.newband .kicker{font-size:11px;font-weight:800;letter-spacing:.16em;
+  color:rgba(250,248,246,.62);margin:0 0 14px;text-align:center}
+.newband h2{font-family:var(--head);font-weight:800;font-size:clamp(1.875rem,3.6vw,2.875rem);
+  line-height:1.05;letter-spacing:-.03em;color:#faf8f6;margin:0 auto;max-width:58ch;text-align:center}
+.newband h2 .hl{color:var(--crimson)}
+.newband .lede{font-size:15px;font-weight:500;line-height:1.6;color:rgba(250,248,246,.72);
+  max-width:60ch;margin:16px auto 0;text-align:center}
+.newgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(16px,1.8vw,26px);
+  margin-top:clamp(36px,4vw,56px)}
+.ncard{background:rgba(250,248,246,.05);border:1px solid rgba(250,248,246,.14);
+  border-radius:20px;padding:18px 18px 22px;transition:transform .22s,border-color .22s}
+.ncard .shotwrap{position:relative;margin:0 0 16px}
+.ncard .sticker{position:absolute;top:10px;left:10px;z-index:2;background:var(--crimson);color:#fff;
+  font-size:10px;font-weight:800;letter-spacing:.12em;padding:4px 9px;border-radius:999px}
+.ncard h3{font-family:var(--head);font-weight:700;font-size:1.25rem;line-height:1.2;
+  letter-spacing:-.02em;color:#faf8f6;margin:0 0 8px}
+.ncard p{font-size:14px;font-weight:500;line-height:1.55;color:rgba(250,248,246,.78);margin:0}
 
-/* ---- controls: prominent role toggle ---- */
-.bar{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin:24px 0 0;}
-.roleseg{display:inline-flex;background:#e4ded7;border-radius:50px;padding:5px;gap:4px;
-         box-shadow:inset 0 1px 3px rgba(40,15,22,.08);}
-.roleseg button{appearance:none;border:0;cursor:pointer;font-family:var(--body);
-  font-size:0.855rem;font-weight:800;padding:11px 30px;border-radius:50px;background:none;
-  color:#6b5f52;transition:all .2s ease;letter-spacing:-.01em;display:flex;align-items:center;gap:8px;}
-.roleseg button[aria-pressed="true"]{background:var(--deep);color:#fff;box-shadow:0 4px 14px rgba(74,16,32,.28);}
-.roleseg button[aria-pressed="true"] .dot{background:var(--crimson);}
-.roleseg .dot{width:7px;height:7px;border-radius:50%;background:#b9afa5;}
-.hint{font-size:0.775rem;color:#6b6560;font-weight:600;}
-.hint b{color:#6b5f52;}
+/* ---------------- sticky bar ---------------- */
+.bar{position:sticky;top:0;z-index:40;background:var(--card);border-bottom:1px solid transparent;
+  transition:box-shadow .2s,border-color .2s}
+.bar.is-stuck{border-bottom-color:var(--hair);box-shadow:0 6px 20px rgba(40,15,22,.07)}
+.bar-inner{max-width:1400px;margin:0 auto;padding:10px clamp(20px,4vw,64px);
+  display:flex;align-items:center;gap:clamp(16px,2vw,28px);min-height:64px}
+.bar .mark{height:26px;flex:none}
+.seg{position:relative;display:grid;grid-template-columns:1fr 1fr;width:clamp(240px,26vw,320px);
+  background:rgba(74,16,32,.07);border-radius:999px;padding:4px;isolation:isolate;flex:none}
+.seg::before{content:"";position:absolute;z-index:0;top:4px;left:4px;width:calc(50% - 4px);
+  height:calc(100% - 8px);border-radius:999px;background:var(--deep);
+  box-shadow:0 3px 12px rgba(74,16,32,.28);transition:transform .32s cubic-bezier(.65,0,.35,1)}
+.seg[data-role="mentor"]::before{transform:translateX(100%)}
+.seg button{position:relative;z-index:1;min-height:44px;appearance:none;border:0;background:none;
+  cursor:pointer;font:800 .875rem var(--body);color:var(--faint);transition:color .2s}
+.seg button[aria-selected="true"]{color:#fff}
+.seg button span{font-size:.72em;opacity:.6;margin-left:6px}
+#chips{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto}
+#chips a{font-size:11.5px;font-weight:700;letter-spacing:.02em;color:var(--faint);
+  text-decoration:none;padding:6px 11px;border-radius:999px;background:rgba(74,16,32,.05)}
+#chips a:hover{color:var(--deep);background:rgba(74,16,32,.10)}
 
-/* ---- pairs ---- */
-.pairs{display:grid;grid-template-columns:repeat(auto-fill,minmax(600px,1fr));gap:26px 32px;padding:24px 0 10px;}
-.pair{background:rgba(255,255,255,.45);border:1px solid #e4ded7;border-radius:26px;padding:18px 20px 22px;}
-.pair-head{display:flex;align-items:baseline;gap:10px;margin:0 4px 14px;flex-wrap:wrap;}
-.pair-head .n{font-family:var(--head);font-size:0.85rem;font-weight:800;color:var(--crimson);}
-.pair-head h2{font-family:var(--head);font-size:1.18rem;font-weight:800;color:var(--deep);margin:0;letter-spacing:-.022em;}
-.pair-head p{margin:0 0 0 auto;font-size:0.79rem;color:#6b5f52;font-weight:600;line-height:1.4;
-             text-align:right;max-width:56%;}
-.duo{display:flex;gap:18px;justify-content:center;}
-.side{display:flex;flex-direction:column;align-items:center;gap:10px;min-width:0;}
-.tag{font-size:0.66rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;padding:5px 12px;border-radius:50px;}
-.tag.cur{background:#e4ded7;color:#6b5f52;}
-.tag.new{background:var(--deep);color:#fff;}
+/* ---------------- pair bands ---------------- */
+.band{padding-block:clamp(48px,5.5vw,84px)}
+.band:nth-of-type(odd){background:var(--canvas-2)}
+.band:nth-of-type(even){background:var(--canvas)}
+.band-inner{max-width:1400px;margin:0 auto;padding-inline:clamp(20px,4vw,64px);
+  display:grid;grid-template-columns:minmax(320px,1fr) auto;gap:clamp(40px,5vw,88px);align-items:center}
+.band--flip .text{order:2}
+.band--flip .stage{order:1}
+.text{justify-self:start;max-width:36ch}
+.text .kicker{font-size:11px;font-weight:800;letter-spacing:.14em;color:var(--faint);margin:0 0 14px}
+.text .kicker i{font-style:normal;color:var(--crimson)}
+.text h2{font-family:var(--head);font-weight:800;font-size:clamp(1.75rem,2.9vw,2.5rem);
+  line-height:1.03;letter-spacing:-.032em;color:var(--deep);margin:0}
+.rule{border:0;height:2px;width:40px;background:var(--crimson);margin:18px 0}
+.note{font-size:clamp(1rem,1.05vw,1.0625rem);font-weight:500;line-height:1.6;color:var(--muted);margin:0}
+.note b{font-weight:700;color:var(--deep)}
+.hint{font-size:11.5px;font-weight:600;color:var(--faint);text-align:center;margin:18px 0 0}
 
-/* ---- phone: an iPhone 17 Pro Max capture (1320x2868) inside a bezel ---- */
-.phone{width:280px;max-width:42vw;aspect-ratio:280/590;border-radius:40px;background:#131013;padding:8px;
-       box-shadow:0 22px 64px rgba(40,15,22,.20),0 3px 10px rgba(0,0,0,.10);}
-.screen{width:100%;height:100%;border-radius:32px;overflow:hidden;position:relative;background:#e9e4de;}
-.screen img{width:100%;height:100%;object-fit:cover;display:block;}
-.screen.missing img{display:none;}
+.stage{position:relative;display:flex;gap:26px;align-items:flex-start}
+.stage::before{content:"";position:absolute;inset:-6% 42% -8% -12%;pointer-events:none;z-index:0;
+  background:radial-gradient(ellipse 62% 52% at 50% 62%, rgba(217,58,58,.20), transparent 70%)}
+.shot{position:relative;z-index:1;margin:0;display:flex;flex-direction:column;align-items:center;gap:12px}
+.lab{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:800;letter-spacing:.14em}
+.lab.new{color:var(--crimson-dk);background:var(--card);border-radius:999px;padding:6px 12px;
+  box-shadow:0 4px 12px rgba(74,16,32,.14)}
+.lab.new::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--crimson)}
+.lab.cur{color:var(--faint)}
+.lab.cur::before{content:"";width:5px;height:5px;background:var(--hair)}
+.zoomwrap{position:relative;appearance:none;border:0;padding:0;background:none;cursor:zoom-in;display:block}
+.frame{--fp:calc(var(--pw)*.0303);--fr:calc(var(--pw)*.135);
+  width:var(--pw);padding:var(--fp);border-radius:var(--fr);position:relative;
+  transition:transform .22s,box-shadow .22s,background .22s}
+.screen{aspect-ratio:660/1434;border-radius:calc(var(--fr) - var(--fp));overflow:hidden;
+  background:linear-gradient(180deg,#efe9e3,#e4ded7);position:relative}
+.screen img{width:100%;height:100%;object-fit:cover;display:block}
+.screen.missing img{display:none}
 .screen.missing::after{content:"Capturing";position:absolute;inset:0;display:grid;place-items:center;
-  font-family:var(--head);font-weight:800;font-size:0.9rem;color:#b9afa5;letter-spacing:.02em;}
+  font-family:var(--head);font-weight:800;font-size:.85rem;color:#b9afa5}
+.frame--new{background:linear-gradient(158deg,#3a3238 0%,#141115 34%,#0d0b0e 68%,#2a242a 100%);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.10),0 2px 4px rgba(40,15,22,.06),
+             0 14px 28px rgba(40,15,22,.12),0 44px 76px -18px rgba(74,16,32,.28)}
+.frame--cur{background:var(--card);box-shadow:0 0 0 1px var(--hair),0 8px 18px -10px rgba(74,16,32,.22)}
+.zbadge{position:absolute;top:8px;right:8px;z-index:3;font-size:16px;line-height:1;opacity:.45;
+  color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.5);transition:opacity .2s;pointer-events:none}
+.frame--cur .zbadge{color:var(--faint);text-shadow:none}
 
-footer{border-top:1px solid #e4ded7;margin-top:18px;padding:24px 0 54px;}
-footer p{font-size:0.775rem;color:#5f5954;line-height:1.62;margin:0 0 9px;max-width:86ch;}
-footer b{color:#6b5f52;}
-footer a{color:var(--crimson-dk);font-weight:700;text-decoration:none;}
-footer a:hover{text-decoration:underline;}
+/* ---------------- closing ---------------- */
+.closing{background:var(--card);border-top:1px solid var(--hair);padding-block:clamp(40px,4.5vw,64px)}
+.closing p{font-family:var(--head);font-weight:800;font-size:clamp(1.25rem,2vw,1.75rem);
+  line-height:1.25;letter-spacing:-.025em;color:var(--deep);margin:0;max-width:52ch}
+.closing p .hl{color:var(--crimson)}
+.closing .meta{font-family:var(--body);font-size:13px;font-weight:600;color:var(--faint);
+  margin-top:16px;max-width:70ch}
+.closing a{color:var(--crimson-dk);font-weight:700;text-decoration:none}
+.closing a:hover{text-decoration:underline}
 
-@media (max-width:760px){
-  .page{padding:26px 14px;}
-  .store-icon{width:76px;height:76px;border-radius:18px;}
-  .we-row{padding:18px;gap:16px;}
-  .pairs{grid-template-columns:1fr;gap:18px;}
-  .pair{padding:14px 12px 16px;border-radius:20px;}
-  .pair-head p{flex-basis:100%;margin-left:0;text-align:left;max-width:none;}
-  .duo{gap:10px;}
-  .phone{border-radius:26px;padding:5px;}
-  .screen{border-radius:21px;}
+/* ---------------- lightbox ---------------- */
+.lb{position:fixed;inset:0;z-index:90;background:rgba(26,18,20,.84);display:grid;place-items:center;
+  padding:clamp(16px,3vw,40px)}
+.lb-x{position:absolute;top:16px;right:18px;appearance:none;border:0;background:rgba(250,248,246,.12);
+  color:#fff;font-size:26px;line-height:1;width:44px;height:44px;border-radius:50%;cursor:pointer}
+.lb-title{position:absolute;top:22px;left:24px;margin:0;color:rgba(250,248,246,.82);
+  font-size:12px;font-weight:800;letter-spacing:.14em}
+.lb-switch{display:none;gap:8px;margin-bottom:16px;justify-content:center}
+.lb-switch button{appearance:none;border:0;min-height:44px;padding:0 18px;border-radius:999px;
+  font:800 12px var(--body);letter-spacing:.08em;background:rgba(250,248,246,.14);color:#fff;cursor:pointer}
+.lb-switch button[aria-pressed="true"]{background:var(--crimson)}
+.lb-row{display:flex;gap:24px;align-items:center}
+.lb-fig{margin:0;text-align:center}
+.lb-fig img{max-height:78vh;max-height:78dvh;width:auto;border-radius:16px;display:block;
+  box-shadow:0 0 0 1px rgba(255,255,255,.14),0 30px 60px rgba(0,0,0,.5)}
+.lb-fig figcaption{color:rgba(250,248,246,.72);font-size:11px;font-weight:800;letter-spacing:.14em;margin-top:12px}
+.lb[data-mode="single"] .lb-fig[data-side="current"]{display:none}
+.lb[data-mode="single"] .lb-switch{display:none}
+
+/* ---------------- reveal ---------------- */
+.text,.shot--cur,.shot--new,.stage::before{will-change:opacity,transform}
+.band .text{opacity:0;transform:translateY(14px);transition:opacity .46s cubic-bezier(.22,.61,.36,1),transform .46s cubic-bezier(.22,.61,.36,1)}
+.band .shot--cur{opacity:0;transform:translateY(18px);transition:opacity .5s cubic-bezier(.22,.61,.36,1) .07s,transform .5s cubic-bezier(.22,.61,.36,1) .07s}
+.band .shot--new{opacity:0;transform:translateY(26px) scale(.985);transition:opacity .56s cubic-bezier(.16,.84,.3,1) .13s,transform .56s cubic-bezier(.16,.84,.3,1) .13s}
+.band .stage::before{opacity:0;transition:opacity .7s ease .18s}
+.band.is-in .text,.band.is-in .shot--cur,.band.is-in .shot--new{opacity:1;transform:none}
+.band.is-in .stage::before{opacity:1}
+.band.no-anim .text,.band.no-anim .shot--cur,.band.no-anim .shot--new,.band.no-anim .stage::before{transition:none}
+
+@media (hover:hover) and (pointer:fine){
+  .zoomwrap:hover .frame--new{transform:translateY(-3px);
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.10),0 2px 4px rgba(40,15,22,.06),
+               0 14px 28px rgba(40,15,22,.12),0 56px 92px -20px rgba(74,16,32,.34)}
+  .zoomwrap:hover .frame--cur{box-shadow:0 0 0 1px rgba(217,58,58,.5),0 8px 18px -10px rgba(74,16,32,.22)}
+  .zoomwrap:hover .zbadge{opacity:1}
+  .ncard:hover{transform:translateY(-4px);border-color:rgba(250,248,246,.26)}
+}
+
+/* ---------------- breakpoints ---------------- */
+.stage{--pw:clamp(238px,17.5vw,292px)}
+@media (max-width:1239px){
+  .stage{--pw:min(clamp(210px,17vw,238px),calc((92vh - 120px)/2.1016));gap:24px}
+  .band-inner{gap:48px}
+  .text{max-width:32ch}
+}
+@media (max-width:1039px){ #chips{display:none} }
+@media (max-width:999px){
+  .band-inner{grid-template-columns:1fr;gap:32px;justify-items:center}
+  .band--flip .text,.band--flip .stage{order:initial}
+  .text{justify-self:center;text-align:center;max-width:46ch}
+  .rule{margin-inline:auto}
+  .stage{--pw:min(clamp(200px,26vw,250px),calc((92vh - 120px)/2.1016));gap:22px}
+  .band{padding-block:56px}
+  .band+.band .band-inner{border-top:1px solid var(--hair-soft);padding-top:40px}
+  .newgrid{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:759px){
+  .mast-icon{width:64px;height:64px;border-radius:16px}
+  /* The rules divide figures sitting on ONE line. Once they wrap they read as
+     indentation instead, so the divider becomes a horizontal rule and the
+     column goes flush left. */
+  .score{gap:20px;flex-direction:column;align-items:flex-start}
+  .score div+div{border-left:0;padding-left:0;border-top:1px solid var(--hair);padding-top:20px;width:100%}
+  .stage{--pw:clamp(132px,calc((100vw - 54px)/2),190px);gap:14px}
+  .band{padding-block:40px}
+  .bar-inner{min-height:52px;gap:12px}
+  .bar .mark{display:none}
+  .lb-row{display:block}
+  .lb-fig{display:none}
+  .lb-fig.is-active{display:block}
+  .lb-switch{display:flex}
+  .lb-fig img{max-width:88vw;max-height:calc(100vh - 148px);max-height:calc(100dvh - 148px);height:auto}
+}
+@media (max-width:559px){ .newgrid{grid-template-columns:1fr} }
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition:none !important;animation:none !important}
+  .band .text,.band .shot--cur,.band .shot--new{opacity:1;transform:none}
+  .band .stage::before{opacity:1}
 }
 </style>
 </head>
 <body>
-<div class="page">
 
-  <div class="we-row">
-    <img class="store-icon" src="assets/app-icon.png" alt="P3 app icon">
-    <div class="wt">
-      <h1>P3 Mobile &mdash; Redesign vs Current</h1>
-      <div class="sub">Real screens from both builds, side by side. Same flows, same navigation, repainted in the P3 web platform's design language.</div>
-      <div class="meta"><b>Left:</b> the app as it ships today &middot; <b>Right:</b> the redesign, on TestFlight with the beta team now</div>
+<header class="mast">
+  <div class="wrap mast-row">
+    <img class="mast-icon" src="assets/app-icon.png" alt="">
+    <div>
+      <h1>P3 Mobile &mdash; the redesign, screen by screen</h1>
+      <p class="sub">Every screen rebuilt in the P3 web platform&rsquo;s design language, plus four surfaces the current app does not have.</p>
+      <p class="status">September 2026 &middot; TestFlight build 1.3.0 with the beta team, reading production data.</p>
+      <div class="score" id="score"></div>
     </div>
   </div>
+</header>
 
-  <div class="summary">
-    <div class="sum"><b>What changed</b><span>The web platform's visual language: its type, color, cards and glass. Flows and navigation are untouched, so nothing has to be relearned.</span></div>
-    <div class="sum"><b>What is new</b><span>Opportunity imagery and filters, the Ascent milestone view, and a Home that leads with asking a mentor. All three already proven on the web platform.</span></div>
-    <div class="sum"><b>Where it stands</b><span>On TestFlight as build 1.3.0 with the beta team, reading production data, so testers sign in with their real accounts.</span></div>
-    <div class="sum"><b>What comes next</b><span>Beta feedback, then it replaces the app in the App Store.</span></div>
+<section class="newband" id="new">
+  <div class="wrap">
+    <p class="kicker">NEW IN THE REDESIGN</p>
+    <h2 id="new-h2">Four things the current app <span class="hl">cannot do at all</span>.</h2>
+    <p class="lede">A repaint cannot add a feature. These four surfaces have no counterpart in the app on the App Store today.</p>
+    <div class="newgrid" id="newgrid"></div>
   </div>
+</section>
 
-  <div class="bar">
-    <div class="roleseg" role="group" aria-label="Role">
-      <button id="r-mentee" aria-pressed="true"><span class="dot"></span>Mentee</button>
-      <button id="r-mentor" aria-pressed="false"><span class="dot"></span>Mentor</button>
+<div id="sentinel" aria-hidden="true"></div>
+
+<div class="bar" id="bar">
+  <div class="bar-inner">
+    <img class="mark" src="assets/p3-logo-horizontal.png" alt="P3">
+    <div class="seg" id="seg" role="tablist" data-role="mentee" aria-label="Role">
+      <button role="tab" id="tab-mentee" aria-selected="true" aria-controls="panel-mentee" tabindex="0">Mentee<span id="c-mentee"></span></button>
+      <button role="tab" id="tab-mentor" aria-selected="false" aria-controls="panel-mentor" tabindex="-1">Mentor<span id="c-mentor"></span></button>
     </div>
-    <div class="hint">Every pair is the <b>same screen in both builds</b>, captured on the same device at the default text size.</div>
+    <nav id="chips" aria-label="Contents"></nav>
   </div>
+</div>
 
-  <div class="pairs" id="pairs"></div>
+<main>
+  <section class="panel" id="panel-mentee" role="tabpanel" aria-labelledby="tab-mentee"></section>
+  <section class="panel" id="panel-mentor" role="tabpanel" aria-labelledby="tab-mentor" hidden></section>
+</main>
 
-  <footer>
-    <p><b>About the captures.</b> Every pair is a real screenshot of both builds on an iPhone 17 Pro Max at the default text size, showing the same account and the same data, so every difference on this page is design rather than content. The mentee pairs were captured against production: the only people who appear are mentors, who are listed on the public registry. The mentor pairs were captured against staging with test accounts, so no real student appears anywhere on this page.</p>
-    <p>The original concept mockups this page grew out of are kept at <a href="concept.html">concept.html</a>. The live app: <a href="https://apps.apple.com/us/app/p3-pulse-of-perseverance/id6478132244">P3: Pulse of Perseverance on the App Store</a>.</p>
-  </footer>
+<section class="closing">
+  <div class="wrap">
+    <p>Same flows, same navigation, <span class="hl">repainted</span> &mdash; and four capabilities that simply were not there before.</p>
+    <p class="meta">The concept mockups this page grew out of are kept at <a href="concept.html">concept.html</a>. The app on the store today: <a href="https://apps.apple.com/us/app/p3-pulse-of-perseverance/id6478132244">P3: Pulse of Perseverance</a>.</p>
+  </div>
+</section>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Screen comparison" data-mode="pair">
+  <button class="lb-x" id="lb-x" aria-label="Close">&times;</button>
+  <p class="lb-title" id="lb-title"></p>
+  <div>
+    <div class="lb-switch" id="lb-switch" role="group" aria-label="Which build">
+      <button data-side="redesign" aria-pressed="true">Redesign</button>
+      <button data-side="current" aria-pressed="false">Today&rsquo;s app</button>
+    </div>
+    <div class="lb-row">
+      <figure class="lb-fig is-active" data-side="redesign"><img alt=""><figcaption>Redesign</figcaption></figure>
+      <figure class="lb-fig" data-side="current"><img alt=""><figcaption>Today&rsquo;s app</figcaption></figure>
+    </div>
+  </div>
 </div>
 
 <script>
-/* One entry per pair. Images live at assets/shots/<role>/<key>-<current|redesign>.webp;
-   a missing image shows a quiet "Capturing" tile rather than breaking the layout. */
 const PAIRS = {
   mentee: [
-    {key:"welcome",   label:"Welcome",       note:"One entry point for both roles, with Apple and Google sign-in."},
-    {key:"home",      label:"Home",          note:"Ask a mentor, then progress, then what to explore. What a student does most comes first."},
-    {key:"milestones",label:"Milestones",    note:"The Ascent: a pathway you can see yourself climbing, instead of a list with a progress bar."},
-    {key:"mentors",   label:"Mentors",       note:"Your mentors first, then who we would match you with. Real photographs, no invented descriptors."},
-    {key:"community", label:"Community",     note:"Real answers from mentors, thumbnail first, across Featured, Latest and Following."},
-    {key:"opps",      label:"Opportunities", note:"Recommended for you, with imagery and filters ported from the web platform."},
-    {key:"profile",   label:"Profile",       note:"One page: who you are, the few things you reach for, the way out."},
+    {key:"welcome",   label:"Welcome",       note:'One entry point for both roles, with <b>Apple and Google sign-in</b>.'},
+    {key:"home",      label:"Home",          note:'<b>Ask a mentor comes first</b>, then progress, then what to explore. What a student does most is what the screen opens on.'},
+    {key:"milestones",label:"Milestones",    note:'The Ascent: <b>a pathway you can see yourself climbing</b>, instead of a list with a progress bar.'},
+    {key:"mentors",   label:"Mentors",       note:'Your mentors first, then who we would match you with. <b>Real photographs, no invented descriptors.</b>'},
+    {key:"community", label:"Community",     note:'<b>Thumbnail first</b>, real answers from mentors, across Featured, Latest and Following.'},
+    {key:"opps",      label:"Opportunities", note:'Recommended for you, with <b>imagery and filters ported from the web platform</b>.'},
+    {key:"profile",   label:"Profile",       note:'One page: <b>who you are, the few things you reach for, the way out.</b>'},
   ],
   mentor: [
-    {key:"home",      label:"Home",          note:"The current app opens a mentor on their own profile. The redesign opens on their mentees' progress and the questions still waiting."},
-    {key:"mentees",   label:"Mentees",       note:"Roster, capacity and requests in one place, with the open slots shown as open."},
-    {key:"community", label:"Community",     note:"What students are asking, promoted out of a segment buried inside the mentor's own profile."},
-    {key:"opps",      label:"Opportunities", note:"Posting is the page. The feed is a tab."},
+    {key:"home",      label:"Home",          note:'The current app opens a mentor on their own profile. <b>The redesign opens on their mentees&rsquo; progress</b> and the questions still waiting.'},
+    {key:"mentees",   label:"Mentees",       note:'Roster, capacity and requests in one place, <b>with the open slots shown as open</b>.'},
+    {key:"community", label:"Community",     note:'What students are asking, <b>promoted out of a segment buried inside the mentor&rsquo;s own profile</b>.'},
+    {key:"opps",      label:"Opportunities", note:'<b>Posting is the page.</b> The feed is a tab.'},
   ],
 };
-const shot=(role,key,side)=>`assets/shots/${role}/${key}-${side}.webp`;
-function phone(role,key,side,alt){
-  const cur = side==="current";
-  return `<div class="side"><span class="tag ${cur?'cur':'new'}">${cur?'Current':'Redesign'}</span>
-    <div class="phone"><div class="screen"><img src="${shot(role,key,side)}" alt="${alt}" loading="lazy"
-      onerror="this.parentNode.classList.add('missing')"></div></div></div>`;
+const NEW = [
+  {key:"conversations",   title:"Conversations",    note:"A direct thread with your mentor: share a scholarship, ask a question, keep the answer."},
+  {key:"pulse-ai",        title:"Pulse AI",         note:"An AI career coach inside the app, answering in P3’s voice and pointing back to real opportunities."},
+  {key:"career-timeline", title:"Career Timeline",  note:"Education, experience and goals as one record the student owns and a mentor can read."},
+  {key:"pathway-discover",title:"Pathway Discover", note:"Career pathways ranked from what a student has already told P3, with the reasoning shown."},
+];
+const ROLE_LABEL = {mentee:"MENTEE", mentor:"MENTOR"};
+const COUNT_WORD = {1:"One",2:"Two",3:"Three",4:"Four"};
+const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const pad = n => String(n).padStart(2,"0");
+const shot = (role,key,side) => `assets/shots/${role}/${key}-${side}.webp`;
+
+function phone(role, p, side, i){
+  const isNew = side === "redesign";
+  const eager = role === "mentee" && i === 0;
+  return `<figure class="shot shot--${isNew?'new':'cur'}">
+    <span class="lab ${isNew?'new':'cur'}">${isNew?'REDESIGN':"TODAY’S APP"}</span>
+    <button class="zoomwrap" data-role="${role}" data-key="${p.key}" data-side="${side}" data-label="${p.label}"
+            aria-label="Enlarge ${p.label}, ${isNew?'redesign':"today’s app"}">
+      <div class="frame frame--${isNew?'new':'cur'}">
+        <span class="zbadge" aria-hidden="true">&#10530;</span>
+        <div class="screen"><img src="${shot(role,p.key,side)}" alt="${p.label}, ${isNew?'redesign':"today’s app"}"
+          width="660" height="1434" decoding="async" draggable="false"
+          ${eager?'fetchpriority="high"':'loading="lazy"'}
+          onerror="this.parentNode.classList.add('missing')"></div>
+      </div>
+    </button>
+  </figure>`;
 }
-function render(role){
-  document.getElementById("pairs").innerHTML = PAIRS[role].map((p,i)=>`
-    <section class="pair" id="${role}-${p.key}">
-      <div class="pair-head"><span class="n">${String(i+1).padStart(2,"0")}</span><h2>${p.label}</h2><p>${p.note}</p></div>
-      <div class="duo">${phone(role,p.key,"current",`${p.label}, current app`)}${phone(role,p.key,"redesign",`${p.label}, redesign`)}</div>
-    </section>`).join("");
+function buildBand(role, p, i, total){
+  const flip = i % 2 === 1;
+  const hint = i === 0 ? '<p class="hint">Click either screen to enlarge.</p>' : '';
+  return `<section class="band${flip?' band--flip':''}" id="${role}-${p.key}">
+    <div class="band-inner">
+      <div class="text">
+        <p class="kicker">${ROLE_LABEL[role]} &middot; <i>${pad(i+1)}</i> / ${pad(total)}</p>
+        <h2>${p.label}</h2><hr class="rule">
+        <p class="note">${p.note}</p>${hint}
+      </div>
+      <div class="stage">${phone(role,p,"redesign",i)}${phone(role,p,"current",i)}</div>
+    </div>
+  </section>`;
 }
-let role="mentee";
-function setRole(r){
-  role=r;
-  document.getElementById("r-mentee").setAttribute("aria-pressed",String(r==="mentee"));
-  document.getElementById("r-mentor").setAttribute("aria-pressed",String(r==="mentor"));
-  render(r); window.scrollTo({top:document.getElementById("pairs").offsetTop-90,behavior:"smooth"});
+function buildNewCard(item){
+  return `<article class="ncard" data-key="${item.key}">
+    <div class="shotwrap">
+      <span class="sticker">NEW</span>
+      <button class="zoomwrap" data-mode="single" data-key="${item.key}" data-label="${item.title}"
+              aria-label="Enlarge ${item.title}">
+        <div class="frame frame--new">
+          <span class="zbadge" aria-hidden="true">&#10530;</span>
+          <div class="screen"><img src="assets/shots/new/${item.key}.webp" alt="${item.title}"
+            width="660" height="1434" loading="lazy" decoding="async" draggable="false"></div>
+        </div>
+      </button>
+    </div>
+    <h3>${item.title}</h3><p>${item.note}</p>
+  </article>`;
 }
-document.getElementById("r-mentee").addEventListener("click",()=>setRole("mentee"));
-document.getElementById("r-mentor").addEventListener("click",()=>setRole("mentor"));
-render(role);
+
+// Build both panels once; switching only flips `hidden`.
+for (const role of ["mentee","mentor"]) {
+  const list = PAIRS[role];
+  document.getElementById("panel-"+role).innerHTML =
+    list.map((p,i) => buildBand(role,p,i,list.length)).join("");
+}
+document.getElementById("newgrid").innerHTML = NEW.map(buildNewCard).join("");
+document.getElementById("c-mentee").textContent = PAIRS.mentee.length;
+document.getElementById("c-mentor").textContent = PAIRS.mentor.length;
+
+// The new cards are the only claim that can go stale: a capture that 404s
+// removes its card and rewrites every number that counted it.
+function recount(){
+  const live = document.querySelectorAll("#newgrid .ncard").length;
+  document.getElementById("new-h2").innerHTML =
+    `${COUNT_WORD[live]||live} things the current app <span class="hl">cannot do at all</span>.`;
+  document.getElementById("new").hidden = live === 0;
+  writeScore(live);
+}
+function writeScore(newCount){
+  document.getElementById("score").innerHTML = `
+    <div><b>${PAIRS.mentee.length}</b><span>mentee screens redesigned</span></div>
+    <div><b>${PAIRS.mentor.length}</b><span>mentor screens redesigned</span></div>
+    <div class="hot"><b>${newCount}</b><span>capabilities that did not exist</span></div>`;
+}
+document.querySelectorAll("#newgrid img").forEach(img => {
+  img.addEventListener("error", () => { img.closest(".ncard")?.remove(); recount(); });
+});
+recount();
+
+// ---- role switching
+const seg = document.getElementById("seg");
+const tabs = {mentee:document.getElementById("tab-mentee"), mentor:document.getElementById("tab-mentor")};
+function stampIn(role){
+  document.querySelectorAll(`#panel-${role} .band`).forEach(b => {
+    b.classList.add("no-anim","is-in");
+    requestAnimationFrame(() => requestAnimationFrame(() => b.classList.remove("no-anim")));
+  });
+}
+function buildChips(role){
+  document.getElementById("chips").innerHTML =
+    PAIRS[role].map(p => `<a href="#${role}-${p.key}">${p.label}</a>`).join("");
+}
+function setRole(role){
+  seg.dataset.role = role;
+  for (const r of ["mentee","mentor"]) {
+    tabs[r].setAttribute("aria-selected", String(r===role));
+    tabs[r].tabIndex = r===role ? 0 : -1;
+    document.getElementById("panel-"+r).hidden = r!==role;
+  }
+  stampIn(role);
+  buildChips(role);
+  const bar = document.getElementById("bar");
+  if (bar.classList.contains("is-stuck")) {
+    window.scrollTo({top: document.getElementById("sentinel").offsetTop, behavior:"auto"});
+  }
+  history.replaceState(null, "", "#"+role);
+}
+Object.entries(tabs).forEach(([r,el]) => el.addEventListener("click", () => setRole(r)));
+seg.addEventListener("keydown", e => {
+  const order = ["mentee","mentor"];
+  const cur = order.indexOf(seg.dataset.role);
+  let next = null;
+  if (e.key === "ArrowRight") next = order[(cur+1)%2];
+  else if (e.key === "ArrowLeft") next = order[(cur+1)%2];
+  else if (e.key === "Home") next = order[0];
+  else if (e.key === "End") next = order[1];
+  if (next) { e.preventDefault(); setRole(next); tabs[next].focus(); }
+});
+
+// ---- reveal + sticky
+if (!reduced) {
+  const io = new IntersectionObserver((entries,obs) => {
+    entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add("is-in"); obs.unobserve(en.target); } });
+  }, {threshold:.2, rootMargin:"0px 0px -12% 0px"});
+  document.querySelectorAll(".band").forEach(b => io.observe(b));
+} else {
+  document.querySelectorAll(".band").forEach(b => b.classList.add("is-in"));
+}
+new IntersectionObserver(([e]) => {
+  document.getElementById("bar").classList.toggle("is-stuck", !e.isIntersecting);
+}, {threshold:0}).observe(document.getElementById("sentinel"));
+
+// ---- lightbox
+const lb = document.getElementById("lb");
+const lbTitle = document.getElementById("lb-title");
+const lbSwitch = document.getElementById("lb-switch");
+const figs = {redesign: lb.querySelector('.lb-fig[data-side="redesign"]'),
+              current:  lb.querySelector('.lb-fig[data-side="current"]')};
+let lastFocus = null;
+
+function load(fig, hiSrc, loSrc, alt){
+  const img = fig.querySelector("img");
+  img.alt = alt;
+  img.onerror = () => { img.onerror = null; img.src = loSrc; };
+  img.src = hiSrc;
+}
+function openLb(btn){
+  lastFocus = btn;
+  const single = btn.dataset.mode === "single";
+  lb.dataset.mode = single ? "single" : "pair";
+  lbTitle.textContent = btn.dataset.label.toUpperCase();
+  if (single) {
+    const k = btn.dataset.key;
+    load(figs.redesign, `assets/shots2x/new/${k}.webp`, `assets/shots/new/${k}.webp`, btn.dataset.label);
+  } else {
+    const {role,key,label} = btn.dataset;
+    load(figs.redesign, `assets/shots2x/${role}/${key}-redesign.webp`, shot(role,key,"redesign"), label+", redesign");
+    load(figs.current,  `assets/shots2x/${role}/${key}-current.webp`,  shot(role,key,"current"),  label+", today’s app");
+    showSide(btn.dataset.side || "redesign");
+  }
+  lb.hidden = false;
+  document.documentElement.style.overflow = "hidden";
+  document.getElementById("lb-x").focus();
+}
+function showSide(side){
+  Object.entries(figs).forEach(([s,f]) => f.classList.toggle("is-active", s===side));
+  lbSwitch.querySelectorAll("button").forEach(b =>
+    b.setAttribute("aria-pressed", String(b.dataset.side===side)));
+}
+function closeLb(){
+  lb.hidden = true;
+  document.documentElement.style.overflow = "";
+  lastFocus?.focus();
+}
+document.addEventListener("click", e => {
+  const btn = e.target.closest(".zoomwrap");
+  if (btn) { e.preventDefault(); openLb(btn); return; }
+  if (e.target.closest("#lb-x") || e.target === lb) closeLb();
+  const side = e.target.closest(".lb-switch button");
+  if (side) showSide(side.dataset.side);
+});
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape" && !lb.hidden) closeLb();
+});
+
+// ---- boot
+const initial = location.hash.replace("#","") === "mentor" ? "mentor" : "mentee";
+setRole(initial);
 </script>
 </body>
 </html>
