@@ -74,15 +74,8 @@ body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--body);
 /* The counts that were a three-figure scorecard now live on the toggle, which
    is where a reader is already looking. All that has to survive up here is the
    one claim the pairs cannot make on their own, as a link to where it is made. */
-.jump{margin:12px 0 0}
  /* NOT inline-flex with a gap: that makes every text node a flex item and
     spaces the words apart. The arrow gets its own margin instead. */
-.jump a{display:inline-block;text-decoration:none;
-  font-size:13px;font-weight:700;color:var(--crimson-dk);
-  background:rgba(217,58,58,.08);border-radius:999px;padding:8px 15px;transition:background .2s}
-.jump a:hover{background:rgba(217,58,58,.15)}
-.jump b{font-weight:800}
-.jump a span{margin-left:6px}
 
 /* ---------------- new capabilities band ---------------- */
 .newband{border-top:3px solid var(--crimson);padding-block:clamp(56px,7vw,104px);
@@ -140,8 +133,8 @@ body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--body);
   transition:box-shadow .2s,border-color .2s}
 .bar.is-stuck{border-bottom-color:var(--hair);box-shadow:0 6px 20px rgba(40,15,22,.07)}
 .bar-inner{max-width:1400px;margin:0 auto;padding:10px clamp(20px,4vw,64px);
-  display:flex;align-items:center;gap:clamp(16px,2vw,28px);min-height:64px}
-.bar .mark{height:26px;flex:none}
+  display:flex;align-items:center;gap:clamp(12px,1.6vw,20px);min-height:56px}
+.bar .mark{height:18px;flex:none}
 .seg{position:relative;display:grid;grid-template-columns:1fr 1fr;width:clamp(240px,26vw,320px);
   background:rgba(74,16,32,.07);border-radius:999px;padding:4px;isolation:isolate;flex:none}
 .seg::before{content:"";position:absolute;z-index:0;top:4px;left:4px;width:calc(50% - 4px);
@@ -231,10 +224,8 @@ body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--body);
 /* ---------------- closing ---------------- */
 .closing{background:var(--card);border-top:1px solid var(--hair);padding-block:clamp(40px,4.5vw,64px)}
 .closing p{font-family:var(--head);font-weight:800;font-size:clamp(1.25rem,2vw,1.75rem);
-  line-height:1.25;letter-spacing:-.025em;color:var(--deep);margin:0;max-width:52ch}
+  line-height:1.25;letter-spacing:-.025em;color:var(--deep);margin:0 auto;max-width:52ch;text-align:center}
 .closing p .hl{color:var(--crimson)}
-.closing .meta{font-family:var(--body);font-size:13px;font-weight:600;color:var(--faint);
-  margin-top:16px;max-width:70ch}
 .closing a{color:var(--crimson-dk);font-weight:700;text-decoration:none}
 .closing a:hover{text-decoration:underline}
 
@@ -284,7 +275,7 @@ body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--body);
 }
 @media (max-width:759px){
   /* The four things above the first pair have to earn their height on a phone:
-     the header, its lede, the New Features link and the toggle are all that
+     the header, its lede and the toggle are all that
      stand between opening the page and seeing a comparison. */
   .mast{padding:20px 0 18px}
   /* flex-start, not center: centring against a three-line block floats the
@@ -293,9 +284,7 @@ body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--body);
   .mast-icon{width:46px;height:46px;border-radius:12px}
   .mast h1{font-size:clamp(1.375rem,6.2vw,1.75rem);letter-spacing:-.03em;line-height:1.04}
   .mast .sub{font-size:.8125rem;line-height:1.45;margin-top:7px}
-  .jump{margin-top:10px}
-  .jump a{font-size:12px;padding:7px 13px}
-  /* Full-width toggle: at 240px it sat marooned against the left edge with the
+      /* Full-width toggle: at 240px it sat marooned against the left edge with the
      wordmark hidden, and half the bar was doing nothing. */
   .seg{width:100%;max-width:none}
   .seg button{font-size:.8125rem}
@@ -346,7 +335,6 @@ body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--body);
     <div>
       <h1>P3 Mobile: the redesign, screen by screen</h1>
       <p class="sub">Every screen rebuilt in the P3 web platform&rsquo;s design language. September 2026, on TestFlight with the beta team.</p>
-      <p class="jump"><a href="#new">New Features <span aria-hidden="true">&darr;</span></a></p>
     </div>
   </div>
 </header>
@@ -380,7 +368,6 @@ body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--body);
 <section class="closing">
   <div class="wrap">
     <p>Same flows, same navigation, <span class="hl">repainted</span>. Plus five capabilities that simply were not there before.</p>
-    <p class="meta">The concept mockups this page grew out of are kept at <a href="concept.html">concept.html</a>. The app on the store today: <a href="https://apps.apple.com/us/app/p3-pulse-of-perseverance/id6478132244">P3: Pulse of Perseverance</a>.</p>
   </div>
 </section>
 
@@ -419,11 +406,11 @@ const PAIRS = {
   ],
 };
 const NEW = [
-  {key:"conversations",   title:"Conversations",    status:"#ece6df", note:"A direct thread with your mentor: share a scholarship, ask a question, keep the answer."},
-  {key:"pulse-ai",        title:"Pulse AI",         status:"#f6f2ff", note:"An AI career coach inside the app. It opens with somewhere to start, not a blank box."},
-  {key:"career-timeline", title:"Career Timeline",  status:"#ece6df", note:"Education, experience and goals as one record the student owns and a mentor can read."},
-  {key:"pathway-discover",title:"Pathway Discover", status:"#ece6df", note:"Pathways ranked from what a student has already told P3, surfaced on Home as Find your pathway."},
-  {key:"dark-mode",       title:"Dark mode",        status:"#141020", note:"A night palette for the whole app, one tap from Profile. Crimson and violet stay as the accents; the Ascent turns to twilight."},
+  {key:"conversations",   title:"Conversations",    status:"#ece6df", note:"A direct thread with your mentor."},
+  {key:"pulse-ai",        title:"Pulse AI",         status:"#f6f2ff", note:"An AI career coach inside the app."},
+  {key:"career-timeline", title:"Career Timeline",  status:"#ece6df", note:"Education, experience and goals in one record."},
+  {key:"pathway-discover",title:"Pathway Discover", status:"#ece6df", note:"Pathways ranked from what a student has told P3."},
+  {key:"dark-mode",       title:"Dark mode",        status:"#141020", note:"A night palette for the whole app, one tap from Profile."},
 ];
 const ROLE_LABEL = {mentee:"MENTEE", mentor:"MENTOR"};
 const COUNT_WORD = {1:"One",2:"Two",3:"Three",4:"Four",5:"Five"};
