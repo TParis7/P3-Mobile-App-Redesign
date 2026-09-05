@@ -122,9 +122,6 @@ body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--body);
 .device::after{content:"";position:absolute;right:-1.1cqw;top:31cqw;width:1.1cqw;height:15cqw;
   border-radius:0 .8cqw .8cqw 0;background:#28232a}
 .device-screen{position:relative;border-radius:12.3cqw;overflow:hidden;background:var(--status,#ece6df)}
-.device-status{height:11.2cqw;position:relative;background:var(--status,#ece6df)}
-.device-status::after{content:"";position:absolute;left:50%;top:2.4cqw;transform:translateX(-50%);
-  width:27cqw;height:8cqw;border-radius:999px;background:#0b0a0c}
 .device-screen img{display:block;width:100%;height:auto}
 .device .zbadge{top:4.5cqw;right:5cqw}
 
@@ -134,7 +131,6 @@ body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--body);
 .bar.is-stuck{border-bottom-color:var(--hair);box-shadow:0 6px 20px rgba(40,15,22,.07)}
 .bar-inner{max-width:1400px;margin:0 auto;padding:10px clamp(20px,4vw,64px);
   display:flex;align-items:center;gap:clamp(12px,1.6vw,20px);min-height:56px}
-.bar .mark{height:18px;flex:none}
 .seg{position:relative;display:grid;grid-template-columns:1fr 1fr;width:clamp(240px,26vw,320px);
   background:rgba(74,16,32,.07);border-radius:999px;padding:4px;isolation:isolate;flex:none}
 .seg::before{content:"";position:absolute;z-index:0;top:4px;left:4px;width:calc(50% - 4px);
@@ -165,7 +161,6 @@ body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--body);
 .rule{border:0;height:2px;width:34px;background:var(--crimson);margin:12px 0}
 .note{font-size:.9375rem;font-weight:500;line-height:1.55;color:var(--muted);margin:0 0 clamp(16px,1.6vw,22px)}
 .note b{font-weight:700;color:var(--deep)}
-.hint{font-size:11.5px;font-weight:600;color:var(--faint);text-align:center;margin:14px 0 0}
 
 .stage{position:relative;display:flex;gap:clamp(12px,1.2vw,18px);align-items:flex-start;
   justify-content:center;margin-top:auto}
@@ -297,7 +292,6 @@ body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--body);
   .note{font-size:.875rem;margin-bottom:14px}
   .stage{--pw:clamp(126px,calc((100vw - 78px)/2),180px);gap:10px}
   .bar-inner{min-height:52px;gap:12px}
-  .bar .mark{display:none}
   /* Two-up as far down as it stays legible. One-up means four consecutive
      full-height phones, which is four screens of scrolling for four cards. */
   .newgrid{grid-template-columns:repeat(2,1fr);gap:12px}
@@ -343,7 +337,6 @@ body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--body);
 
 <div class="bar" id="bar">
   <div class="bar-inner">
-    <img class="mark" src="assets/p3-logo-horizontal.png" alt="P3">
     <div class="seg" id="seg" role="tablist" data-role="mentee" aria-label="Role">
       <button role="tab" id="tab-mentee" aria-selected="true" aria-controls="panel-mentee" tabindex="0">Mentee</button>
       <button role="tab" id="tab-mentor" aria-selected="false" aria-controls="panel-mentor" tabindex="-1">Mentor</button>
@@ -406,11 +399,11 @@ const PAIRS = {
   ],
 };
 const NEW = [
-  {key:"conversations",   title:"Conversations",    status:"#ece6df", note:"A direct thread with your mentor."},
-  {key:"pulse-ai",        title:"Pulse AI",         status:"#f6f2ff", note:"An AI career coach inside the app."},
-  {key:"career-timeline", title:"Career Timeline",  status:"#ece6df", note:"Education, experience and goals in one record."},
-  {key:"pathway-discover",title:"Pathway Discover", status:"#ece6df", note:"Pathways ranked from what a student has told P3."},
-  {key:"dark-mode",       title:"Dark mode",        status:"#141020", note:"A night palette for the whole app, one tap from Profile."},
+  {key:"conversations",   title:"Conversations",    status:"#ece6df"},
+  {key:"pulse-ai",        title:"Pulse AI",         status:"#f6f2ff"},
+  {key:"career-timeline", title:"Career Timeline",  status:"#ece6df"},
+  {key:"pathway-discover",title:"Pathway Discover", status:"#ece6df"},
+  {key:"dark-mode",       title:"Dark mode",        status:"#141020"},
 ];
 const ROLE_LABEL = {mentee:"MENTEE", mentor:"MENTOR"};
 const COUNT_WORD = {1:"One",2:"Two",3:"Three",4:"Four",5:"Five"};
@@ -436,13 +429,11 @@ function phone(role, p, side, i){
   </figure>`;
 }
 function buildPairCard(role, p, i, total){
-  const hint = i === 0 ? '<p class="hint">Tap either screen to enlarge.</p>' : '';
   return `<article class="pcard" id="${role}-${p.key}">
     <p class="kicker">${ROLE_LABEL[role]} &middot; <i>${pad(i+1)}</i> / ${pad(total)}</p>
     <h2>${p.label}</h2><hr class="rule">
     <p class="note">${p.note}</p>
     <div class="stage">${phone(role,p,"redesign",i)}${phone(role,p,"current",i)}</div>
-    ${hint}
   </article>`;
 }
 function buildNewCard(item){
@@ -452,12 +443,12 @@ function buildNewCard(item){
               aria-label="Enlarge ${item.title}">
         <div class="device" style="--status:${item.status}">
           <span class="zbadge" aria-hidden="true">&#10530;</span>
-          <div class="device-screen"><div class="device-status" aria-hidden="true"></div><img src="assets/shots/new/${item.key}.webp" alt="${item.title}"
+          <div class="device-screen"><img src="assets/shots/new/${item.key}.webp" alt="${item.title}"
             width="660" height="1360" loading="lazy" decoding="async" draggable="false"></div>
         </div>
       </button>
     </div>
-    <h3>${item.title}<span class="sticker">NEW</span></h3><p>${item.note}</p>
+    <h3>${item.title}<span class="sticker">NEW</span></h3>
   </article>`;
 }
 
