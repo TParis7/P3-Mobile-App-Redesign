@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light">
 <meta name="robots" content="noindex, nofollow">
-<meta name="description" content="Every screen of the new P3 app, shown beside the app it replaces, plus five things the current app cannot do.">
+<meta name="description" content="Every screen of the new P3 app, shown beside the app it replaces, plus four things the current app cannot do.">
 <meta name="theme-color" content="#4a1020">
 
 <link rel="icon" href="favicon.ico" sizes="any">
@@ -18,7 +18,7 @@
 <meta property="og:site_name" content="Pulse of Perseverance Project">
 <meta property="og:url" content="https://tparis7.github.io/P3-Mobile-App-Redesign/">
 <meta property="og:title" content="The new P3 app, screen by screen">
-<meta property="og:description" content="Every screen rebuilt and shown beside the app it replaces, plus five things the current app cannot do.">
+<meta property="og:description" content="Every screen rebuilt and shown beside the app it replaces, plus four things the current app cannot do.">
 <meta property="og:image" content="https://tparis7.github.io/P3-Mobile-App-Redesign/assets/og-image.png?v=3">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
@@ -26,7 +26,7 @@
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="The new P3 app, screen by screen">
-<meta name="twitter:description" content="Every screen rebuilt and shown beside the app it replaces, plus five things the current app cannot do.">
+<meta name="twitter:description" content="Every screen rebuilt and shown beside the app it replaces, plus four things the current app cannot do.">
 <meta name="twitter:image" content="https://tparis7.github.io/P3-Mobile-App-Redesign/assets/og-image.png?v=3">
 <title>The new P3 app, screen by screen</title>
 <style>
@@ -78,7 +78,7 @@ body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--body);
     spaces the words apart. The arrow gets its own margin instead. */
 
 /* ---------------- new capabilities band ---------------- */
-.newband{border-top:3px solid var(--crimson);padding-block:clamp(56px,7vw,104px);
+.newband{border-top:3px solid var(--crimson);padding-top:clamp(30px,3.6vw,52px);padding-bottom:clamp(56px,7vw,104px);
   background:
     radial-gradient(ellipse 70% 46% at 50% -8%, rgba(217,58,58,.30), transparent 62%),
     linear-gradient(180deg,#4a1020 0%,#3a0d19 60%,#2d0812 100%);}
@@ -89,7 +89,7 @@ body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--body);
 .newband h2 .hl{color:var(--crimson)}
 .newband .lede{font-size:15px;font-weight:500;line-height:1.6;color:rgba(250,248,246,.72);
   max-width:60ch;margin:16px auto 0;text-align:center}
-.newgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(14px,1.6vw,22px);
+.newgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(14px,1.6vw,22px);
   margin-top:clamp(36px,4vw,56px)}
 .ncard{background:rgba(250,248,246,.05);border:1px solid rgba(250,248,246,.14);
   border-radius:20px;padding:18px 18px 22px;transition:transform .22s,border-color .22s}
@@ -291,13 +291,11 @@ body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--body);
   /* Two-up as far down as it stays legible. One-up means four consecutive
      full-height phones, which is four screens of scrolling for four cards. */
   .newgrid{grid-template-columns:repeat(2,1fr);gap:12px}
-  /* Five cards two-up leaves one alone on the last row: keep its width, centre it. */
-  .ncard:last-child:nth-child(odd){grid-column:1 / -1;width:calc(50% - 6px);justify-self:center}
   .ncard{padding:10px 10px 14px;border-radius:16px}
   .ncard .shotwrap{margin-bottom:12px}
   .ncard h3{font-size:1.0625rem}
   .ncard p{font-size:12.5px;line-height:1.5}
-  .newband{padding-block:44px}
+  .newband{padding-top:26px;padding-bottom:44px}
   .newband h2{font-size:clamp(1.5rem,7vw,1.875rem)}
   .newband .lede{font-size:14px}
   .lb-row{display:block}
@@ -323,7 +321,7 @@ body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--body);
     <img class="mast-icon" src="assets/app-icon.png" alt="">
     <div>
       <h1>The new P3 app, screen by screen</h1>
-      <p class="sub">Every screen rebuilt and shown beside the app it replaces. Switch between the mentee and mentor experience below.</p>
+      <p class="sub">Switch between the mentee and mentor experience below.</p>
     </div>
   </div>
 </header>
@@ -347,15 +345,15 @@ body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--body);
 <section class="newband" id="new">
   <div class="wrap">
     <p class="kicker">NEW IN THE REDESIGN</p>
-    <h2 id="new-h2">Five things the current app <span class="hl">cannot do at all</span>.</h2>
-    <p class="lede">More than a new look. These five capabilities do not exist in the app on the App Store today.</p>
+    <h2 id="new-h2">Four things the current app <span class="hl">cannot do at all</span>.</h2>
+    <p class="lede">More than a new look. These four capabilities do not exist in the app on the App Store today.</p>
     <div class="newgrid" id="newgrid"></div>
   </div>
 </section>
 
 <section class="closing">
   <div class="wrap">
-    <p>Same flows, same navigation, <span class="hl">a whole new look</span>. Plus five capabilities that were never there before.</p>
+    <p>Same flows, same navigation, <span class="hl">a whole new look</span>.</p>
   </div>
 </section>
 
@@ -390,8 +388,8 @@ const PAIRS = {
     // Same front door as the mentee list: the sign-in screen is shared, so this
     // pair borrows the mentee captures (`from`) rather than duplicating files.
     {key:"welcome",   label:"Welcome",       from:"mentee", note:'Mentors and mentees share one front door, with <b>Apple and Google sign-in</b>.'},
-    {key:"home",      label:"Home",          note:'The current app opens a mentor on their own profile. <b>The redesign opens on their mentees&rsquo; progress</b> and the questions still waiting.'},
-    {key:"mentees",   label:"Mentees",       note:'Roster, capacity and requests in one place, with <b>each mentee&rsquo;s field and milestone progress at a glance</b>.'},
+    {key:"home",      label:"Home",          note:'The current app opens a mentor on their own profile. <b>The redesign opens on their mentees&rsquo; progress</b> and the questions received.'},
+    {key:"mentees",   label:"Mentees",       note:'Roster and requests in one place, with <b>each mentee&rsquo;s field and milestone progress at a glance</b>.'},
     {key:"community", label:"Community",     note:'What students are asking, <b>front and center instead of buried inside the mentor&rsquo;s profile</b>.'},
     {key:"opps",      label:"Opportunities", note:'<b>Share a listing with a mentee in one tap</b>, and add a new opportunity in seconds.'},
   ],
@@ -399,8 +397,7 @@ const PAIRS = {
 const NEW = [
   {key:"conversations",   title:"Conversations",    status:"#ece6df"},
   {key:"pulse-ai",        title:"Pulse AI",         status:"#f6f2ff"},
-  {key:"career-timeline", title:"Career Timeline",  status:"#ece6df"},
-  {key:"pathway-discover",title:"Career Navigator", status:"#ece6df"},
+  {key:"career-timeline", title:"Navigator",        status:"#ece6df"},
   {key:"dark-mode",       title:"Dark mode",        status:"#141020"},
 ];
 const ROLE_LABEL = {mentee:"MENTEE", mentor:"MENTOR"};
