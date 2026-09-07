@@ -35,8 +35,8 @@ const PAIRS = {
     // Same front door as the mentee list: the sign-in screen is shared, so this
     // pair borrows the mentee captures (`from`) rather than duplicating files.
     {key:"welcome",   label:"Welcome",       from:"mentee", note:'Mentors and mentees share one front door, with <b>Apple and Google sign-in</b>.'},
-    {key:"home",      label:"Home",          note:'The current app opens a mentor on their own profile. <b>The redesign opens on their mentees&rsquo; progress</b> and the questions received.'},
-    {key:"mentees",   label:"Mentees",       note:'Roster and requests in one place, with <b>each mentee&rsquo;s field and milestone progress at a glance</b>.'},
+    {key:"home",      label:"Home",          note:'<b>The redesign opens on their mentees&rsquo; progress</b> and questions received.'},
+    {key:"mentees",   label:"Mentees",       note:'Roster and requests in one place, with <b>each mentee&rsquo;s milestone progress at a glance</b>.'},
     {key:"community", label:"Community",     note:'What students are asking, <b>front and center instead of buried inside the mentor&rsquo;s profile</b>.'},
     {key:"opps",      label:"Opportunities", note:'<b>Share a listing with a mentee in one tap</b>, and add a new opportunity in seconds.'},
   ],
