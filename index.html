@@ -82,8 +82,6 @@ body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--body);
   background:
     radial-gradient(ellipse 70% 46% at 50% -8%, rgba(217,58,58,.30), transparent 62%),
     linear-gradient(180deg,#4a1020 0%,#3a0d19 60%,#2d0812 100%);}
-.newband .kicker{font-size:11px;font-weight:800;letter-spacing:.16em;
-  color:rgba(250,248,246,.62);margin:0 0 14px;text-align:center}
 .newband h2{font-family:var(--head);font-weight:800;font-size:clamp(1.875rem,3.6vw,2.875rem);
   line-height:1.05;letter-spacing:-.03em;color:#faf8f6;margin:0 auto;max-width:58ch;text-align:center}
 .newband h2 .hl{color:var(--crimson)}
@@ -344,8 +342,7 @@ body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--body);
 
 <section class="newband" id="new">
   <div class="wrap">
-    <p class="kicker">NEW IN THE REDESIGN</p>
-    <h2 id="new-h2">Four things the current app <span class="hl">cannot do at all</span>.</h2>
+    <h2 id="new-h2">New <span class="hl">Features</span></h2>
     <p class="lede">More than a new look. These four capabilities do not exist in the app on the App Store today.</p>
     <div class="newgrid" id="newgrid"></div>
   </div>
@@ -401,7 +398,6 @@ const NEW = [
   {key:"dark-mode",       title:"Dark mode",        status:"#141020"},
 ];
 const ROLE_LABEL = {mentee:"MENTEE", mentor:"MENTOR"};
-const COUNT_WORD = {1:"One",2:"Two",3:"Three",4:"Four",5:"Five"};
 const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const pad = n => String(n).padStart(2,"0");
 const shot = (role,key,side) => `assets/shots/${role}/${key}-${side}.webp`;
@@ -458,20 +454,12 @@ for (const role of ["mentee","mentor"]) {
 }
 document.getElementById("newgrid").innerHTML = NEW.map(buildNewCard).join("");
 
-// The new cards are the only claim that can go stale: a capture that 404s
-// removes its card and rewrites every number that counted it.
+// The heading is a plain label now, so a capture that 404s just loses its card.
+// Only an empty grid changes anything: the band hides rather than heading nothing.
 function recount(){
   const live = document.querySelectorAll("#newgrid .ncard").length;
-  document.getElementById("new-h2").innerHTML =
-    `${COUNT_WORD[live]||live} things the current app <span class="hl">cannot do at all</span>.`;
   document.getElementById("new").hidden = live === 0;
-  writeScore(live);
 }
-// The header claim and the section heading are the same number, written from
-// the same array, so a capture that fails to load cannot leave one of them lying.
-// The header link is a plain label now, so only the section heading carries a
-// count and there is nothing left that could disagree with it.
-function writeScore(){}
 document.querySelectorAll("#newgrid img").forEach(img => {
   img.addEventListener("error", () => { img.closest(".ncard")?.remove(); recount(); });
 });
